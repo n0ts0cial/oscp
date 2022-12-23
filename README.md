@@ -1,4 +1,4 @@
-# oscp
+# OSCP
 ## NMAP
 ##### NMAP - TCP PORT QUICK SCAN
 ```
@@ -45,4 +45,44 @@ cmd /c wmic service get name,displayname,pathname,startmode |findstr /i "auto" |
 ```
 ```
 wmic service get name,pathname,displayname,startmode | findstr /i auto | findstr /i /v "C:\Windows\\" | findstr /i /v """
+```
+##### LIST - PROCESS USING TCP PORT
+```
+netstat -ano -p tcp
+```
+```
+Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessID';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). ID}}, @{name='ProcessName';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Path}} |Format-Table
+```
+##### LIST - PROCESS LISTENING TCP PORT
+```
+netstat -ano -p tcp| findstr /I listening
+```
+```
+Get-NetTCPConnection -State Listen
+```
+##### LIST - PROCESS USING SPECIFIC TCP PORT
+```
+netstat -ano -p tcp| findstr /I 5040
+```
+```
+Get-NetTCPConnection -State Listen | ?{$_.LocalPort -eq 30900}
+```
+```
+Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessID';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). ID}}, @{name='ProcessName';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Path}} | ?{$_.LocalPort -eq 30900} |Format-Table
+```
+
+##### LIST - OWNER OF A PROCESS
+```
+tasklist /V  |findstr "PID 7580"
+```
+```
+Get-Process -Id 4424 -IncludeUserName | Select-Object -Property ID,ProcessName,UserName
+```
+##### LIST - OWNER OF A PROCESS USING TCP PORT
+```
+Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessID';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). ID}}, @{name='ProcessName';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Path}}, @{name='User';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Username}}   | Format-Table
+```
+##### LIST - OWNER OF A PROCESS USING SPECIFIC TCP PORT
+```
+Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessID';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). ID}}, @{name='ProcessName';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Path}}, @{name='User';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Username}}  | ?{$_.LocalPort -eq 30900} | Format-Table
 ```
