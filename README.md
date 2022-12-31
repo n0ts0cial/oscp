@@ -86,6 +86,39 @@ Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessI
 ```
 Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessID';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). ID}}, @{name='ProcessName';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Path}}, @{name='User';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Username}}  | ?{$_.LocalPort -eq 30900} | Format-Table
 ```
+
+## ACTIVE DIRECTORY ENUMERATION
+##### LIST - FOREST
+```
+$MyForest = [System.DirectoryServices.ActiveDirectory.Forest]
+$MyForest::GetCurrentForest()
+```
+##### LIST - FOREST
+```
+Import-Module activedirectory
+$MyForestInfo = Get-ADForest
+Write-Host -ForegroundColor Green "Forest Name: $($MyForestInfo.Name)"
+Write-Host -ForegroundColor Green "Forest Mode: $($MyForestInfo.ForestMode)"
+Write-Host -ForegroundColor Green "Forest Functional Level: $($MyForestInfo.ForestMode)"
+```
+
+##### LIST - DOMAIN
+```
+aaa
+```
+##### LIST - ALL DOMAIN GROUPS (1)
+```
+Get-ADGroup -Filter * 
+Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
+```
+##### LIST - ALL DOMAIN GROUPS (2)
+```
+Get-ADGroup -Filter * 
+Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
+```
+
+
+
 ## MSFVENOM
 ##### REVERSE SHELL - LINUX x64
 ```
