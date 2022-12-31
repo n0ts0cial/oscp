@@ -116,8 +116,14 @@ Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, Group
 Get-ADGroup -Filter * 
 Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
 ```
-
-
+##### LIST - ALL DOMAIN GROUPS (3)
+```
+powershell -command "Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft " 
+```
+##### LIST - ALL DOMAIN GROUPS (4)
+```
+net group /domain
+```
 
 ## MSFVENOM
 ##### REVERSE SHELL - LINUX x64
