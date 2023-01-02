@@ -102,9 +102,15 @@ Write-Host -ForegroundColor Green "Forest Mode: $($MyForestInfo.ForestMode)"
 Write-Host -ForegroundColor Green "Forest Functional Level: $($MyForestInfo.ForestMode)"
 ```
 
+##### POWERVIEW - IMPORT
+```
+Import-module .\Microsoft.ActiveDirectory.Management.dll
+Import-module .\activedirectory.psd1
+```
 ##### LIST - DOMAIN
 ```
-aaa
+Get-NetDomain
+Get-NetDomain -Domain teste.local
 ```
 ##### LIST - ALL DOMAIN GROUPS (1)
 ```
@@ -123,6 +129,15 @@ powershell -command "Get-ADGroup -Filter * | select SamAccountName, objectClass,
 ##### LIST - ALL DOMAIN GROUPS (4)
 ```
 net group /domain
+```
+##### LIST - DOMAIN POLICY (POWERVIEW)
+```
+Get-DomainPolicy
+(Get-DomainPolicy)."system access"
+```
+##### LIST - DOMAIN SID
+```
+Get-DomainSid
 ```
 
 ## MSFVENOM
