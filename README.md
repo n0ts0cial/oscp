@@ -134,10 +134,27 @@ net group /domain
 ```
 Get-DomainPolicy
 (Get-DomainPolicy)."system access"
+(Get-DomainPolicy)."Kerberos policy"
 ```
 ##### LIST - DOMAIN SID
 ```
 Get-DomainSid
+```
+##### LIST - DOMAIN CONTROLLERS (POWERVIEW)
+```
+Get-Addomaincontroller
+Get-Addomaincontroller -domain teste.local
+```
+##### LIST - DOMAIN USERS E USER PROPERTIES (POWERVIEW)
+```
+Get-Aduser -filter * -properties *
+Get-Aduser -identity ben - properties *
+```
+##### LIST - DOMAIN USERS E USER PROPERTIES (POWERVIEW)
+```
+Get-Netuser 
+Get-Netuser -username teste 
+Get-Userproperty -properties sammacount
 ```
 
 ## MSFVENOM
