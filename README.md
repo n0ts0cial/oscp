@@ -168,6 +168,12 @@ Get-Netuser
 Get-Netuser -username teste 
 Get-Userproperty -properties sammacount
 ```
+##### LIST - GPOS(POWERVIEW)
+```
+get-netgpo
+get-netgpo -computer server01
+```
+
 
 ## MSFVENOM
 ##### REVERSE SHELL - LINUX x64
