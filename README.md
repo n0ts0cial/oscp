@@ -209,6 +209,17 @@ aaa
 ```
 aaa
 ```
+# PRIVILEGE ESCALATION WINDOWS
+## TECHNIQUES
+##### AALWAYS ELEVATED
+```
+reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+Get-ItemProperty HKLM\Software\Policies\Microsoft\Windows\Installer
+Get-ItemProperty HKCU\Software\Policies\Microsoft\Windows\Installer
+```
+
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
