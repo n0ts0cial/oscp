@@ -142,8 +142,8 @@ net group /domain
 ##### LIST - DOMAIN POLICY (POWERVIEW)
 ```
 Get-DomainPolicy
-(Get-DomainPolicy)."system access"
-(Get-DomainPolicy)."Kerberos policy"
+(Get-DomainPolicy)."systemaccess"
+(Get-DomainPolicy)."Kerberospolicy"
 ```
 ##### LIST - DOMAIN SID
 ```
