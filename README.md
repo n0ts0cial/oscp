@@ -173,6 +173,17 @@ Get-Userproperty -properties sammacount
 get-netgpo
 get-netgpo -computer server01
 ```
+##### BLOODHOUND - PYTHON
+```
+git clone https://github.com/fox-it/BloodHound.py
+cd BloodHound.py
+python setup.py install
+```
+```
+bloodhound-python -u username -p password -dc xx.aa.com --disable-auto-gc -d aa.com         --CHECAR OPÇÔES DEFAULT , INTERESSANTE LIMITAR AOS DOMAIN CONTROLELRS
+bloodhound-python -u username -p password -dc xx.aa.com --disable-auto-gc -d aa.com -c all   --TODOS O S METODOS DE COLLECTION
+```
+
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
