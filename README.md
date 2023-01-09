@@ -217,6 +217,21 @@ Get-ADUser -identity test3 -Properties * | select Samaccountname, Enabled
 ```
 get-netuser -Identity test3
 ```
+##### LIST - DOMAIN USERS PROPERTIES (POWERSPLOIT)
+```
+curl https://github.com/PowerShellMafia/PowerSploit/archive/refs/tags/v3.0.0.zip -Outfile v3.0.0.zip
+curl https://github.com/n0ts0cial/oscp/raw/main/powersploit3.zip -Outfile powersploit3.zip
+expand-archive -path ".\powersploit3.zip" -destinationpath ".\"
+cd PowerSploit-3.0.0
+Import-Module .\PowerSploit.psd1
+```
+1 PROPRIEDADE DE TODOS OS USUARIOS
+```
+Get-UserProperty -Properties pwdlastset
+```
+```
+Get-Aduser -Filter * -Properties * | select name,pwdlastset
+```
 ##### LIST - DOMAIN USERS GROUP MEMBERSHIP
 ```
 dsquery user -samid test3  | dsget user -memberof | dsget group -samid
@@ -268,52 +283,6 @@ Get-ADGroupMember -Identity "Domain Admins" -Recursive | select SAMAccountName, 
 ```
 Import-module .\Microsoft.ActiveDirectory.Management.dll
 Import-module .\activedirectory.psd1
-```
-##### LIST - DOMAIN
-```
-Get-NetDomain
-Get-NetDomain -Domain teste.local
-```
-##### LIST - DOMAIN POLICY (POWERVIEW)
-```
-Get-DomainPolicy
-(Get-DomainPolicy)."systemaccess"
-(Get-DomainPolicy)."Kerberospolicy"
-```
-##### LIST - DOMAIN SID
-```
-Get-DomainSid
-```
-##### LIST - DOMAIN CONTROLLERS (POWERVIEW)
-```
-Get-Addomaincontroller
-Get-Addomaincontroller -domain teste.local
-```
-##### LIST - DOMAIN USERS E USER PROPERTIES (POWERVIEW)
-```
-Get-Aduser -filter * -properties *
-Get-Aduser -identity ben - properties *
-```
-##### LIST - DOMAIN USERS E USER PROPERTIES (POWERVIEW)
-```
-Get-Netuser 
-Get-Netuser -username teste 
-Get-Userproperty -properties sammacount
-```
-##### LIST - DOMAIN USERS PROPERTIES (POWERSPLOIT)
-```
-curl https://github.com/PowerShellMafia/PowerSploit/archive/refs/tags/v3.0.0.zip -Outfile v3.0.0.zip
-curl https://github.com/n0ts0cial/oscp/raw/main/powersploit3.zip -Outfile powersploit3.zip
-expand-archive -path ".\powersploit3.zip" -destinationpath ".\"
-cd PowerSploit-3.0.0
-Import-Module .\PowerSploit.psd1
-```
-1 PROPRIEDADE DE TODOS OS USUARIOS
-```
-Get-UserProperty -Properties pwdlastset
-```
-```
-Get-Aduser -Filter * -Properties * | select name,pwdlastset
 ```
 ##### LIST - GPOS(POWERVIEW)
 ```
