@@ -123,11 +123,15 @@ $MyForestInfo = Get-ADForest
 Write-Host -ForegroundColor Green "Forest Name: $($MyForestInfo.Name)"
 Write-Host -ForegroundColor Green "Forest Mode: $($MyForestInfo.ForestMode)"
 Write-Host -ForegroundColor Green "Forest Functional Level: $($MyForestInfo.ForestMode)"
+Write-Host -ForegroundColor Green "Forest Domains: $($MyForestInfo.domains)"
 ```
 ##### LIST - DOMAIN
 ```
 $MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
 $MyDomain::GetCurrentDomain()
+```
+```
+Get-ADForest | select domains
 ```
 ```
 Get-WmiObject -Namespace root\cimv2 -Class Win32_ComputerSystem | Select Name, Domain
