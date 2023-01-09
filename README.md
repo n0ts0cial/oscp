@@ -209,12 +209,28 @@ Get-ADUser -identity test3 -Properties * | select Samaccountname, Enabled
 ```
 get-netuser -Identity test3
 ```
+##### LIST - DOMAIN USERS GROUP MEMBERSHIP
+```
+dsquery user -samid test3  | dsget user -memberof | dsget group -samid
+```
 ##### LIST - DOMAIN GROUPS
 ```
 Get-ADGroup -filter * -properties * | select SAMAccountName
 Get-ADGroup -filter * -properties * | select SamAccountName, ObjectClass, GroupCategory, GroupScope, DistinguishedName | Format-Table
 ```
-
+##### LIST - DOMAIN GROUPS - ALL MEMBERS OF ALL GROUPS
+```
+$DomainGroups = Get-ADGroup -Filter *
+foreach ($Group in $DomainGroups)
+{
+    Write-Host "Group: $($Group.Name)"
+    $GroupMembers = Get-ADGroupMember -Identity $Group -Recursive
+    foreach ($GroupMember in $GroupMembers)
+    {
+        Write-Host "    Member Name: $($GroupMember.sAMAccountName)"
+    }
+}
+```
 ##### LIST - DOMAIN GROUP MEMBERS
 ```
 Get-ADGroupMember -Identity "Domain Admins" | select SAMAccountName, objectClass
