@@ -407,6 +407,7 @@ Invoke-ACLScanner -ResolveGUIDs | select ObjectDN,IdentityReferenceName,ActiveDi
 SE ACHAR, PODE DESABILITAR O KERBEROS PREAUTH MANUALMENTE
 ```
 Set-DomainObject -Identity test4 -XOR @{useraccountcontrol=4194304} -Verbose
+Set-ADAccountControl -Id kamisama -DoesNotRequirePreAuth:$true
 ```
 
 
