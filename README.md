@@ -169,6 +169,19 @@ Get-NetDomainController -Domain "tech.local"
 (Get-ADDomain).DistinguishedName
 Get-Domainsid
 ```
+##### LIST - DOMAIN POLICY
+```
+Get-domainpolicy
+(Get-domainpolicy)."systemaccess"
+(Get-domainpolicy)."kerberospolicy"
+```
+##### LIST - DOMAIN POLICY OTHER DOMAIN
+```
+Get-domainpolicy -domain tech.local
+(Get-domainpolicy -domain tech.local)."systemaccess"
+(Get-domainpolicy -domain tech.local)."kerberospolicy"
+```
+
 ##### POWERVIEW - IMPORT
 ```
 Import-module .\Microsoft.ActiveDirectory.Management.dll
