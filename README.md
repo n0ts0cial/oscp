@@ -168,6 +168,8 @@ Get-NetDomainController -Domain "tech.local"
 ```
 (Get-ADDomain).DistinguishedName
 Get-Domainsid
+(get-addomaincontroller).ldapport
+(get-addomaincontroller).sslport
 ```
 ##### LIST - DOMAIN POLICY
 ```
@@ -180,6 +182,32 @@ Get-domainpolicy
 Get-domainpolicy -domain tech.local
 (Get-domainpolicy -domain tech.local)."systemaccess"
 (Get-domainpolicy -domain tech.local)."kerberospolicy"
+```
+##### LIST - DOMAIN USERS
+```
+net user /domain
+wmic USERACCOUNT where "DOMAIN = 'ABC'" get Domain,Name
+wmic USERACCOUNT where "DOMAIN  like '%ABC%'" get Domain,Name
+wmic USERACCOUNT Get Domain,Name,Sid
+dsquery user -o samid -limit 0
+dsquery user dc=ABC,dc=LOCAL -limit 0
+```
+```
+Get-ADUser -Filter *
+Get-ADUser -Filter * -Properties *
+Get-ADUser -Filter * -Properties * | select Samaccountname, Enabled
+```
+```
+get-netuser
+get-netuser -Identity test3
+```
+##### LIST - DOMAIN USERS SPECIFICS
+```
+Get-ADUser -identity test3 -Properties *
+Get-ADUser -identity test3 -Properties * | select Samaccountname, Enabled
+```
+```
+get-netuser -Identity test3
 ```
 
 ##### POWERVIEW - IMPORT
