@@ -129,6 +129,14 @@ Write-Host -ForegroundColor Green "Forest Functional Level: $($MyForestInfo.Fore
 $MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
 $MyDomain::GetCurrentDomain()
 ```
+```
+Get-WmiObject -Namespace root\cimv2 -Class Win32_ComputerSystem | Select Name, Domain
+```
+```
+wmic computersystem get domain
+systeminfo | findstr /B /C:"Domain"
+```
+
 ##### [LIST - DOMAIN CONTROLLERS CURRENT DOMAIN](https://techexpert.tips/windows/windows-list-domain-controllers/)
 ```
 $MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
