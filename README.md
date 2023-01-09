@@ -404,6 +404,14 @@ foreach($result in $MyResults)
 $FormatEnumerationLimit=-1
 Invoke-ACLScanner -ResolveGUIDs | select ObjectDN,IdentityReferenceName,ActiveDirectoryRights | Out-String -Width 4096
 ```
+```
+$FormatEnumerationLimit=-1
+Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReferenceName -match "bruno"} | select ObjectDN,IdentityReferenceName,ActiveDirectoryRights | Out-String -Width 4096
+```
+```
+$FormatEnumerationLimit=-1
+Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReferenceName -match "Domain Admins"} | select ObjectDN,IdentityReferenceName,ActiveDirectoryRights | Out-String -Width 4096
+```
 SE ACHAR, PODE DESABILITAR O KERBEROS PREAUTH MANUALMENTE
 ```
 Set-DomainObject -Identity test4 -XOR @{useraccountcontrol=4194304} -Verbose
