@@ -129,10 +129,22 @@ Write-Host -ForegroundColor Green "Forest Functional Level: $($MyForestInfo.Fore
 $MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
 $MyDomain::GetCurrentDomain()
 ```
-##### LIST - DOMAIN CONTROLLERS
+##### [LIST - DOMAIN CONTROLLERS CURRENT DOMAIN](https://techexpert.tips/windows/windows-list-domain-controllers/)
 ```
 $MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
 $MyDomain::GetCurrentDomain()
+```
+```
+wmic NTDOMAIN GET DomainControllerName,DomainControllerAddress,DomainName
+net group "Domain Controllers" /domain
+DSQUERY SERVER -o rdn
+DSQUERY SERVER
+nltest /dclist:TECH.LOCAL
+```
+##### LIST - DOMAIN CONTROLLERS OTHER DOMAIN
+```
+Get-ADDomainController -Discover -Domainname "tech.local"
+Get-NetDomainController -Domain "tech.local"
 ```
 ##### POWERVIEW - IMPORT
 ```
