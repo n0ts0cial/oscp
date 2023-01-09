@@ -228,6 +228,8 @@ Import-Module .\PowerSploit.psd1
 1 PROPRIEDADE DE TODOS OS USUARIOS
 ```
 Get-UserProperty -Properties pwdlastset
+Get-UserProperty -Properties badpwdcount
+Get-UserProperty -Properties logoncount
 ```
 ```
 Get-Aduser -Filter * -Properties * | select name,pwdlastset
