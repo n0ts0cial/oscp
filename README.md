@@ -111,6 +111,14 @@ curl https://github.com/n0ts0cial/oscp/raw/main/Import-ActiveDirectory.ps1  -Out
 Import-module .\Import-ActiveDirectory.ps1
 Import-ActiveDirectory
 ```
+##### POWERSPLOIT INSTALLATION
+```
+curl https://github.com/PowerShellMafia/PowerSploit/archive/refs/tags/v3.0.0.zip -Outfile v3.0.0.zip
+curl https://github.com/n0ts0cial/oscp/raw/main/powersploit3.zip -Outfile powersploit3.zip
+expand-archive -path ".\powersploit3.zip" -destinationpath ".\"
+cd PowerSploit-3.0.0
+Import-Module .\PowerSploit.psd1
+```
 ##### LIST - FOREST
 ```
 $MyForest = [System.DirectoryServices.ActiveDirectory.Forest]
@@ -291,6 +299,21 @@ Get-Aduser -identity ben - properties *
 Get-Netuser 
 Get-Netuser -username teste 
 Get-Userproperty -properties sammacount
+```
+##### LIST - DOMAIN USERS PROPERTIES (POWERSPLOIT)
+```
+curl https://github.com/PowerShellMafia/PowerSploit/archive/refs/tags/v3.0.0.zip -Outfile v3.0.0.zip
+curl https://github.com/n0ts0cial/oscp/raw/main/powersploit3.zip -Outfile powersploit3.zip
+expand-archive -path ".\powersploit3.zip" -destinationpath ".\"
+cd PowerSploit-3.0.0
+Import-Module .\PowerSploit.psd1
+```
+1 PROPRIEDADE DE TODOS OS USUARIOS
+```
+Get-UserProperty -Properties pwdlastset
+```
+```
+Get-Aduser -Filter * -Properties * | select name,pwdlastset
 ```
 ##### LIST - GPOS(POWERVIEW)
 ```
