@@ -289,6 +289,28 @@ foreach($result in $MyResults)
   Write-host ""
   }
 ```
+##### KERBEROASTING - LIST ALL SPN USERS
+```
+$MySearch = New-Object DirectoryServices.DirectorySearcher([ADSI]"")
+$MySearch.filter = "(&(objectClass=user)(objectCategory=user)(servicePrincipalName=*))"
+$MyResults = $MySearch.Findall()
+
+foreach($result in $MyResults)
+{
+ $userEntry = $result.GetDirectoryEntry()
+ Write-host "Object Name = " $userEntry.name -backgroundcolor "yellow" -foregroundcolor "black"
+ Write-host "DN = "  $userEntry.distinguishedName
+ Write-host "Object Cat. = "  $userEntry.objectCategory
+ Write-host "servicePrincipalNames"
+ $i=1
+ foreach($SPN in $userEntry.servicePrincipalName)
+  {
+  Write-host "SPN(" $i ")   = "   $SPN
+  $i+=1
+  }
+  Write-host ""
+  }
+```
 ##### KERBEROASTING - REQUEST A TGS TICKET
 ```
 Add-Type -Assemblyname System.IdentityModel
