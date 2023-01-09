@@ -209,6 +209,17 @@ Get-ADUser -identity test3 -Properties * | select Samaccountname, Enabled
 ```
 get-netuser -Identity test3
 ```
+##### LIST - DOMAIN GROUPS
+```
+Get-ADGroup -filter * -properties * | select SAMAccountName
+Get-ADGroup -filter * -properties * | select SamAccountName, ObjectClass, GroupCategory, GroupScope, DistinguishedName | Format-Table
+```
+
+##### LIST - DOMAIN GROUP MEMBERS
+```
+Get-ADGroupMember -Identity "Domain Admins" | select SAMAccountName, objectClass
+Get-ADGroupMember -Identity "Domain Admins" -Recursive | select SAMAccountName, objectClass
+```
 
 ##### POWERVIEW - IMPORT
 ```
