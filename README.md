@@ -213,10 +213,29 @@ get-netuser -Identity test3
 ```
 dsquery user -samid test3  | dsget user -memberof | dsget group -samid
 ```
-##### LIST - DOMAIN GROUPS
+##### LIST - DOMAIN GROUPS (0)
 ```
 Get-ADGroup -filter * -properties * | select SAMAccountName
 Get-ADGroup -filter * -properties * | select SamAccountName, ObjectClass, GroupCategory, GroupScope, DistinguishedName | Format-Table
+```
+##### LIST - ALL DOMAIN GROUPS (1)
+```
+Get-ADGroup -Filter * 
+Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
+```
+##### LIST - ALL DOMAIN GROUPS (2)
+```
+Get-ADGroup -Filter * 
+Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
+```
+##### LIST - ALL DOMAIN GROUPS (3)
+```
+powershell -command "Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft " 
+```
+##### LIST - ALL DOMAIN GROUPS (4)
+```
+net group /domain
+dsquery group
 ```
 ##### LIST - DOMAIN GROUPS - ALL MEMBERS OF ALL GROUPS
 ```
@@ -246,24 +265,6 @@ Import-module .\activedirectory.psd1
 ```
 Get-NetDomain
 Get-NetDomain -Domain teste.local
-```
-##### LIST - ALL DOMAIN GROUPS (1)
-```
-Get-ADGroup -Filter * 
-Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
-```
-##### LIST - ALL DOMAIN GROUPS (2)
-```
-Get-ADGroup -Filter * 
-Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
-```
-##### LIST - ALL DOMAIN GROUPS (3)
-```
-powershell -command "Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft " 
-```
-##### LIST - ALL DOMAIN GROUPS (4)
-```
-net group /domain
 ```
 ##### LIST - DOMAIN POLICY (POWERVIEW)
 ```
