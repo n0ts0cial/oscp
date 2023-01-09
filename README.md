@@ -143,6 +143,12 @@ $MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
 $MyDomain::GetCurrentDomain()
 ```
 ```
+Get-ADGroupMember "Domain Controllers" | %{Resolve-DnsName -Name $_.Name} | select Name, IPAddress
+Get-ADDomainController -filter * | select Name, IPv4Address
+Get-WmiObject -Class Win32_NTDomain | select DomainControllerName, DomainControllerAddress, DomainName, DnsForestName
+Resolve-DnsName -Name _ldap._tcp.dc._msdcs.tech.local -Type ANY | select Name, IP4Address
+```
+```
 wmic NTDOMAIN GET DomainControllerName,DomainControllerAddress,DomainName
 net group "Domain Controllers" /domain
 DSQUERY SERVER -o rdn
