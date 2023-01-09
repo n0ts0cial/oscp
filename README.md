@@ -234,6 +234,16 @@ Get-UserProperty -Properties logoncount
 ```
 Get-Aduser -Filter * -Properties * | select name,pwdlastset
 ```
+##### LIST - DOMAIN USERS PROPERTIES - PROCURAR POR INFO EM CAMPOS DOS USUARIOS(POWERSPLOIT)
+```
+Find-UserField -SearchField Description -SearchTerm "built"
+Find-UserField -SearchField Description -SearchTerm "pass"
+```
+```
+Get-AdUser -Filter 'Description -like "*built*"' -Properties Description | select name, Description
+Get-AdUser -Filter 'Description -like "*pass*"' -Properties Description | select name, Description
+```
+
 ##### LIST - DOMAIN USERS GROUP MEMBERSHIP
 ```
 dsquery user -samid test3  | dsget user -memberof | dsget group -samid
