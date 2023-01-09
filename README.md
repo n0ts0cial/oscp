@@ -160,6 +160,11 @@ nltest /dclist:TECH.LOCAL
 Get-ADDomainController -Discover -Domainname "tech.local"
 Get-NetDomainController -Domain "tech.local"
 ```
+##### LIST - DOMAIN CONTROLLERS MISC INFO
+```
+(Get-ADDomain).DistinguishedName
+Get-Domainsid
+```
 ##### POWERVIEW - IMPORT
 ```
 Import-module .\Microsoft.ActiveDirectory.Management.dll
