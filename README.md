@@ -191,6 +191,7 @@ Get-domainpolicy -domain tech.local
 (Get-domainpolicy -domain tech.local)."systemaccess"
 (Get-domainpolicy -domain tech.local)."kerberospolicy"
 ```
+## DOMAIN USERS
 ##### LIST - DOMAIN USERS
 ```
 net user /domain
@@ -249,31 +250,26 @@ Get-AdUser -Filter 'Description -like "*pass*"' -Properties Description | select
 ```
 dsquery user -samid test3  | dsget user -memberof | dsget group -samid
 ```
-##### LIST - DOMAIN GROUPS (0)
 ```
+Get-ADPrincipalGroupMembership vegeta | select name
+Get-ADPrincipalGroupMembership vegeta 
+```
+## DOMAIN GROUPS
+##### DOMAIN GROUPS - LIST ALL GROUPS
+```
+Get-ADGroup -Filter * 
 Get-ADGroup -filter * -properties * | select SAMAccountName
 Get-ADGroup -filter * -properties * | select SamAccountName, ObjectClass, GroupCategory, GroupScope, DistinguishedName | Format-Table
-```
-##### LIST - ALL DOMAIN GROUPS (1)
-```
-Get-ADGroup -Filter * 
 Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
 ```
-##### LIST - ALL DOMAIN GROUPS (2)
-```
-Get-ADGroup -Filter * 
-Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft -AutoSize | Out-String -Width 4096
-```
-##### LIST - ALL DOMAIN GROUPS (3)
 ```
 powershell -command "Get-ADGroup -Filter * | select SamAccountName, objectClass, GroupCategory, GroupScope | ft " 
 ```
-##### LIST - ALL DOMAIN GROUPS (4)
 ```
 net group /domain
 dsquery group
 ```
-##### LIST - DOMAIN GROUPS - ALL MEMBERS OF ALL GROUPS
+##### DOMAIN GROUPS - LIST ALL MEMBERS OF ALL GROUPS
 ```
 $DomainGroups = Get-ADGroup -Filter *
 foreach ($Group in $DomainGroups)
@@ -286,7 +282,7 @@ foreach ($Group in $DomainGroups)
     }
 }
 ```
-##### LIST - DOMAIN GROUP MEMBERS
+##### DOMAIN GROUPS - LIST ALL MEMBERS OF A GROUP
 ```
 Get-ADGroupMember -Identity "Domain Admins" | select SAMAccountName, objectClass
 Get-ADGroupMember -Identity "Domain Admins" -Recursive | select SAMAccountName, objectClass
@@ -302,6 +298,10 @@ Get-ADComputer -Filter * -Properties * | select Samaccountname, Enabled
 ```
 Get-ADComputer -identity tech-dc01 -Properties *
 Get-ADComputer -identity tech-dc01 -Properties * | select Samaccountname, Enabled
+```
+##### LIST - DOMAIN COMPUTERS GROUP MEMBERSHIP
+```
+aaa
 ```
 
 ## [GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
