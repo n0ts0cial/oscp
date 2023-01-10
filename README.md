@@ -245,7 +245,6 @@ Find-UserField -SearchField Description -SearchTerm "pass"
 Get-AdUser -Filter 'Description -like "*built*"' -Properties Description | select name, Description
 Get-AdUser -Filter 'Description -like "*pass*"' -Properties Description | select name, Description
 ```
-
 ##### LIST - DOMAIN USERS GROUP MEMBERSHIP
 ```
 dsquery user -samid test3  | dsget user -memberof | dsget group -samid
@@ -292,7 +291,20 @@ foreach ($Group in $DomainGroups)
 Get-ADGroupMember -Identity "Domain Admins" | select SAMAccountName, objectClass
 Get-ADGroupMember -Identity "Domain Admins" -Recursive | select SAMAccountName, objectClass
 ```
-## GPO - GROUP POLICY OBJECTS
+## DOMAIN COMPUTERS
+##### LIST - DOMAIN COMPUTERS
+```
+Get-ADComputer -Filter *
+Get-ADComputer -Filter * -Properties *
+Get-ADComputer -Filter * -Properties * | select Samaccountname, Enabled
+```
+##### LIST - DOMAIN COMPUTERS SPECIFICS
+```
+Get-ADComputer -identity tech-dc01 -Properties *
+Get-ADComputer -identity tech-dc01 -Properties * | select Samaccountname, Enabled
+```
+
+## [GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
 ##### GPO - LIST ALL GPOS
 ```
 Get-GPO -all | select DisplayName
