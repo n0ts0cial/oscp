@@ -444,6 +444,16 @@ $MyPermissions | Sort-Object Name
 Get-GPResultantSetOfPolicy -ReportType Html -Path "c:\report.html"
 Get-GPResultantSetOfPolicy -ReportType Xml -Path "c:\report.xml"
 ```
+##### DOMAIN GPO - Gets all GPOs in a domain that set "Restricted Groups"
+```
+Get-NetGPOGroup
+Get-NetGPOGroup -ResolveMemberSIDs
+```
+##### DOMAIN GPO - MISC NAO ENTENDI DIRENTO
+```
+Find-GPOComputerAdmin -computername server01
+Find-GPOLocation
+```
 ## DOMAIN MISC
 ##### DOMAIN - FIND SHARES
 ```
