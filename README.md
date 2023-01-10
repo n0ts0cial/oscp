@@ -405,8 +405,48 @@ Get-GPPermissions -Guid $GPO.Id -All | Select-Object @{n='Name';e={$GPO.DisplayN
 }
 $MyPermissions | Sort-Object Name
 ```
-
-
+## LOCAL MACHINE - DOMAIN ENUMERATION
+##### LOCAL MACHINE - LIST ALL USERS
+```
+Get-LocalUser
+```
+##### LOCAL MACHINE - LIST LOCAL ADMINISTRATORS
+```
+Get-LocalGroupMember -Group "Administrators"
+```
+##### LOCAL MACHINE - LIST LOCAL ADMINISTRATORS FROM ACTIVE DIRECTORY
+```
+$RESULT = 
+$ADGROUPS = Get-LocalGroupMember -Group "Administrators" | ?{ (($_.PrincipalSource -eq "ActiveDirectory") -and ($_.ObjectClass -eq "Group")) } 
+foreach ($LINE in $ADGROUPS) {
+$GROUPNAME = $LINE.NAME
+$LINESPLIT = $GROUPNAME.Split("\")
+$MYGROUP = $LINESPLIT[1]
+$RESULT += Get-ADGroupMember -Identity $MYGROUP | select objectClass, SamAccountName | ft
+}
+$RESULT
+```
+##### LOCAL MACHINE - LIST LOCAL ADMINISTRATORS FROM ACTIVE DIRECTORY RECURSIVE
+```
+$RESULT = 
+$ADGROUPS = Get-LocalGroupMember -Group "Administrators" | ?{ (($_.PrincipalSource -eq "ActiveDirectory") -and ($_.ObjectClass -eq "Group")) } 
+foreach ($LINE in $ADGROUPS) {
+$GROUPNAME = $LINE.NAME
+$LINESPLIT = $GROUPNAME.Split("\")
+$MYGROUP = $LINESPLIT[1]
+$RESULT += Get-ADGroupMember -Identity $MYGROUP -Recursive | select objectClass, SamAccountName | ft
+}
+$RESULT
+```
+##### LOCAL MACHINE - LIST ALL GROUPS
+```
+Get-LocalGroup
+Get-LocalGroup | ft -AutoSize | Out-String -Width 4096
+```
+##### LOCAL MACHINE - LIST ALL MEMBERS OF ALL GROUPS
+```
+aaa
+```
 
 
 
