@@ -192,7 +192,7 @@ Get-domainpolicy -domain tech.local
 (Get-domainpolicy -domain tech.local)."kerberospolicy"
 ```
 ## DOMAIN USERS
-##### LIST - DOMAIN USERS
+##### DOMAIN USERS - LIST ALL DOMAIN USERS
 ```
 net user /domain
 wmic USERACCOUNT where "DOMAIN = 'ABC'" get Domain,Name
@@ -210,7 +210,7 @@ Get-ADUser -Filter * -Properties * | select Samaccountname, Enabled
 get-netuser
 get-netuser -Identity test3
 ```
-##### LIST - DOMAIN USERS SPECIFICS
+##### DOMAIN USERS - LIST USERS PROPERTIES
 ```
 Get-ADUser -identity test3 -Properties *
 Get-ADUser -identity test3 -Properties * | select Samaccountname, Enabled
@@ -218,7 +218,7 @@ Get-ADUser -identity test3 -Properties * | select Samaccountname, Enabled
 ```
 get-netuser -Identity test3
 ```
-##### LIST - DOMAIN USERS PROPERTIES (POWERSPLOIT)
+##### DOMAIN USERS - LIST USERS PROPERTIES (POWERSPLOIT)
 ```
 curl https://github.com/PowerShellMafia/PowerSploit/archive/refs/tags/v3.0.0.zip -Outfile v3.0.0.zip
 curl https://github.com/n0ts0cial/oscp/raw/main/powersploit3.zip -Outfile powersploit3.zip
@@ -237,7 +237,7 @@ Get-UserProperty -Properties logoncount
 Get-Aduser -Filter * -Properties * | select name,description
 Get-Aduser -Filter * -Properties * | select name,pwdlastset
 ```
-##### LIST - DOMAIN USERS PROPERTIES - PROCURAR POR INFO EM CAMPOS DOS USUARIOS(POWERSPLOIT)
+##### DOMAIN USERS - LIST USERS PROPERTIES EM TODOS OS USUARIOS (POWERSPLOIT)
 ```
 Find-UserField -SearchField Description -SearchTerm "built"
 Find-UserField -SearchField Description -SearchTerm "pass"
@@ -246,7 +246,7 @@ Find-UserField -SearchField Description -SearchTerm "pass"
 Get-AdUser -Filter 'Description -like "*built*"' -Properties Description | select name, Description
 Get-AdUser -Filter 'Description -like "*pass*"' -Properties Description | select name, Description
 ```
-##### LIST - DOMAIN USERS GROUP MEMBERSHIP
+##### DOMAIN USERS - LIST GROUP MEMBERSHIP
 ```
 dsquery user -samid test3  | dsget user -memberof | dsget group -samid
 ```
@@ -288,20 +288,21 @@ Get-ADGroupMember -Identity "Domain Admins" | select SAMAccountName, objectClass
 Get-ADGroupMember -Identity "Domain Admins" -Recursive | select SAMAccountName, objectClass
 ```
 ## DOMAIN COMPUTERS
-##### LIST - DOMAIN COMPUTERS
+##### DOMAIN COMPUTERS - LIST ALL COMPUTERS
 ```
 Get-ADComputer -Filter *
 Get-ADComputer -Filter * -Properties *
 Get-ADComputer -Filter * -Properties * | select Samaccountname, Enabled
 ```
-##### LIST - DOMAIN COMPUTERS SPECIFICS
+##### DOMAIN COMPUTERS - LIST COMPUTER PROPERTIES
 ```
 Get-ADComputer -identity tech-dc01 -Properties *
 Get-ADComputer -identity tech-dc01 -Properties * | select Samaccountname, Enabled
 ```
-##### LIST - DOMAIN COMPUTERS GROUP MEMBERSHIP
+##### DOMAIN COMPUTERS - LIST GROUP MEMBERSHIP
 ```
-aaa
+Get-ADPrincipalGroupMembership TECH-DC01$ | select name
+Get-ADPrincipalGroupMembership TECH-DC01$
 ```
 
 ## [GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
