@@ -342,10 +342,6 @@ Get-ADPrincipalGroupMembership TECH-DC01$
 ```
 dsquery * "CN=MyServiceComputer,CN=Computers,DC=TECH,DC=LOCAL" -attr MemberOf
 ```
-##### DOMAIN COMPUTERS - LIST GROUP MEMBERSHIP
-```
-aaa
-```
 ## [GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
 ##### GPO - LIST ALL GPOS
 ```
