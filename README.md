@@ -292,6 +292,71 @@ foreach ($Group in $DomainGroups)
 Get-ADGroupMember -Identity "Domain Admins" | select SAMAccountName, objectClass
 Get-ADGroupMember -Identity "Domain Admins" -Recursive | select SAMAccountName, objectClass
 ```
+## GPO - GROUP POLICY OBJECTS
+##### GPO - LIST ALL GPOS
+```
+Get-GPO -all | select DisplayName
+Get-GPO -all | select DisplayName,Id
+```
+```
+$LDAPSEARCH = New-Object System.DirectoryServices.DirectorySearcher 
+$LDAPSEARCH.SearchRoot = "LDAP://DC=TECH,DC=LOCAL"
+$LDAPSEARCH.Filter = "(objectCategory=groupPolicyContainer)"
+$LDAPSEARCH.FindAll()
+```
+##### GPO - TRANSLATE NAME / ID / NAME
+```
+Get-GPO -Name "Default Domain Policy" | select Displayname,Id
+Get-GPO -Guid d1e5ff89-e3b2-494e-bf5c-c83f46de5b4a | select Displayname,Id
+```
+##### GPO - LIST ALL GPO LINKS
+```
+$MyGpos = Get-GPO -All
+$MyLinks = foreach ($GPO in $MyGpos) {
+[xml]$XMLGPO = Get-GPOReport -ReportType Xml -Guid $GPO.Id
+foreach ($line in $XMLGPO.GPO.Linksto) {
+		'' | Select-object @{n='Name';e={$XMLGPO.GPO.Name}},@{n='Link';e={$line.SOMPath}},@{n='Status';e={$line.Enabled}}
+}
+}
+$MyLinks | Sort-Object Name
+```
+##### GPO - LIST SPECIFIC GPO LINKS
+```
+$MyGpos = Get-GPO -Name "MY-GPO"
+$MyLinks = foreach ($GPO in $MyGpos) {
+[xml]$XMLGPO = Get-GPOReport -ReportType Xml -Guid $GPO.Id
+foreach ($line in $XMLGPO.GPO.Linksto) {
+		'' | Select-object @{n='Name';e={$XMLGPO.GPO.Name}},@{n='Link';e={$line.SOMPath}},@{n='Status';e={$line.Enabled}}
+}
+}
+$MyLinks | Sort-Object Name
+```
+##### GPO - LIST ALL GPO PERMISSIONS
+```
+$MyGpos = Get-GPO -All
+$MyPermissions = foreach ($GPO in $MyGpos) {
+Get-GPPermissions -Guid $GPO.Id -All | Select-Object @{n='Name';e={$GPO.DisplayName}},@{n='AccountName';e={$_.Trustee.Name}},@{n='AccountType';e={$_.Trustee.SidType.ToString()}},@{n='Permissions';e={$_.Permission}}
+}
+$MyPermissions | Sort-Object Name
+```
+##### GPO - LIST SPECIFIC GPO PERMISSIONS
+```
+$MyGpos = Get-GPO -Name "MY-GPO"
+$MyPermissions = foreach ($GPO in $MyGpos) {
+Get-GPPermissions -Guid $GPO.Id -All | Select-Object @{n='Name';e={$GPO.DisplayName}},@{n='AccountName';e={$_.Trustee.Name}},@{n='AccountType';e={$_.Trustee.SidType.ToString()}},@{n='Permissions';e={$_.Permission}}
+}
+$MyPermissions | Sort-Object Name
+```
+
+
+
+
+
+
+
+
+
+
 
 ##### POWERVIEW - IMPORT
 ```
