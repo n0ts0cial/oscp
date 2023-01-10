@@ -256,6 +256,10 @@ dsquery user -samid test3  | dsget user -memberof | dsget group -samid
 Get-ADPrincipalGroupMembership vegeta | select name
 Get-ADPrincipalGroupMembership vegeta 
 ```
+```
+Get-Netgroup -username vegeta
+Get-Netgroup -username vegeta | select name
+```
 ## DOMAIN GROUPS
 ##### DOMAIN GROUPS - LIST ALL GROUPS
 ```
@@ -341,6 +345,10 @@ Get-ADPrincipalGroupMembership TECH-DC01$
 ```
 ```
 dsquery * "CN=MyServiceComputer,CN=Computers,DC=TECH,DC=LOCAL" -attr MemberOf
+```
+```
+Get-AdPrincipalGroupMembership -Identity vegeta
+Get-AdPrincipalGroupMembership -Identity vegeta | select samaccountname
 ```
 ## [GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
 ##### GPO - LIST ALL GPOS
