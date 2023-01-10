@@ -405,7 +405,7 @@ Get-GPPermissions -Guid $GPO.Id -All | Select-Object @{n='Name';e={$GPO.DisplayN
 }
 $MyPermissions | Sort-Object Name
 ```
-## LOCAL MACHINE - DOMAIN ENUMERATION
+## LOCAL MACHINE - ENUMERATION
 ##### LOCAL MACHINE - LIST ALL USERS
 ```
 Get-LocalUser
@@ -445,7 +445,16 @@ Get-LocalGroup | ft -AutoSize | Out-String -Width 4096
 ```
 ##### LOCAL MACHINE - LIST ALL MEMBERS OF ALL GROUPS
 ```
-aaa
+$DomainGroups = Get-LocalGroup
+foreach ($Group in $DomainGroups)
+{
+    Write-Host "Group: $($Group.Name)" -background yellow -foreground black
+    $GroupMembers = Get-LocalGroupMember -Group $Group
+    foreach ($GroupMember in $GroupMembers)
+    {
+        Write-Host "    Member Name: $($GroupMember.Name)"
+    }
+}
 ```
 
 
