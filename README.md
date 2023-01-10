@@ -300,6 +300,19 @@ foreach ($Group in $DomainGroups)
     }
 }
 ```
+##### DOMAIN GROUPS - LIST ALL MEMBERS OF ALL GROUPS (COLORIDO)
+```
+$DomainGroups = Get-ADGroup -Filter *
+foreach ($Group in $DomainGroups)
+{
+    Write-Host "Group: $($Group.Name)"  -background yellow -foreground black
+    $GroupMembers = Get-ADGroupMember -Identity $Group -Recursive
+    foreach ($GroupMember in $GroupMembers)
+    {
+        Write-Host "    Member Name: $($GroupMember.sAMAccountName)"
+    }
+}
+```
 ##### DOMAIN GROUPS - LIST ALL MEMBERS OF A GROUP
 ```
 Get-ADGroupMember -Identity "Domain Admins" | select SAMAccountName, objectClass
