@@ -294,17 +294,38 @@ Get-ADComputer -Filter *
 Get-ADComputer -Filter * -Properties *
 Get-ADComputer -Filter * -Properties * | select Samaccountname, Enabled
 ```
+```
+Get-Netcomputer
+Get-Netcomputer | select name, samaccountname
+Get-Netcomputer -operatingSystem "*Server 2022*"
+Get-Netcomputer -operatingSystem "*Server 2022*" | select samaccountname
+```
+##### DOMAIN COMPUTERS - LIST COMPUTERS FILTERS
+```
+Get-ADComputer -Filter 'OperatingSystem -like "*Server 2022*"' | select name, samaccountname
+Get-ADComputer -Filter 'OperatingSystem -like "*Server 2022*"' -Properties OperatingSystem | select name, samaccountname, OperatingSystem
+Get-ADComputer -Filter * -Properties DNSHostname | %{ Test-Connection -Count 1 -Computername $_.DNSHostname}
+```
 ##### DOMAIN COMPUTERS - LIST COMPUTER PROPERTIES
 ```
 Get-ADComputer -identity tech-dc01 -Properties *
 Get-ADComputer -identity tech-dc01 -Properties * | select Samaccountname, Enabled
+```
+```
+Get-Netcomputer | select name, samaccountname
 ```
 ##### DOMAIN COMPUTERS - LIST GROUP MEMBERSHIP
 ```
 Get-ADPrincipalGroupMembership TECH-DC01$ | select name
 Get-ADPrincipalGroupMembership TECH-DC01$
 ```
-
+```
+dsquery * "CN=MyServiceComputer,CN=Computers,DC=TECH,DC=LOCAL" -attr MemberOf
+```
+##### DOMAIN COMPUTERS - LIST GROUP MEMBERSHIP
+```
+aaa
+```
 ## [GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
 ##### GPO - LIST ALL GPOS
 ```
