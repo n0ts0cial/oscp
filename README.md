@@ -376,7 +376,7 @@ get-netloggedon -computer server01
 get-netloggedon -computer server01 | select username,logondomain,authdomains,logonserver,computername | ft
 ```
 
-## [GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
+## [DOMAIN GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
 ##### GPO - LIST ALL GPOS
 ```
 Get-GPO -all | select DisplayName
@@ -431,6 +431,22 @@ Get-GPPermissions -Guid $GPO.Id -All | Select-Object @{n='Name';e={$GPO.DisplayN
 }
 $MyPermissions | Sort-Object Name
 ```
+
+## DOMAIN MISC
+##### DOMAIN - FIND SHARES
+```
+Invoke-ShareFinder -Verbose
+```
+##### DOMAIN - FIND SENSITIVE FILES
+```
+Invoke-FileFinder -Verbose
+```
+##### DOMAIN - FIND FILE SERVER
+```
+Get-DomainFileServer
+Get-NetFileServer -Verbose
+```
+
 ## LOCAL MACHINE - ENUMERATION
 ##### LOCAL MACHINE - LIST ALL USERS
 ```
