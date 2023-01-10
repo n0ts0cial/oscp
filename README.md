@@ -458,6 +458,8 @@ Find-GPOLocation
 ##### DOMAIN OU - LIST ALL GPOS
 ```
 Get-ADOrganizationalUnit -filter *
+Get-ADOrganizationalUnit -filter * -Properties *
+Get-ADOrganizationalUnit -filter * -Properties * | select CanonicalName, DistinguishedName
 Get-ADOrganizationalUnit -filter * | select DistinguishedName
 ```
 ```
