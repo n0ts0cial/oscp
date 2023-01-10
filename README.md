@@ -277,7 +277,7 @@ Get-Netgroup -domain tech.local
 Get-Netgroup *admin*
 Get-Netgroup *admin* | select samaccountname
 ```
-##### DOMAIN GROUPS - LIST GROUPS FILTER
+##### DOMAIN GROUPS - LIST ALL GROUPS FILTER
 ```
 Get-ADGroup -filter 'Name -like "*admin*"' | select name
 Get-Netgroup *admin*
@@ -300,6 +300,12 @@ foreach ($Group in $DomainGroups)
 ```
 Get-ADGroupMember -Identity "Domain Admins" | select SAMAccountName, objectClass
 Get-ADGroupMember -Identity "Domain Admins" -Recursive | select SAMAccountName, objectClass
+```
+```
+Get-NetgroupMember -identity 'GROUP-A'
+Get-NetgroupMember -identity 'GROUP-A' | select SAMAccountName
+Get-NetgroupMember -identity 'GROUP-A' | select groupname,MemberName,MemberObjectClass
+Get-NetgroupMember -identity 'GROUP-A' -domain 'tech.local'
 ```
 ## DOMAIN COMPUTERS
 ##### DOMAIN COMPUTERS - LIST ALL COMPUTERS
