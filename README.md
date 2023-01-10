@@ -119,6 +119,7 @@ expand-archive -path ".\powersploit3.zip" -destinationpath ".\"
 cd PowerSploit-3.0.0
 Import-Module .\PowerSploit.psd1
 ```
+## FOREST
 ##### LIST - FOREST
 ```
 $MyForest = [System.DirectoryServices.ActiveDirectory.Forest]
@@ -133,6 +134,7 @@ Write-Host -ForegroundColor Green "Forest Mode: $($MyForestInfo.ForestMode)"
 Write-Host -ForegroundColor Green "Forest Functional Level: $($MyForestInfo.ForestMode)"
 Write-Host -ForegroundColor Green "Forest Domains: $($MyForestInfo.domains)"
 ```
+## DOMAIN
 ##### LIST - DOMAIN
 ```
 $MyDomain = [System.DirectoryServices.ActiveDirectory.Domain]
@@ -268,6 +270,18 @@ powershell -command "Get-ADGroup -Filter * | select SamAccountName, objectClass,
 ```
 net group /domain
 dsquery group
+```
+```
+Get-Netgroup | select samaccountname
+Get-Netgroup -domain tech.local
+Get-Netgroup *admin*
+Get-Netgroup *admin* | select samaccountname
+```
+##### DOMAIN GROUPS - LIST GROUPS FILTER
+```
+Get-ADGroup -filter 'Name -like "*admin*"' | select name
+Get-Netgroup *admin*
+Get-Netgroup *admin* | select samaccountname
 ```
 ##### DOMAIN GROUPS - LIST ALL MEMBERS OF ALL GROUPS
 ```
