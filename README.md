@@ -363,6 +363,19 @@ dsquery * "CN=MyServiceComputer,CN=Computers,DC=TECH,DC=LOCAL" -attr MemberOf
 Get-AdPrincipalGroupMembership -Identity vegeta
 Get-AdPrincipalGroupMembership -Identity vegeta | select samaccountname
 ```
+##### DOMAIN COMPUTERS - LOGGED USERS
+```
+quser
+query user
+query user /server:tech-dc01
+```
+```
+get-netloggedon
+get-netloggedon | select username,logondomain,authdomains,logonserver,computername | ft
+get-netloggedon -computer server01
+get-netloggedon -computer server01 | select username,logondomain,authdomains,logonserver,computername | ft
+```
+
 ## [GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
 ##### GPO - LIST ALL GPOS
 ```
@@ -455,6 +468,10 @@ $RESULT
 ```
 Get-LocalGroup
 Get-LocalGroup | ft -AutoSize | Out-String -Width 4096
+```
+```
+Get-Netlocalgroup
+Get-Netlocalgroup -computer server01
 ```
 ##### LOCAL MACHINE - LIST ALL MEMBERS OF ALL GROUPS
 ```
