@@ -454,6 +454,15 @@ Get-NetGPOGroup -ResolveMemberSIDs
 Find-GPOComputerAdmin -computername server01
 Find-GPOLocation
 ```
+## DOMAIN OU - ORGANIZATIONAL UNIT
+##### DOMAIN OU - LIST ALL GPOS
+```
+Get-ADOrganizationalUnit -filter *
+Get-ADOrganizationalUnit -filter * | select DistinguishedName
+```
+```
+Get-NetOu
+```
 ## DOMAIN MISC
 ##### DOMAIN - FIND SHARES
 ```
