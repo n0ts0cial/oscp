@@ -377,7 +377,7 @@ get-netloggedon -computer server01 | select username,logondomain,authdomains,log
 ```
 
 ## [DOMAIN GPO - GROUP POLICY OBJECTS](https://techexpert.tips/powershell/powershell-list-all-gpo/)
-##### GPO - LIST ALL GPOS
+##### DOMAIN GPO - LIST ALL GPOS
 ```
 Get-GPO -all | select DisplayName
 Get-GPO -all | select DisplayName,Id
@@ -388,12 +388,20 @@ $LDAPSEARCH.SearchRoot = "LDAP://DC=TECH,DC=LOCAL"
 $LDAPSEARCH.Filter = "(objectCategory=groupPolicyContainer)"
 $LDAPSEARCH.FindAll()
 ```
-##### GPO - TRANSLATE NAME / ID / NAME
+```
+Get-NetGpo
+```
+##### DOMAIN GPO - LIST ALL GPOS PARA COMPUTADOR ESPECIFICO
+```
+Get-NetGpo -Computername server01
+Get-NetGpo -Computername server01 | select displayname
+```
+##### DOMAIN GPO - TRANSLATE NAME / ID / NAME
 ```
 Get-GPO -Name "Default Domain Policy" | select Displayname,Id
 Get-GPO -Guid d1e5ff89-e3b2-494e-bf5c-c83f46de5b4a | select Displayname,Id
 ```
-##### GPO - LIST ALL GPO LINKS
+##### DOMAIN GPO - LIST ALL GPO LINKS
 ```
 $MyGpos = Get-GPO -All
 $MyLinks = foreach ($GPO in $MyGpos) {
@@ -404,7 +412,7 @@ foreach ($line in $XMLGPO.GPO.Linksto) {
 }
 $MyLinks | Sort-Object Name
 ```
-##### GPO - LIST SPECIFIC GPO LINKS
+##### DOMAIN GPO - LIST SPECIFIC GPO LINKS
 ```
 $MyGpos = Get-GPO -Name "MY-GPO"
 $MyLinks = foreach ($GPO in $MyGpos) {
@@ -415,7 +423,7 @@ foreach ($line in $XMLGPO.GPO.Linksto) {
 }
 $MyLinks | Sort-Object Name
 ```
-##### GPO - LIST ALL GPO PERMISSIONS
+##### DOMAIN GPO - LIST ALL GPO PERMISSIONS
 ```
 $MyGpos = Get-GPO -All
 $MyPermissions = foreach ($GPO in $MyGpos) {
@@ -423,7 +431,7 @@ Get-GPPermissions -Guid $GPO.Id -All | Select-Object @{n='Name';e={$GPO.DisplayN
 }
 $MyPermissions | Sort-Object Name
 ```
-##### GPO - LIST SPECIFIC GPO PERMISSIONS
+##### DOMAIN GPO - LIST SPECIFIC GPO PERMISSIONS
 ```
 $MyGpos = Get-GPO -Name "MY-GPO"
 $MyPermissions = foreach ($GPO in $MyGpos) {
@@ -431,7 +439,11 @@ Get-GPPermissions -Guid $GPO.Id -All | Select-Object @{n='Name';e={$GPO.DisplayN
 }
 $MyPermissions | Sort-Object Name
 ```
-
+##### DOMAIN GPO - GERAR HELATORIO HTML / XML
+```
+Get-GPResultantSetOfPolicy -ReportType Html -Path "c:\report.html"
+Get-GPResultantSetOfPolicy -ReportType Xml -Path "c:\report.xml"
+```
 ## DOMAIN MISC
 ##### DOMAIN - FIND SHARES
 ```
