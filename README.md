@@ -563,12 +563,10 @@ foreach ($Group in $DomainGroups)
     }
 }
 ```
-
-
-
-
-
-
+##### LOCAL MACHINE - LIST ALL PERMISSIONS
+```
+(Get-ACL "AD:$((Get-ADComputer -Identity 'TECH-DC01').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
+```
 
 
 
