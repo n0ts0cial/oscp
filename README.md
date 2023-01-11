@@ -260,6 +260,21 @@ Get-ADPrincipalGroupMembership vegeta
 Get-Netgroup -username vegeta
 Get-Netgroup -username vegeta | select name
 ```
+##### DOMAIN USER - LIST OWNER SINGLE COMPUTER
+```
+$User = Get-ADUser test3 -Properties nTSecurityDescriptor 
+$User | Select-Object -Property Name, @{name='Owner'; expression={$_.nTSecurityDescriptor.owner}}
+```
+##### DOMAIN USER - LIST OWNER ALL COMPUTERS
+```
+$UserList = Get-ADUser -Properties nTSecurityDescriptor -Filter *
+foreach ($User in $UserList)
+{
+$User | Select-Object -Property Name, @{ label='Owner'
+        expression={$_.nTSecurityDescriptor.owner}
+    }
+}
+```
 ## DOMAIN GROUPS
 ##### DOMAIN GROUPS - LIST ALL GROUPS
 ```
