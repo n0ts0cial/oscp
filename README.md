@@ -592,6 +592,12 @@ Get-ObjectAcl -Samaccountname buma -ResolveGUIDs
 Get-ObjectAcl -Samaccountname buma -ResolveGUIDs | ft
 Get-ObjectAcl 'CN=buma,CN=Users,DC=TECH,DC=LOCAL' -Verbose | ft
 ```
+##### DOMAIN - LIST PATH PERMISSIONS / SHARE PERMISSION
+```
+$FormatEnumerationLimit=-1
+Get-PathACL -Path "\\tech-dc01.tech.local\sysvol" | ft | Out-String -Width 4096
+Get-PathACL -Path "\\tech-dc01.tech.local\sysvol" | select Path, IdentityReference, FileSystemRights | ft | Out-String -Width 4096
+```
 ## LOCAL MACHINE - ENUMERATION
 ##### LOCAL MACHINE - LIST ALL USERS
 ```
