@@ -994,3 +994,6 @@ $MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,
 $MyACL.AddAccessRule($MyACE)
 Set-acl -aclobject $MyACL $MyDistinguishedNameAD
 ```
+```
+Add-DomainObjectAcl -TargetIdentity chichi -PrincipalIdentity vegeta -Rights All
+```
