@@ -260,12 +260,12 @@ Get-ADPrincipalGroupMembership vegeta
 Get-Netgroup -username vegeta
 Get-Netgroup -username vegeta | select name
 ```
-##### DOMAIN USER - LIST OWNER SINGLE COMPUTER
+##### DOMAIN USER - LIST OWNER SINGLE USER
 ```
 $User = Get-ADUser test3 -Properties nTSecurityDescriptor 
 $User | Select-Object -Property Name, @{name='Owner'; expression={$_.nTSecurityDescriptor.owner}}
 ```
-##### DOMAIN USER - LIST OWNER ALL COMPUTERS
+##### DOMAIN USER - LIST OWNER ALL USERS
 ```
 $UserList = Get-ADUser -Properties nTSecurityDescriptor -Filter *
 foreach ($User in $UserList)
@@ -275,6 +275,18 @@ $User | Select-Object -Property Name, @{ label='Owner'
     }
 }
 ```
+##### DOMAIN USER - LIST ALL PERMISSIONS OF SINGLE USER
+```
+(Get-ACL "AD:$((Get-ADUser -identity 'test3').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
+```
+##### DOMAIN USERS - LIST INTERESTING PERMISSIONS OF SINGLE USER
+```
+$MyPermission = (Get-ACL "AD:$((Get-ADUser -identity 'test3').distinguishedname)").access
+$values = @('write','genericall')
+$regexValues = [string]::Join('|',$values) 
+$MyPermission | where ActiveDirectoryRights -match $regexValues | Select IdentityReference, AccessControlType, ActiveDirectoryRights 
+```
+
 ## DOMAIN GROUPS
 ##### DOMAIN GROUPS - LIST ALL GROUPS
 ```
@@ -405,11 +417,11 @@ $Computer | Select-Object -Property Name, @{ label='Owner'
     }
 }
 ```
-##### DOMAIN COMPUTERS - LIST ALL PERMISSIONS
+##### DOMAIN COMPUTERS - LIST ALL PERMISSIONS OF SINGLE COMPUTER
 ```
 (Get-ACL "AD:$((Get-ADComputer -Identity 'TECH-DC01').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights  
 ```
-##### DOMAIN COMPUTERS - LIST INTERESTING PERMISSIONS
+##### DOMAIN COMPUTERS - LIST INTERESTING PERMISSIONS OF SINGLE COMPUTER
 ```
 $MyPermission = (Get-ACL "AD:$((Get-ADComputer -Identity 'TECH-DC01').distinguishedname)").access
 $values = @('write','genericall')
