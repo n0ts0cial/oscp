@@ -585,7 +585,13 @@ Invoke-FileFinder -Verbose
 Get-DomainFileServer
 Get-NetFileServer -Verbose
 ```
-
+##### DOMAIN - LIST OBJECT PERMISSIONS
+```
+Get-ObjectAcl
+Get-ObjectAcl -Samaccountname buma -ResolveGUIDs
+Get-ObjectAcl -Samaccountname buma -ResolveGUIDs | ft
+Get-ObjectAcl 'CN=buma,CN=Users,DC=TECH,DC=LOCAL' -Verbose | ft
+```
 ## LOCAL MACHINE - ENUMERATION
 ##### LOCAL MACHINE - LIST ALL USERS
 ```
