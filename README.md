@@ -351,6 +351,32 @@ Get-NetgroupMember -identity 'GROUP-A' | select SAMAccountName
 Get-NetgroupMember -identity 'GROUP-A' | select groupname,MemberName,MemberObjectClass
 Get-NetgroupMember -identity 'GROUP-A' -domain 'tech.local'
 ```
+##### DOMAIN GROUPS - LIST OWNER SINGLE GROUP
+```
+$Group = Get-ADGroup 'Domain admins' -Properties nTSecurityDescriptor 
+$Group | Select-Object -Property Name, @{name='Owner'; expression={$_.nTSecurityDescriptor.owner}}
+```
+##### DOMAIN GROUPS - LIST OWNER ALL COMPUTERS
+```
+$GroupList = Get-ADGroup -Properties nTSecurityDescriptor -Filter *
+foreach ($Group in $GroupList)
+{
+$Group | Select-Object -Property Name, @{ label='Owner'
+        expression={$_.nTSecurityDescriptor.owner}
+    }
+}
+```
+##### DOMAIN GROUPS - LIST ALL PERMISSIONS OF SINGLE GROUP
+```
+(Get-ACL "AD:$((Get-ADGroup -Identity 'Domain admins').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights  
+```
+##### DOMAIN GROUPS - LIST INTERESTING PERMISSIONS OF SINGLE GROUP
+```
+$MyPermission = (Get-ACL "AD:$((Get-ADGroup -Identity 'Domain Admins').distinguishedname)").access
+$values = @('write','genericall')
+$regexValues = [string]::Join('|',$values) 
+$MyPermission | where ActiveDirectoryRights -match $regexValues | Select IdentityReference, AccessControlType, ActiveDirectoryRights 
+```
 ## DOMAIN COMPUTERS
 ##### DOMAIN COMPUTERS - LIST ALL COMPUTERS
 ```
