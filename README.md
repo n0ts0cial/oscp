@@ -375,11 +375,12 @@ foreach ($Computer in $ComputerList)
     }
 }
 ```
-##### DOMAIN COMPUTERS - LIST OWNER
+##### DOMAIN COMPUTERS - LIST OWNER SINGLE COMPUTER
 ```
 $Computer = Get-ADComputer TESTE1 -Properties nTSecurityDescriptor 
 $Computer | Select-Object -Property Name, @{name='Owner'; expression={$_.nTSecurityDescriptor.owner}}
 ```
+##### DOMAIN COMPUTERS - LIST OWNER ALL COMPUTERS
 ```
 $ComputerList = Get-ADComputer -Properties nTSecurityDescriptor -Filter *
 foreach ($Computer in $ComputerList)
@@ -389,8 +390,17 @@ $Computer | Select-Object -Property Name, @{ label='Owner'
     }
 }
 ```
-
-
+##### DOMAIN COMPUTERS - LIST ALL PERMISSIONS
+```
+(Get-ACL "AD:$((Get-ADComputer -Identity 'TECH-DC01').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights  
+```
+##### DOMAIN COMPUTERS - LIST INTERESTING PERMISSIONS
+```
+$MyPermission = (Get-ACL "AD:$((Get-ADComputer -Identity 'TECH-DC01').distinguishedname)").access
+$values = @('write','genericall')
+$regexValues = [string]::Join('|',$values) 
+$MyPermission | where ActiveDirectoryRights -match $regexValues | Select IdentityReference, AccessControlType, ActiveDirectoryRights 
+```
 ##### DOMAIN COMPUTERS - LOGGED USERS
 ```
 quser
