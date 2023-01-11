@@ -557,6 +557,21 @@ Get-ADOrganizationalUnit -filter * | select DistinguishedName
 Get-NetOu
 ```
 ## DOMAIN MISC
+##### DOMAIN - SCAN ALL INTERESTING ACL PERMISSIONS TO ALL
+```
+$FormatEnumerationLimit=-1
+Invoke-ACLScanner -ResolveGUIDs | select ObjectDN,IdentityReferenceName,ActiveDirectoryRights | Out-String -Width 4096
+```
+##### DOMAIN - SCAN ALL INTERESTING ACL PERMISSIONS TO A USER
+```
+$FormatEnumerationLimit=-1
+Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReferenceName -match "vegeta"} | select ObjectDN,IdentityReferenceName,ActiveDirectoryRights | Out-String -Width 4096
+```
+##### DOMAIN - SCAN ALL INTERESTING ACL PERMISSIONS TO A MATCH
+```
+$FormatEnumerationLimit=-1
+Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReferenceName -match "Domain Admins"} | select ObjectDN,IdentityReferenceName,ActiveDirectoryRights | Out-String -Width 4096
+```
 ##### DOMAIN - FIND SHARES
 ```
 Invoke-ShareFinder -Verbose
