@@ -363,6 +363,34 @@ dsquery * "CN=MyServiceComputer,CN=Computers,DC=TECH,DC=LOCAL" -attr MemberOf
 Get-AdPrincipalGroupMembership -Identity vegeta
 Get-AdPrincipalGroupMembership -Identity vegeta | select samaccountname
 ```
+```
+$ComputerList = Get-ADComputer -Filter *
+foreach ($Computer in $ComputerList)
+{
+    Write-Host "Computer: $($Computer.Name)" -Background yellow -foreground black
+    $Groups = Get-ADPrincipalGroupMembership $Computer.sAMAccountName
+    foreach ($Group in $Groups)
+    {
+        Write-Host "    Group Name: $($Group.Name)"
+    }
+}
+```
+##### DOMAIN COMPUTERS - LIST OWNER
+```
+$Computer = Get-ADComputer TESTE1 -Properties nTSecurityDescriptor 
+$Computer | Select-Object -Property Name, @{name='Owner'; expression={$_.nTSecurityDescriptor.owner}}
+```
+```
+$ComputerList = Get-ADComputer -Properties nTSecurityDescriptor -Filter *
+foreach ($Computer in $ComputerList)
+{
+$Computer | Select-Object -Property Name, @{ label='Owner'
+        expression={$_.nTSecurityDescriptor.owner}
+    }
+}
+```
+
+
 ##### DOMAIN COMPUTERS - LOGGED USERS
 ```
 quser
