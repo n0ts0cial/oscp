@@ -356,7 +356,7 @@ Get-NetgroupMember -identity 'GROUP-A' -domain 'tech.local'
 $Group = Get-ADGroup 'Domain admins' -Properties nTSecurityDescriptor 
 $Group | Select-Object -Property Name, @{name='Owner'; expression={$_.nTSecurityDescriptor.owner}}
 ```
-##### DOMAIN GROUPS - LIST OWNER ALL COMPUTERS
+##### DOMAIN GROUPS - LIST OWNER ALL GROUPS
 ```
 $GroupList = Get-ADGroup -Properties nTSecurityDescriptor -Filter *
 foreach ($Group in $GroupList)
