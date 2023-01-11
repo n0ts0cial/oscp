@@ -997,3 +997,20 @@ Set-acl -aclobject $MyACL $MyDistinguishedNameAD
 ```
 Add-DomainObjectAcl -TargetIdentity chichi -PrincipalIdentity vegeta -Rights All
 ```
+DAR PERMISSÃO GENERICALL PARA VEGETA SOBRE GRUPO GROUP-A
+```
+$MyAdmin = (get-aduser vegeta).sid
+$MyObject = (Get-ADGroup 'GROUP-A')
+$MyDistinguishedName = ($MyObject).distinguishedname
+$MyDistinguishedNameAD = $MyDistinguishedName = "AD:$MyObject"
+$MyACL= Get-ACL $MyDistinguishedNameAD
+$MyADRights = [System.DirectoryServices.ActiveDirectoryRights] "GenericWrite"
+$MyType = [System.Security.AccessControl.AccessControlType] "Allow"
+$MyInheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] "All"
+$MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,$MyADRights,$MyType,$MyInheritanceType
+$MyACL.AddAccessRule($MyACE)
+Set-acl -aclobject $MyACL $MyDistinguishedNameAD
+```
+```
+Add-DomainObjectAcl -TargetIdentity 'GROUP-A' -PrincipalIdentity vegeta -Rights All
+```
