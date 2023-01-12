@@ -134,6 +134,20 @@ Write-Host -ForegroundColor Green "Forest Mode: $($MyForestInfo.ForestMode)"
 Write-Host -ForegroundColor Green "Forest Functional Level: $($MyForestInfo.ForestMode)"
 Write-Host -ForegroundColor Green "Forest Domains: $($MyForestInfo.domains)"
 ```
+##### FOREST - LIST DETAILS 
+```
+Get-ADForest
+Get-ADForest -identity tech.local 
+```
+```
+Get-NetForest
+Get-NetForest -forest tech.local
+```
+##### FOREST - LIST DOMAINS IN THE FOREST
+```
+(Get-ADForest).Domains
+```
+
 ## DOMAIN
 ##### LIST - DOMAIN
 ```
@@ -598,6 +612,34 @@ $FormatEnumerationLimit=-1
 Get-PathACL -Path "\\tech-dc01.tech.local\sysvol" | ft | Out-String -Width 4096
 Get-PathACL -Path "\\tech-dc01.tech.local\sysvol" | select Path, IdentityReference, FileSystemRights | ft | Out-String -Width 4096
 ```
+
+## DOMAIN TRUST
+##### DOMAIN TRUST - SCAN ALL INTERESTING ACL PERMISSIONS TO ALL
+```
+Get-Netdomaintrust
+Get-Netdomaintrust -domain tech.local
+```
+```
+Get-NetForest
+Get-NetForest -forest tech.local
+```
+```
+Get-ADTrust -filter *
+Get-ADTrust -identity tech.local 
+Get-ADTrust -identity sub.tech.local 
+```
+```
+Get-NetForestTrust
+Get-NetForestTrust -forest tech.local
+```
+```
+Get-NetForestCatalog
+Get-NetForestCatalog -Forest tech.local
+```
+```
+Get-ADTrust -Filter 'msdDS-TrustForestTrustInfo -ne "$null"'
+```
+
 ## LOCAL MACHINE - ENUMERATION
 ##### LOCAL MACHINE - LIST ALL USERS
 ```
