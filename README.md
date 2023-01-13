@@ -599,6 +599,16 @@ Invoke-FileFinder -Verbose
 Get-DomainFileServer
 Get-NetFileServer -Verbose
 ```
+##### DOMAIN - ONDE SOU LOCAL ADMIN?
+Find all machines on the currentdomain where the current user has local admin access.
+```
+Find-LocalAdminAccess -Verbose
+Find-LocalAdminAccess -Domain tech.local
+```
+
+
+
+
 ##### DOMAIN - LIST OBJECT PERMISSIONS
 ```
 Get-ObjectAcl
