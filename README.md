@@ -623,14 +623,17 @@ Invoke-EnumerateLocalAdmin -Verbose
 ##### DOMAIN - ONDE O ADMINISTRADOR TEM SESSÃO LOGADO?
 ```
 Invoke-UserHunter
+Invoke-UserHunter -Stealth
+```
+##### DOMAIN - ONDE O ADMINISTRADOR TEM SESSÃO LOGADO? ***ONLY HIGH TRAFFIC SERVER
+```
 Invoke-UserHunter -CheckAccess
 ```
+
 ##### DOMAIN - ONDE MEMBROS DO GRUPO X TEM SESSÃO LOGADO?
 ```
 Invoke-UserHunter -Groupname "GROUP-X"
 ```
-
-
 ##### DOMAIN - LIST OBJECT PERMISSIONS
 ```
 Get-ObjectAcl
