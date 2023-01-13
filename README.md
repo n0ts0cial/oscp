@@ -606,7 +606,6 @@ Find-LocalAdminAccess -Verbose
 Find-LocalAdminAccess -Domain tech.local
 ```
 ##### DOMAIN - SOU LOCAL ADMIN NESSA MÁQUINA? 
-
 ```
 Invoke-CheckLocalAdminAccess
 Invoke-CheckLocalAdminAccess -computername server01
@@ -617,8 +616,19 @@ curl https://github.com/n0ts0cial/oscp/raw/main/Find-WMILocalAdminAccess.ps1 -Ou
 Import-Module .\Find-WMILocalAdminAccess.ps1
 Find-WMILocalAdminAccess
 ```
-
-
+##### DOMAIN - QUEM SÃO OS ADMINISTRADORES LOCAIS DE TODAS AS MÁQUINAS
+```
+Invoke-EnumerateLocalAdmin -Verbose
+```
+##### DOMAIN - ONDE O ADMINISTRADOR TEM SESSÃO LOGADO?
+```
+Invoke-UserHunter
+Invoke-UserHunter -CheckAccess
+```
+##### DOMAIN - ONDE MEMBROS DO GRUPO X TEM SESSÃO LOGADO?
+```
+Invoke-UserHunter -Groupname "GROUP-X"
+```
 
 
 ##### DOMAIN - LIST OBJECT PERMISSIONS
