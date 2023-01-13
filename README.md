@@ -566,10 +566,61 @@ Get-ADOrganizationalUnit -filter *
 Get-ADOrganizationalUnit -filter * -Properties *
 Get-ADOrganizationalUnit -filter * -Properties * | select CanonicalName, DistinguishedName
 Get-ADOrganizationalUnit -filter * | select DistinguishedName
+Get-ADComputer -Filter * -Properties * | select Name, Samaccountname, Enabled, DistinguishedName | Format-Table
 ```
 ```
 Get-NetOu
 ```
+##### DOMAIN OU - LIST SPECIFIC OU 
+```
+Get-ADOrganizationalUnit 'OU=TEST,DC=TECH,DC=LOCAL'
+Get-ADOrganizationalUnit 'OU=TEST,DC=TECH,DC=LOCAL' -properties *
+Get-ADOrganizationalUnit -filter { Name -eq 'TEST' }
+Get-ADOrganizationalUnit -filter { Name -eq 'TEST' } -properties *
+```
+##### DOMAIN OU - LIST ALL OUS E NUMERO DE USUARIOS, GRUPOS E COMPUTADORES 
+```
+$FormatEnumerationLimit=-1
+Get-ADOrganizationalUnit -Properties CanonicalName -Filter * | Sort-Object CanonicalName |
+ForEach-Object {
+    [pscustomobject]@{
+        Name          = Split-Path $_.CanonicalName -Leaf
+        CanonicalName = $_.CanonicalName
+        UserCount     = @(Get-AdUser -Filter * -SearchBase $_.DistinguishedName -SearchScope OneLevel).Count
+        GroupCount = @(Get-ADGroup -Filter * -SearchBase $_.DistinguishedName -SearchScope OneLevel).Count
+        ComputerCount = @(Get-AdComputer -Filter * -SearchBase $_.DistinguishedName -SearchScope OneLevel).Count
+    }
+} | Format-Table | Out-String -Width 4096
+```
+##### DOMAIN OU - LIST ALL PERMISSIONS OF SINGLE OU
+```
+(Get-ACL "AD:$((Get-ADOrganizationalUnit -Identity 'OU=TEST,DC=TECH,DC=LOCAL').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
+```
+##### DOMAIN OU - LIST INTERESTING PERMISSIONS OF SINGLE OU
+```
+$MyPermission = (Get-ACL "AD:$((Get-ADOrganizationalUnit 'OU=TEST,DC=TECH,DC=LOCAL').distinguishedname)").access
+$values = @('write','genericall')
+$regexValues = [string]::Join('|',$values) 
+$MyPermission | where ActiveDirectoryRights -match $regexValues | Select IdentityReference, AccessControlType, ActiveDirectoryRights 
+```
+##### DOMAIN OU - LIST OWNER ALL OUs
+```
+$OUList = Get-ADOrganizationalUnit -Properties nTSecurityDescriptor -Filter *
+foreach ($Computer in $OUList)
+{
+$Computer | Select-Object -Property Name, @{ label='Owner'
+        expression={$_.nTSecurityDescriptor.owner}
+    }
+}
+```
+##### DOMAIN OU - LIST OWNER SINGLE OU
+```
+$OU = Get-ADOrganizationalUnit -identity 'OU=TEST,DC=TECH,DC=LOCAL' -Properties nTSecurityDescriptor 
+$OU | Select-Object -Property Name, @{name='Owner'; expression={$_.nTSecurityDescriptor.owner}}
+```
+
+
+
 ## DOMAIN MISC
 ##### DOMAIN - SCAN ALL INTERESTING ACL PERMISSIONS TO ALL
 ```
