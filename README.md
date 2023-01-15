@@ -873,9 +873,51 @@ Get-Serviceunquoted -Verbose
 ```
 Get-ModifiableServiceFile -Verbose
 ```
-##### POWERUP - EXEMPLOS
+##### POWERUP - COMANDOS
 ```
-Get-ModifiableService -verbose
+SERVICE ENUMERATION:
+
+Get-ServiceUnquoted
+Get-ModifiableServiceFile
+Get-ModifiableService
+Get-ServiceDetail
+
+SERVICE ABUSE:
+Invoke-ServiceAbuse
+Write-ServiceBinary
+Install-ServiceBinary
+Restore-ServiceBinary
+
+DLL HIJACKING:
+
+Find-ProcessDLLHijack
+Find-PathDLLHijack
+Write-HijackDll
+
+REGISTRY CHECKS:
+
+Get-RegistryAlwaysInstallElevated
+Get-RegistryAutoLogon
+Get-ModifiableRegistryAutoRun
+
+MISCELLANEOUS CHECKS:
+
+Get-ModifiableScheduledTaskFile
+Get-UnattendedInstallFile
+Get-Webconfig
+Get-ApplicationHost
+Get-SiteListPassword
+Get-CachedGPPPassword
+
+OTHER HELPERS:
+
+Get-ModifiablePath
+Get-CurrentUserTokenGroupSid
+Add-ServiceDacl
+Set-ServiceBinPath
+Test-ServiceDaclPermission
+Write-UserAddMSI
+Invoke-AllChecks
 ```
 ##### POWERUP ATAQUE - ADICIONAR USUARIO JOHN COM SENHA: Password123!
 ```
