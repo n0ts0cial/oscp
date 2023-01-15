@@ -823,12 +823,24 @@ Invoke-BloodHound
 Invoke-Bloodhound -collectionmethod all
 Invoke-Bloodhound -collectionmethod all -excludedc
 Invoke-BloodHound -CollectionMethod ACL,ObjectProps
+Invoke-Bloodhound -collectionmethod DCOnly
 -CompressData -RemoveCSV and -NoSaveCache   --GERAR O ARQUIVO ZIP PARA ARRASRTAR NO BLOODHOUND
 ```
 ##### BLOODHOUND - SHARPHOUND
 ```
 SharpHound.exe
 ```
+##### BLOODHOUND - INICIAR
+NA CONSOLE DE ROOT
+```
+neo4j console
+```
+NA INTERFACE GRAFICA
+```
+sudo bloodhound
+```
+
+
 # MIMIKATZ
 ## TECHNIQUES
 ##### MIMIKATZ - DOWNLOAD E EXECUTE ZIP VIA POWERSHELL
