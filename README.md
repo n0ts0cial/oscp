@@ -191,6 +191,7 @@ Get-NetDomainController -Domain "tech.local"
 ##### LIST - DOMAIN CONTROLLERS MISC INFO
 ```
 (Get-ADDomain).DistinguishedName
+(Get-ADDomain).DomainSID
 Get-Domainsid
 (get-addomaincontroller).ldapport
 (get-addomaincontroller).sslport
