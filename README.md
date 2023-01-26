@@ -1574,6 +1574,34 @@ All Local Logons on the DC are logged to:
 C:\Windows\System32\kiwisso.log
 
 
+### ADMIN SDHOLDER
+##### ADMIN SDHOLDER - DEFAULT PROTECTED ADMINISTRATIVE GROUPS IN AD
+
+- Enterprise Admins
+- Schema Admins
+- Domain Admins
+- Administrators
+- Account Operators
+- Server Operators
+- Print Operators
+- Backup Operators
+- Cert Publishers
+- Domain Controllers
+- Read-Only Domain Controllers
+- Replicator
+
+##### ADMIN SDHOLDER - LIST PROTECTEDD USERS:
+```
+Get-ADUser -LDAPFilter "(admincount=1)" | Select Name,DistinguishedName
+```
+##### ADMIN SDHOLDER - LIST PROTECTEDD GROUPS:
+```
+Get-ADGroup -LDAPFilter "(admincount=1)" | Select Name,DistinguishedName
+```
+
+
+
+
 
 
 
