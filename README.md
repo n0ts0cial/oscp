@@ -1590,11 +1590,11 @@ C:\Windows\System32\kiwisso.log
 - Read-Only Domain Controllers
 - Replicator
 
-##### ADMIN SDHOLDER - LIST PROTECTEDD USERS:
+##### ADMIN SDHOLDER - LIST PROTECTED USERS:
 ```
 Get-ADUser -LDAPFilter "(admincount=1)" | Select Name,DistinguishedName
 ```
-##### ADMIN SDHOLDER - LIST PROTECTEDD GROUPS:
+##### ADMIN SDHOLDER - LIST PROTECTED GROUPS:
 ```
 Get-ADGroup -LDAPFilter "(admincount=1)" | Select Name,DistinguishedName
 ```
