@@ -470,6 +470,12 @@ $Computer | Select-Object -Property Name, @{ label='Owner'
     }
 }
 ```
+ou
+```
+Get-ADComputer -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}}
+Get-ADComputer -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | out-file "ComputerOwners.txt"
+Get-ADComputer -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | Export-CSV "ComputerOwners.csv"
+```
 ##### DOMAIN COMPUTERS - LIST ALL PERMISSIONS OF SINGLE COMPUTER
 ```
 (Get-ACL "AD:$((Get-ADComputer -Identity 'TECH-DC01').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights  
