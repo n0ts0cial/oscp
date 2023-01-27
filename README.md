@@ -1597,9 +1597,9 @@ Get-ADGroup -LDAPFilter "(admincount=1)" | Select Name,DistinguishedName
 ```
 (Get-ACL "AD:CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
 ```
-##### ADMIN SDHOLDER - LIST PERMISSIONS
+##### ADMIN SDHOLDER - LIST PERMISSIONS FROM 1 USER OVER SDHOLDER
 ```
-(Get-ACL "AD:CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
+(Get-Acl -Path 'AD:\CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL').Access | ?{$_.IdentityReference -match 'pentester'} | Select IdentityReference, AccessControlType, ActiveDirectoryRights
 ```
 ##### ADMIN SDHOLDER - ADICIONAR GENERICALL PARA USUARIO
 ```
@@ -1614,6 +1614,21 @@ $MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,
 $MyACL.AddAccessRule($MyACE)
 Set-acl -aclobject $MyACL $MyDistinguishedNameAD
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
