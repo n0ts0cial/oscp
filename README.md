@@ -292,7 +292,8 @@ $User | Select-Object -Property Name, @{ label='Owner'
 ```
 ou
 ```
-Get-ADUser -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}}
+Get-ADUser -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}}
+Get-ADUser -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | out-file "userOwners.txt"
 ```
 ##### DOMAIN USER - LIST ALL PERMISSIONS OF SINGLE USER
 ```
