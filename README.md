@@ -387,6 +387,12 @@ $Group | Select-Object -Property Name, @{ label='Owner'
     }
 }
 ```
+ou
+```
+Get-ADGroup -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}}
+Get-ADGroup -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | out-file "GroupOwners.txt"
+Get-ADGroup -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | Export-CSV "GroupOwners.csv"
+```
 ##### DOMAIN GROUPS - LIST ALL PERMISSIONS OF SINGLE GROUP
 ```
 (Get-ACL "AD:$((Get-ADGroup -Identity 'Domain admins').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights  
