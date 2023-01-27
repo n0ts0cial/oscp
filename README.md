@@ -294,6 +294,7 @@ ou
 ```
 Get-ADUser -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}}
 Get-ADUser -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | out-file "userOwners.txt"
+Get-ADUser -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name,Samaccountname, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | Export-CSV "userOwners.csv"
 ```
 ##### DOMAIN USER - LIST ALL PERMISSIONS OF SINGLE USER
 ```
