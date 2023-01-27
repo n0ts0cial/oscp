@@ -1597,6 +1597,10 @@ Get-ADGroup -LDAPFilter "(admincount=1)" | Select Name,DistinguishedName
 ```
 (Get-ACL "AD:CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
 ```
+```
+$FormatEnumerationLimit=-1
+(Get-ACL "AD:CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights | Out-String -Width 4096
+```
 ##### ADMIN SDHOLDER - LIST PERMISSIONS FROM 1 USER OVER SDHOLDER
 ```
 (Get-Acl -Path 'AD:\CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL').Access | ?{$_.IdentityReference -match 'pentester'} | Select IdentityReference, AccessControlType, ActiveDirectoryRights
