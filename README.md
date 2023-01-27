@@ -290,6 +290,10 @@ $User | Select-Object -Property Name, @{ label='Owner'
     }
 }
 ```
+ou
+```
+Get-ADUser -Filter * -Properties nTSecurityDescriptor | Select-Object -Property Name, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}}
+```
 ##### DOMAIN USER - LIST ALL PERMISSIONS OF SINGLE USER
 ```
 (Get-ACL "AD:$((Get-ADUser -identity 'test3').distinguishedname)").access | Select IdentityReference, AccessControlType, ActiveDirectoryRights
