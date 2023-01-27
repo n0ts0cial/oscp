@@ -1668,6 +1668,10 @@ DCSync:
 1131f6aa-9c07-11d1-f79f-00c04fc2dcd2
 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2
 89e95b76-444d-4c62-991a-0facbeda640c
+LISTAR QUEM TEM DCSYNC:
+```
+(Get-Acl "ad:\dc=TECH,dc=LOCAL").Access | ? {($_.ObjectType -eq "1131f6aa-9c07-11d1-f79f-00c04fc2dcd2" -or $_.ObjectType -eq "1131f6ad-9c07-11d1-f79f-00c04fc2dcd2" -or $_.ObjectType -eq "89e95b76-444d-4c62-991a-0facbeda640c" ) } | select IdentityReference
+```
 ##### ADMIN SDHOLDER - DEPOIS DE PEGAR UMA CONTA DE ADMIN, ABUSAR DE PERMISSÃO PARA CONFIGURAR PERMISSÃO FULL PARA DOMINIO (DCSYNC)
 ```
  $MyAdmin = (get-aduser pentester).sid
