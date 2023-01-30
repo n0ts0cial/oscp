@@ -1778,6 +1778,7 @@ Set-RemotePSRemoting -Username vegeta -computername tech-dc01 -Remove -Verbose
 ##### PERSISTENCE PSREMOTING - ACESSAR REMOTAMENTE
 ```
 Enter-PSSession -computername tech-dc01
+Invoke-Command -Scriptblock{whoami} -computername tech-dc01
 ```
 
 
