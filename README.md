@@ -1372,7 +1372,7 @@ OPÇÃO 2 - CRIAR UMA CONTA NO DOMINIO
 $PASSWORD= ConvertTo-SecureString –AsPlainText -Force -String 123qwe..
 New-ADUser -Name "pentester" -Description "Pentester User" -Enabled $true -AccountPassword $PASSWORD
 ```
-OPÇÃO 3 - ACESSAR REMOTAMENTE DIA PSREMOTE
+OPÇÃO 3 - ACESSAR REMOTAMENTE VIA PSREMOTE
 ```
 Enter-Pssession -computername tech-dc01
 ```
