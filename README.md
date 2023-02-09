@@ -1495,7 +1495,7 @@ kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-312420
 ```
 
 
-## ATAQUE DNSADMIN
+## ATAQUE DNSADMINS
 If you own a user who is a member of the 'DNS admin' it is possible to perform various attacks on the DNS server (usually Domain Controller) It is possible to get a reverse shell with this, but this puts the whole DNS traffic flat within the domain as this keeps the DNS service busy! For more information see [ https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-dnsadmins-to-system-to-domain-compromise ]
 ##### DNSADMIN - LOAD REQUIREMENTS
 ```
