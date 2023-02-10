@@ -637,6 +637,7 @@ Get-ADOrganizationalUnit -filter * -Properties * | select Name, CanonicalName, D
 Get-ADOrganizationalUnit -filter * -Properties * | select Name, CanonicalName, DistinguishedName, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | out-file "OUOwners.txt"
 $FormatEnumerationLimit=-1
 Get-ADOrganizationalUnit -filter * -Properties * | select Name, CanonicalName, DistinguishedName, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | Out-String -Width 4096 | out-file "OUOwners.txt" 
+Get-ADOrganizationalUnit -filter * -Properties * | select Name, CanonicalName, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | Export-CSV "OUOwners.csv" | Out-String -Width 4096
 ```
 ##### DOMAIN OU - LIST OWNER SINGLE OU
 ```
