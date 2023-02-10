@@ -632,6 +632,12 @@ $Computer | Select-Object -Property Name, @{ label='Owner'
     }
 }
 ```
+```
+Get-ADOrganizationalUnit -filter * -Properties * | select Name, CanonicalName, DistinguishedName, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}}
+Get-ADOrganizationalUnit -filter * -Properties * | select Name, CanonicalName, DistinguishedName, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | out-file "OUOwners.txt"
+$FormatEnumerationLimit=-1
+Get-ADOrganizationalUnit -filter * -Properties * | select Name, CanonicalName, DistinguishedName, @{label='Owner';expression={$_.nTSecurityDescriptor.owner}} | Out-String -Width 4096 | out-file "OUOwners.txt" 
+```
 ##### DOMAIN OU - LIST OWNER SINGLE OU
 ```
 $OU = Get-ADOrganizationalUnit -identity 'OU=TEST,DC=TECH,DC=LOCAL' -Properties nTSecurityDescriptor 
