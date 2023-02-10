@@ -1539,6 +1539,10 @@ OU USAR O STANDIN
 ```
 StandIn.exe --computer Desktop-Pentestlab --make
 ```
+OU USAR O IMPACKET
+```
+impacket-addcomputer -method SAMR -computer-name Pentestlab$ -computer-pass Password123 purple.lab/pentestlab:Password1234
+```
 
 
 
