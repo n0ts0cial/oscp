@@ -1516,12 +1516,12 @@ SharpView Get-DomainObject -Domain tech.local
 ```
 StandIn.exe --object ms-DS-MachineAccountQuota=*
 ```
-##### RESOURCE-BASED CONSTRAINED DELEGATION - FIND COMPUTERS AND USERS WITH RESOURCE-BASED CONSTRAINED DELEGATION
+##### RESOURCE-BASED CONSTRAINED DELEGATION - FIND COMPUTERS AND USERS WITH GENERICWRITE, GENERICALL
 ```
-aaa
+Find-Find-InterestingDomainAcl
+Find-InterestingDomainAcl | ?{$_.IdentityReferenceClass -eq 'computer'}
+Find-InterestingDomainAcl | ?{$_.IdentityReferenceClass -eq 'user'}
 ```
-
-
 ##### RESOURCE-BASED CONSTRAINED DELEGATION - CRIAR CONTA FALSA DE COMPUTADOR
 CARREGAR O POWERMAD
 ```
