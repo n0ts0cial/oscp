@@ -579,7 +579,7 @@ Find-GPOComputerAdmin -computername server01
 Find-GPOLocation
 ```
 
-##### DOMAIN GPO - LIST OWNER ALL OUs
+##### DOMAIN GPO - LIST OWNER ALL GPOs
 ```
 Get-GPO -all  | Select-Object  DisplayName, Owner, Description
 Get-GPO -all  | Select-Object  DisplayName, Owner, Description | Out-file "GPOOwners.txt"
