@@ -578,6 +578,14 @@ Get-NetGPOGroup -ResolveMemberSIDs
 Find-GPOComputerAdmin -computername server01
 Find-GPOLocation
 ```
+
+##### DOMAIN GPO - LIST OWNER ALL OUs
+```
+Get-GPO -all  | Select-Object  DisplayName, Owner, Description
+Get-GPO -all  | Select-Object  DisplayName, Owner, Description | Out-file "GPOOwners.txt"
+Get-GPO -all  | Select-Object  DisplayName, Owner, Description | Out-String -Width 4096 | out-file "GPOOwners.txt"
+Get-GPO -all  | Select-Object  DisplayName, Owner, Description | Out-String -Width 4096 | Export-CSV "GPOOwners.csv"
+```
 ## DOMAIN OU - ORGANIZATIONAL UNIT
 ##### DOMAIN OU - LIST ALL GPOS
 ```
