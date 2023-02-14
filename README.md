@@ -2528,3 +2528,8 @@ Get-ObjectAcl -samaccountname "users" -ResolveGUIDs -Verbose | select IdentityRe
 Get-ObjectAcl -samaccountname "domain admins" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
 Get-ObjectAcl -samaccountname "student209" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
 ```
+##### POWERVIEW OLD - VERIFICAR PERMISSÕES DE MODIFICAÇÃO QUE UM USUARIO OU GRUPO POSSUI NO AD
+```
+Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "student209"}
+Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "RDPUsers"}
+```
