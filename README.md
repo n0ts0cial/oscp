@@ -604,8 +604,21 @@ Get-ADOrganizationalUnit -filter * -Properties * | select CanonicalName, Disting
 Get-ADOrganizationalUnit -filter * | select DistinguishedName
 Get-ADComputer -Filter * -Properties * | select Name, Samaccountname, Enabled, DistinguishedName | Format-Table
 ```
+- POWERVIEW - LIST ALL OUs
 ```
 Get-NetOu
+Get-NetOu | select name, ou, distinguishedname
+```
+- POWERVIEW(OLD) - LIST COMPUTERS IN A SPECIFIC OU
+```
+Get-Netou -OUName StudentMachines
+Get-Netou -OUName StudentMachines | %{Get-NetComputer -ADSPath $_}
+```
+- POWERVIEW(OLD) - LISTAR GPOS APLICADAS EM UMA OU
+```
+(Get-Netou -OUName StudentMachines -Fulldata).gplink
+Get-NetGPO -ADSpath 'LDAP://cn={3E04167E-C2B6-4A9A-8FB7-C811158DC97C},cn=policies,cn=system,DC=dollarcorp,DC=moneycorp,DC=local'
+Get-NetGPO -ADSpath 'LDAP://cn={3E04167E-C2B6-4A9A-8FB7-C811158DC97C},cn=policies,cn=system,DC=dollarcorp,DC=moneycorp,DC=local' | select name, displayname
 ```
 ##### DOMAIN OU - LIST SPECIFIC OU 
 ```
