@@ -226,6 +226,7 @@ Get-ADUser -Filter * -Properties * | select Samaccountname, Enabled
 ```
 get-netuser
 get-netuser -Identity test3
+get-netuser -domain moneycorp.local | select samaccountname
 ```
 ##### DOMAIN USERS - LIST USERS PROPERTIES
 ```
@@ -876,6 +877,7 @@ SharpHound.exe
 .\SharpHound.exe
 .\SharpHound.exe --collectionmethods DCOnly
 .\SharpHound.exe --collectionmethods Loggedon
+.\SharpHound.exe -d moneycorp.local
 ```
 ##### BLOODHOUND - INICIAR
 NA CONSOLE DE ROOT
