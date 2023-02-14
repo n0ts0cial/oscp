@@ -208,6 +208,14 @@ Get-domainpolicy -domain tech.local
 (Get-domainpolicy -domain tech.local)."systemaccess"
 (Get-domainpolicy -domain tech.local)."kerberospolicy"
 ```
+## DOMAIN ADMINS
+##### DOMAIN ADMINS - LIST ALL DOMAIN ADMINS E ENTERPISE ADMINS
+```
+Get-DomainGroupMember -domain dollarcorp.moneycorp.local "Domain Admins" | select GroupName, GroupDomain, MemberName, MemberDomain
+Get-DomainGroupMember -domain moneycorp.local "Domain Admins" | select GroupName, GroupDomain, MemberName, MemberDomain
+Get-DomainGroupMember -domain moneycorp.local "Enterprise Admins" | select GroupName, GroupDomain, MemberName, MemberDomain
+Get-DomainGroupMember -domain dollarcorp.moneycorp.local "Enterprise Admins" | select GroupName, GroupDomain, MemberName, MemberDomain
+```
 ## DOMAIN USERS
 ##### DOMAIN USERS - LIST ALL DOMAIN USERS
 ```
