@@ -2532,4 +2532,5 @@ Get-ObjectAcl -samaccountname "student209" -ResolveGUIDs -Verbose | select Ident
 ```
 Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "student209"}
 Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "RDPUsers"}
+Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "RDPUsers"} | select ObjectDN,ActiveDirectoryRights
 ```
