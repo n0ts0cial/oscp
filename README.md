@@ -2558,7 +2558,7 @@ Get-NetOu -fulldata dcorp-dc.dollarcorp.moneycorp.local
 Get-NetOu StudentMachines
 Get-NetOu StudentMachines -fulldata
 ```
-LIST COMPUTERS INSIDE A SPECIFIC OU
+##### POWERVIEW OLD - LISTAR COMPUTERS INSIDE A SPECIFIC OU
 ```
 Get-Netou -OUName StudentMachines | %{Get-NetComputer -ADSPath $_}
 ```
@@ -2581,4 +2581,21 @@ Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "student209"}
 Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "RDPUsers"}
 Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "RDPUsers"} | select ObjectDN,ActiveDirectoryRights
 Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "RDPUsers"} | select ObjectDN,IdentityReference,ActiveDirectoryRights
+```
+##### POWERVIEW OLD - LISTAR DOMINIOS
+```
+Get-NetForestDomain
+Get-NetForestDomain | select name
+```
+##### POWERVIEW OLD - LISTAR RELACIONAMENTOS DE CONFIANÇA DO DOMINIO
+```
+Get-NetDomainTrust
+Get-NetDomainTrust | ?{$_.TrustType -eq 'External'}
+Get-NetForestDomain -Verbose | Get-NetDomainTrust | ?{$_.TrustType -eq 'External'}
+```
+##### POWERVIEW OLD - LISTAR RELACIONAMENTOS DE CONFIANÇA DE FLORESTAS
+```
+Get-NetForestDomain -Forest eurocorp.local
+Get-NetForestDomain -Forest eurocorp.local -Verbose
+Get-NetForestDomain -Forest eurocorp.local -Verbose | Get-NetDomainTrust
 ```
