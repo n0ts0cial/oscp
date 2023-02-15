@@ -2599,3 +2599,14 @@ Get-NetForestDomain -Forest eurocorp.local
 Get-NetForestDomain -Forest eurocorp.local -Verbose
 Get-NetForestDomain -Forest eurocorp.local -Verbose | Get-NetDomainTrust
 ```
+##### POWERVIEW OLD - HUNT / ENCONTRAR LOCAIS ONDE O USUARIO SEJA LOCAL ADMIN
+```
+Find-LocalAdminAccess -Verbose
+Find-LocalAdminAccess -Domain tech.local
+```
+##### POWERVIEW OLD - TENTAR EFETUAR A ELEVAÇÃO DE PRIVILEGIO LOCALMENte
+```
+Import-Module .\PowerUp.ps1
+Invoke-AllChecks
+help invoke-ServiceAbuse -examples
+```
