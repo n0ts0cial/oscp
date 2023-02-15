@@ -2546,6 +2546,22 @@ Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC -Verbose
 Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC
 Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC | findstr /V shared
 ```
+##### POWERVIEW OLD - LISTAR OUs
+LIST ALL OUs
+```
+Get-NetOu
+Get-NetOu -FullData
+Get-NetOu -FullData | select name
+Get-NetOu -domain dollarcorp.moneycorp.local
+Get-NetOu | measure-object
+Get-NetOu -fulldata dcorp-dc.dollarcorp.moneycorp.local
+Get-NetOu StudentMachines
+Get-NetOu StudentMachines -fulldata
+```
+LIST COMPUTERS INSIDE A SPECIFIC OU
+```
+Get-Netou -OUName StudentMachines | %{Get-NetComputer -ADSPath $_}
+```
 ##### POWERVIEW OLD - VERIFICAR QUAL GPO É APLICADA EM UMA OU 
 ```
 Get-Netou -OUName StudentMachines | %{Get-NetComputer -ADSPath $_}
