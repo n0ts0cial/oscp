@@ -2535,6 +2535,17 @@ Get-NetComputer | measure-object
 Get-NetComputer -fulldata | select -expandproperty cn
 Get-NetComputer -fulldata dcorp-dc.dollarcorp.moneycorp.local
 ```
+##### POWERVIEW OLD - LISTAR DOMAIN ADMINS E ENTERPRISE ADMINS
+```
+Get-NetGroupmember -Groupname "Domain admins"
+Get-NetGroupmember -Groupname "Enterprise Admins" -Domain moneycorp.local
+```
+##### POWERVIEW OLD - LISTAR COMPARTILHAMENTOS INTERESSANTES
+```
+Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC -Verbose
+Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC
+Invoke-Sharefinder -ExcludeStandard -ExcludePrint -ExcludeIPC | findstr /V shared
+```
 ##### POWERVIEW OLD - VERIFICAR QUAL GPO É APLICADA EM UMA OU 
 ```
 Get-Netou -OUName StudentMachines | %{Get-NetComputer -ADSPath $_}
