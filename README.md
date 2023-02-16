@@ -2622,3 +2622,19 @@ sc start AbyssWebServer
 Find-LocalAdminAccess -Verbose
 Find-LocalAdminAccess -Domain tech.local
 ```
+
+
+
+## BASICO E RECORRENTE
+##### POWERSHELL - DESABILITAR DEFENDER
+```
+Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
+Get-MpPreference | findstr /I realtime
+```
+##### POWERSHELL - BYPASS CLM CONSTRAINED LANGUAGE MODE
+```
+$ExecutionContext.SessionState.LanguageMode
+Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
+
+```
+
