@@ -2640,7 +2640,10 @@ Invoke-UserHunter -Groupname "GROUP-X"
 Invoke-UserHunter -CheckAccess | select UserName,ComputerName
 Invoke-UserHunter -CheckAccess | select UserName,ComputerName, LocalAdmin
 ```
-
+VERIFICAR SE REALMENTE SOU ADMINISTRADOR COM PSREMOTE.
+```
+Invoke-Command -Scriptblock{whoami;hostname} -computername dcorp-mgmt
+```
 
 
 
@@ -2694,8 +2697,10 @@ Invoke-UserHunter -CheckAccess
 Invoke-UserHunter -CheckAccess | select UserName,ComputerName
 Invoke-UserHunter -CheckAccess | select UserName,ComputerName, LocalAdmin
 ```
-
-
+VERIFICAR SE REALMENTE SOU ADMINISTRADOR COM PSREMOTE.
+```
+Invoke-Command -Scriptblock{whoami;hostname} -computername dcorp-mgmt
+```
 
 
 ##### POWERSHELL - RODAR BLOODHOUND (BAIXAR A VERSÃO DO CRTP E INSTALAR NO WINDOWS)
