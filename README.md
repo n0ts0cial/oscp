@@ -2679,13 +2679,15 @@ VERIFICAR SE O USUARIO É ADMINISTRADOR LOCAL EM ALGUMA OUTRA MAQUINA:
 Import-module .\PowerView.ps1
 Find-LocalAdminAccess -Verbose
 ```
-dcorp-adminsrv.dollarcorp.moneycorp.local
-dcorp-std209.dollarcorp.moneycorp.local
-dcorp-mgmt.dollarcorp.moneycorp.local
+- dcorp-adminsrv.dollarcorp.moneycorp.local
+- dcorp-std209.dollarcorp.moneycorp.local
+- dcorp-mgmt.dollarcorp.moneycorp.local
+
 PROCURAR POR ACESSO DE ADMINISTRADORES NESSAS MAQUINAS:
 ```
 Invoke-UserHunter -CheckAccess
 Invoke-UserHunter -CheckAccess | select UserName,ComputerName
+Invoke-UserHunter -CheckAccess | select UserName,ComputerName, LocalAdmin
 ```
 
 
