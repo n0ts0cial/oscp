@@ -2685,6 +2685,7 @@ dcorp-mgmt.dollarcorp.moneycorp.local
 PROCURAR POR ACESSO DE ADMINISTRADORES NESSAS MAQUINAS:
 ```
 Invoke-UserHunter -CheckAccess
+Invoke-UserHunter -CheckAccess | select UserName,ComputerName
 ```
 
 
