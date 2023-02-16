@@ -2622,9 +2622,10 @@ sc start AbyssWebServer
 Find-LocalAdminAccess -Verbose
 Find-LocalAdminAccess -Domain tech.local
 ```
-
-
-
+```
+Import-Module .\Find-WMILocalAdminAccess.ps1
+Find-WMILocalAdminAccess
+```
 ## BASICO E RECORRENTE
 ##### POWERSHELL - DESABILITAR DEFENDER
 ```
