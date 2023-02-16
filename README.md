@@ -2626,6 +2626,22 @@ Find-LocalAdminAccess -Domain tech.local
 Import-Module .\Find-WMILocalAdminAccess.ps1
 Find-WMILocalAdminAccess
 ```
+##### POWERVIEW OLD - HUNT / ENCONTRAR ONDE O ADMINISTRADOR TEM SESSÃO LOGADA
+```
+Invoke-UserHunter
+Invoke-UserHunter -Stealth
+Invoke-UserHunter -CheckAccess
+```
+##### POWERVIEW OLD - HUNT / ENCONTRAR ONDE OS ADMINISTRADORES TEM SESSÃO LOGADA (ACHO SOMENTE ADMINISTRATOR)
+```
+Invoke-UserHunter -Groupname "Domain Admins"
+Invoke-UserHunter -Groupname "GROUP-X"
+```
+
+
+
+
+
 ## BASICO E RECORRENTE
 ##### POWERSHELL - DESABILITAR DEFENDER
 ```
