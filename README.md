@@ -2633,9 +2633,12 @@ Invoke-UserHunter -Stealth
 Invoke-UserHunter -CheckAccess
 ```
 ##### POWERVIEW OLD - HUNT / ENCONTRAR ONDE OS ADMINISTRADORES TEM SESSÃO LOGADA (ACHO SOMENTE ADMINISTRATOR)
+Finds machines on the local domain where specified users are logged into, and can optionally check if the current user has local admin access to found machines
 ```
 Invoke-UserHunter -Groupname "Domain Admins"
 Invoke-UserHunter -Groupname "GROUP-X"
+Invoke-UserHunter -CheckAccess | select UserName,ComputerName
+Invoke-UserHunter -CheckAccess | select UserName,ComputerName, LocalAdmin
 ```
 
 
@@ -2684,6 +2687,7 @@ Find-LocalAdminAccess -Verbose
 - dcorp-mgmt.dollarcorp.moneycorp.local
 
 PROCURAR POR ACESSO DE ADMINISTRADORES NESSAS MAQUINAS:
+Finds machines on the local domain where specified users are logged into, and can optionally check if the current user has local admin access to found machines
 ```
 Invoke-UserHunter -CheckAccess
 Invoke-UserHunter -CheckAccess | select UserName,ComputerName
