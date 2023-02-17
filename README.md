@@ -2750,4 +2750,8 @@ cat  m1.txt| grep -i -E "username|password|domain|ntlm"
 VAI OBTER OS NTLM HASHES:
 - DCORP-MGMT$:639c1adde3e0d1ba0d733c7d0d8f23ec
 - svcadmin:b38ff50264b74508085d82c69794a4d8:ThisisBlasphemyThisisMadness
-
+##### POWERSHELL - QUAL PROCESSO ESTA USANDO UMA CONTA?
+```
+tasklist /v
+tasklist /v | findstr /I svcadmin
+```
