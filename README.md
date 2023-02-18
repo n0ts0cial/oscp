@@ -2658,6 +2658,12 @@ Get-MpPreference | findstr /I realtime
 Invoke-Command -Scriptblock{Set-MpPreference -DisableRealtimeMonitoring $true -Verbose} -computername dcorp-mgmt
 Invoke-Command -Scriptblock{Get-MpPreference| findstr /I realtime} -computername dcorp-mgmt
 ```
+##### POWERSHELL - VERIFICAR EXCLUSÕES DO DEFENDER
+```
+Get-MpPreference | Select-Object -ExpandProperty ExclusionPath
+Get-MpPreference | Select-Object -ExpandProperty ExclusionExtension
+Get-MpPreference | Select-Object -ExpandProperty ExclusionProcess
+```
 ##### POWERSHELL - VERIFICAR CONSTRAINED LANGUAGE MODE
 ```
 Invoke-Command -ComputerName dcorp-adminsrv -ScriptBlock { $ExecutionContext.SessionState.LanguageMode }
