@@ -2644,6 +2644,16 @@ VERIFICAR SE REALMENTE SOU ADMINISTRADOR COM PSREMOTE.
 ```
 Invoke-Command -Scriptblock{whoami;hostname} -computername dcorp-mgmt
 ```
+##### POWERVIEW OLD - QUEM TEM PERMISSÃO PARA REPLICAR O AD DCSYNC
+```
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll')}
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll')} | select ObjectType,IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.Identityreference -match "administrator") -and (($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll'))} | select ObjectType,IdentityReference, ActiveDirectoryRights
+```
+
+
+
+
 
 
 
@@ -2771,6 +2781,9 @@ VAI OBTER OS NTLM HASHES:
 tasklist /v
 tasklist /v | findstr /I svcadmin
 ```
+
+
+
 
 
 
