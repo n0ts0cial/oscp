@@ -2662,6 +2662,12 @@ Invoke-Command -Scriptblock{Get-MpPreference| findstr /I realtime} -computername
 ```
 Invoke-Command -ComputerName dcorp-adminsrv -ScriptBlock { $ExecutionContext.SessionState.LanguageMode }
 ```
+```
+$user = 'dcorp\student209'
+$pass = ConvertTo-SecureString -AsPlainText 'aaaaaaa' -Force
+$cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $user,$pass
+Invoke-Command -ComputerName dcorp-adminsrv -Credential $cred -ScriptBlock { $ExecutionContext.SessionState.LanguageMode }
+```
 ##### POWERSHELL - BYPASS CLM CONSTRAINED LANGUAGE MODE
 ```
 $ExecutionContext.SessionState.LanguageMode
