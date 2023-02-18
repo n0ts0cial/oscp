@@ -2658,6 +2658,10 @@ Get-MpPreference | findstr /I realtime
 Invoke-Command -Scriptblock{Set-MpPreference -DisableRealtimeMonitoring $true -Verbose} -computername dcorp-mgmt
 Invoke-Command -Scriptblock{Get-MpPreference| findstr /I realtime} -computername dcorp-mgmt
 ```
+##### POWERSHELL - VERIFICAR CONSTRAINED LANGUAGE MODE
+```
+Invoke-Command -ComputerName dcorp-adminsrv -ScriptBlock { $ExecutionContext.SessionState.LanguageMode }
+```
 ##### POWERSHELL - BYPASS CLM CONSTRAINED LANGUAGE MODE
 ```
 $ExecutionContext.SessionState.LanguageMode
