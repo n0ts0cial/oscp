@@ -2670,6 +2670,16 @@ Get-DomainUser -PreauthNotRequired | select samaccountname
 Get-DomainUser -PreauthNotRequired | ?{$_.memberof -match 'Domain Admins'}
 Get-DomainUser -PreauthNotRequired | ?{$_.memberof -match 'Domain Admins'} | select samaccountname
 ```
+##### POWERVIEW OLD - LISTAR GRUPOS DOS QUAIS UM USUARIO FAZ PARTE (MEMBER OF)
+```
+Get-Netgroup -username student209
+```
+POWERVIEW (NOVO):
+```
+Get-DomainGroup -MemberIdentity student209 | select samaccountname
+```
+
+
 
 
 
