@@ -2667,6 +2667,13 @@ Add-ObjectAcl -TargetDistinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -Pr
 
 
 ## BASICO E RECORRENTE
+##### POWERSHELL - VERIFICAR STATUS DO FIREWALL
+```
+get-netfirewallprofile | select name,enabled
+```
+```
+invoke-command -computername dcorp-dc -scriptblock { get-netfirewallprofile | select name,enabled } | select name,enabled
+```
 ##### POWERSHELL - DESABILITAR DEFENDER
 ```
 Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
