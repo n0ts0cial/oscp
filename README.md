@@ -2577,7 +2577,7 @@ Get-ObjectAcl -samaccountname "domain admins" -ResolveGUIDs -Verbose | select Id
 Get-ObjectAcl -samaccountname "student209" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
 ```
 ##### POWERVIEW OLD - VERIFICAR PERMISSÕES DE MODIFICAÇÃO QUE UM USUARIO OU GRUPO POSSUI NO AD
-OBSERVAÇÃO: CASO O MEU USUARIO NAO TENHA NADA, E OS GRUPOS DOS AUQIS EU FAÇO PARTE???
+OBSERVAÇÃO: CASO O MEU USUARIO NAO TENHA NADA, E OS GRUPOS DOS QUAIS EU FAÇO PARTE???
 ```
 Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "student209"}
 Invoke-ACLScanner -ResolveGUIDs | ?{$_.IdentityReference -match "RDPUsers"}
