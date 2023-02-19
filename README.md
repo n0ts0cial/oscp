@@ -3007,5 +3007,5 @@ Invoke-Mimikatz -Command '"kerberos::golden /domain:dollarcorp.moneycorp.local /
 Get-WmiObject -Class win32_operatingsystem -ComputerName dcorp-dc.dollarcorp.moneycorp.local
 ```
 
-[Powershell - Delete files and folders](https://techexpert.tips/powershell/powershell-delete-files-and-folders/)
+
 
