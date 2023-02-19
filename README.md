@@ -2707,6 +2707,22 @@ Get-DomainGroup -MemberIdentity student209 | select samaccountname
 
 
 ## BASICO E RECORRENTE
+##### POWERSHELL - INFORMAÇÕES DO HOST
+```
+$COMANDO = systeminfo
+$COMANDO | findstr /I "name"
+$COMANDO | findstr /I "domain"
+$COMANDO | findstr /I "logon"
+$COMANDO | findstr /I "Type"
+```
+##### POWERSHELL - [LISTAR ADMINSTRADORES LOCAIS](https://techexpert.tips/powershell/powershell-list-local-administrators/)
+```
+Get-LocalGroup
+Get-LocalGroup | ft -AutoSize | Out-String -Width 4096
+```
+```
+Get-LocalGroupMember -Group "Administrators"
+```
 ##### POWERSHELL - VERIFICAR STATUS DO FIREWALL
 ```
 get-netfirewallprofile | select name,enabled
