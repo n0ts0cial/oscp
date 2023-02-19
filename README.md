@@ -2680,6 +2680,11 @@ VERIFICAR SE REALMENTE SOU ADMINISTRADOR COM PSREMOTE.
 ```
 Invoke-Command -Scriptblock{whoami;hostname} -computername dcorp-mgmt
 ```
+##### POWERVIEW OLD - HUNT / MONITORARQUEM ESTÁ LOGADO EM UM COMPUTADOR COM INTERVALO EM SEGUNDOS (QUEM TEM SESSÃO) 
+```
+Invoke-UserHunter -ComputerName dcorp-appsrv -Poll 100 -UserName Administrator -Delay 5 -Verbose
+Invoke-UserHunter -ComputerName dcorp-appsrv -Poll 100 -UserName Administrator -Delay 5 -Verbose | select username, computername
+```
 ##### POWERVIEW OLD - QUEM TEM PERMISSÃO PARA REPLICAR O AD DCSYNC
 ```
 Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll')}
