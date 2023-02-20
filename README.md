@@ -2981,6 +2981,22 @@ Enter-PSSession $appsrv1
 cd C:\Users\appadmin\
 ls
 ```
+##### POWERSHELL - TAREFAS AGENDADAS REMOTAMENTE
+CRIAR UMA TAREFA PARA PING (TESTE DE CONECTIVIDADE)
+```
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "PING" /TR "cmd /c ping 172.16.99.209"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "PING"
+```
+CRIAR UMA TAREFA PARA VERIFICAR STATUS DO DEFENDER
+```
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "AVSTATUS" /TR "powershell -c Get-MpPreference > c:\avstatus.txt"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "AVSTATUS"
+type \\mcorp-dc.moneycorp.local\c$\avstatus.txt | findstr /I realtime
+```
+
+
+
+
 
 
 
