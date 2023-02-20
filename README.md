@@ -2748,6 +2748,13 @@ POWERVIEW (NOVO):
 ```
 Get-DomainGroup -MemberIdentity student209 | select samaccountname
 ```
+##### POWERVIEW OLD - LISTAR TODOS ATRIBUTOS DE UM GRUPO (PEGAR SID DE GRUPO) 
+```
+get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local
+get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local | select samaccountname,objectsid
+```
+
+
 
 
 
