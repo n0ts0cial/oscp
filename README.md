@@ -2981,6 +2981,13 @@ Enter-PSSession $appsrv1
 cd C:\Users\appadmin\
 ls
 ```
+##### POWERSHELL - COMANDOS DOMAIN TRUST
+```
+([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()).GetAllTrustRelationships()
+([System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest()).GetAllTrustRelationships()
+netdom.exe trust DOLLARCORP.MONEYCORP.LOCAL /domain:EUROCORP.LOCAL /quarantine
+```
+
 ##### CMD - TAREFAS AGENDADAS REMOTAMENTE
 CRIAR UMA TAREFA PARA PING (TESTE DE CONECTIVIDADE)
 ```
