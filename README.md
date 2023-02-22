@@ -3061,9 +3061,32 @@ evil-winrm -i 172.16.100.9 -u 'dcorp\student209' -p m2RrLCevS8WG6pasdTh -e c:\ex
 ```
 ssh 172.16.100.9 -l 'dcorp\student209'
 ```
+##### POWERSHELL - ACTIVE DIRECTORY PERMISSION
+```
+$MyPermission = get-objectacl -ADSpath 'LDAP://CN={700F0219-4525-47CE-B300-C351155B3028},CN=Policies,CN=System,DC=TECH,DC=LOCAL'  -ResolveGUIDs | select ObjectType,IdentityReference, ActiveDirectoryRights
+$values = @('write','genericall')
+$regexValues = [string]::Join('|',$values) 
+$MyPermission | where ActiveDirectoryRights -match $regexValues | Select IdentityReference, ActiveDirectoryRights 
 
+get-objectacl -ADSpath 'LDAP://CN={700F0219-4525-47CE-B300-C351155B3028},CN=Policies,CN=System,DC=TECH,DC=LOCAL'
+get-objectacl -ADSpath 'LDAP://CN={700F0219-4525-47CE-B300-C351155B3028},CN=Policies,CN=System,DC=TECH,DC=LOCAL'  -ResolveGUIDs
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll')}
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll')} | select ObjectType,IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.Identityreference -match "administrator") -and (($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll'))} | select ObjectType,IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -Identity 'CN=AdminSDHolder,CN=System,DC=TECH,DC=LOCAL' | Select SecurityIdentifier, AccessControlType, ActiveDirectoryRights
+Get-ObjectAcl -samaccountname "users" -ResolveGUIDs -Verbose
+Get-ObjectAcl -samaccountname "users" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -samaccountname "domain admins" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -samaccountname "student209" -ResolveGUIDs -Verbose | select IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll')}
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll')} | select ObjectType,IdentityReference, ActiveDirectoryRights
+Get-ObjectAcl -Distinguishedname "dc=dollarcorp,dc=moneycorp,dc=local" -ResolveGUIDs | ? {($_.Identityreference -match "administrator") -and (($_.ObjectType -match 'replication') -or ($_ActiveDirectoryRights -match 'GenericAll'))} | select ObjectType,IdentityReference, ActiveDirectoryRights
 
+Get-NetGPO -ADSpath 'LDAP://CN={700F0219-4525-47CE-B300-C351155B3028},CN=Policies,CN=System,DC=TECH,DC=LOCAL'
+Get-NetGPO -ADSpath 'LDAP://cn={3E04167E-C2B6-4A9A-8FB7-C811158DC97C},cn=policies,cn=system,DC=dollarcorp,DC=moneycorp,DC=local' | select name, displayname
 
+| select ObjectType,IdentityReference, ActiveDirectoryRights
+```
 
 
 
