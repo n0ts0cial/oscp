@@ -2987,7 +2987,11 @@ ls
 ([System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest()).GetAllTrustRelationships()
 netdom.exe trust DOLLARCORP.MONEYCORP.LOCAL /domain:EUROCORP.LOCAL /quarantine
 ```
-
+```
+get-adtrust -filter * -Properties *
+get-adtrust -filter * |? {$_.name -eq 'eurocorp.local'}
+Get-ADTrust -Identity 'eurocorp.local' -properties *
+```
 ##### CMD - TAREFAS AGENDADAS REMOTAMENTE
 CRIAR UMA TAREFA PARA PING (TESTE DE CONECTIVIDADE)
 ```
