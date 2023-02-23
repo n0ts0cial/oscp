@@ -2753,8 +2753,10 @@ Get-DomainGroup -MemberIdentity student209 | select samaccountname
 get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local
 get-netgroup -fulldata -GroupName "Enterprise Admins" -Domain moneycorp.local | select samaccountname,objectsid
 ```
-
-
+##### POWERVIEW OLD - LISTAR O SID DO DOMINIO (DOMAIN SID / SID PORRA)
+```
+Get-DomainSID
+```
 
 
 
@@ -3087,6 +3089,12 @@ Get-NetGPO -ADSpath 'LDAP://cn={3E04167E-C2B6-4A9A-8FB7-C811158DC97C},cn=policie
 
 | select ObjectType,IdentityReference, ActiveDirectoryRights
 ```
+
+
+
+
+
+
 
 
 
