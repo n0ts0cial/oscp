@@ -23,6 +23,13 @@ time nmap -A -Pn -vv --script vuln -sV -oA scan-ports-custom 192.168.1.1 -p `cat
 ```
 time nmap -sU -vv -sV -oA scan-udp-1000 192.168.1.1
 ```
+##### NMAP - BYPASS FIREWALL
+```
+nmap -sW -p 22,80 -vv 192.168.2.113
+nmap -f -p 22,80,99 -vv 192.168.2.113
+nmap --mtu 8  -p 22,80,99 -vv 192.168.2.113
+nmap -sM -p 22,80 -vv 192.168.2.113
+```
 ## WEBSERVER ENUMERATION
 ##### WEBSERVER - WHATWEB
 ```
