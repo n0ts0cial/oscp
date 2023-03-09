@@ -28,6 +28,8 @@ time nmap -sU -vv -sV -oA scan-udp-1000 192.168.1.1
 nmap -sW -p 22,80 -vv 192.168.2.113
 nmap -f -p 22,80,99 -vv 192.168.2.113
 nmap --mtu 8  -p 22,80,99 -vv 192.168.2.113
+nmap --mtu 16  -p 22,80,99 -vv 192.168.2.113
+nmap -sS -T5 192.168.2.113 --script firewall-bypass
 nmap -sM -p 22,80 -vv 192.168.2.113
 ```
 ## WEBSERVER ENUMERATION
