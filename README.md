@@ -3550,3 +3550,7 @@ WMIC FUNFANDO? TESTAR NO DC
 ```
 Invoke-WmiMethod win32_process -ComputerName dcorp-dc -name create -argumentlist "cmd.exe /c whoami >> c:\teste.txt"
 ```
+ULTIMA VERZ QUE O COMPUTADOR LOGOU NO DOMINIO:
+```
+Get-ADComputer -Filter * -properties *  | select samaccountname,LastLogon,LastLogonDate
+```
